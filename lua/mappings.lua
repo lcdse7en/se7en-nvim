@@ -26,6 +26,15 @@ map('n', 'sa', cb('modules.surround', 'add'))
 map('n', 'sr', cb('modules.surround', 'remove'))
 map('n', 'sc', cb('modules.surround', 'replace'))
 
+-- Better window movement
+map("n", "<C-h>", "<C-w>h", { silent = true })
+map("n", "<C-j>", "<C-w>j", { silent = true })
+map("n", "<C-k>", "<C-w>k", { silent = true })
+map("n", "<C-l>", "<C-w>l", { silent = true })
+
+--- Copy-paste
+map("n", "<leader>C", 'gg"+yG', { desc = "Copy whole file" })
+
 -- Move selected line / block of text in visual mode
 map("x", "K", ":move '<-2<CR>gv-gv", { silent = true })
 map("x", "J", ":move '>+1<CR>gv-gv", { silent = true })
