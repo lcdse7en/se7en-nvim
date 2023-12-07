@@ -192,8 +192,18 @@ return {
         },
       },
       o = {
-        name = 'Terminal Float | Open URL',
+        name = 'Terminal Float | Open URL | Octo',
         l = { "<cmd>silent !$BROWSER https://github.com/lcdse7en&<cr>", "Open Github: lcdse7en" }, --  NOTE: :silent 静默执行 & 后台运行
+        o = {
+          name = 'Octo',
+          i = {
+            name = "octo issues",
+          },
+          -- l = { "<cmd>Lspsaga outline<cr>", "Lspsaga [O]ut[L]ine" },
+          r = {
+            name = "octo repo",
+          },
+        },
         r = {
           name = "register open url",
           g = { ":silent !$BROWSER https://github.com/<C-r>+&<cr>", "Open https://github.com/++(On Register)" },
