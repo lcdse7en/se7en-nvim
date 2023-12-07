@@ -8,13 +8,16 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
      ]]
   end,
 })
+
+-- resize splits if window got resized
+vim.api.nvim_create_autocmd({ "VimResized" }, {
+  group = vim.api.nvim_create_augroup("resize_splits", { clear = true }),
+  callback = function()
+    vim.cmd "tabdo wincmd ="
+  end,
+})
+
 --  NOTE: go to last loc when opening a buffer
--- vim.api.nvim_create_autocmd("BufReadPost", {
---   group = vim.api.nvim_create_augroup("restore_cur_pos", { clear = true }),
---   pattern = "*",
---   command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"zz" | endif]],
---   desc = "Restore cursor position to last known position on read.",
--- })
 vim.api.nvim_create_autocmd('BufReadPost', {
   desc = 'Jump to the last place you’ve visited in a file before exiting',
   callback = function()
