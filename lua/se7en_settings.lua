@@ -6,7 +6,7 @@ PREF = {
 	},
 
   lsp = {
-    format_on_save = true,
+    format_on_save = false,
     virtual_text = false,
     show_diagnostic = true,
     show_inlay_hints = true,

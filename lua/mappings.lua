@@ -20,7 +20,6 @@ map("n", "<leader>r", "<cmd>silent source $MYVIMRC<cr>", { silent = true, desc =
 -- save in insert mode
 map("i", "<C-s>", "<cmd>:w<cr><esc>", { silent = true })
 map("n", "<C-s>", "<cmd>:w<cr><esc>", { silent = true })
-map("n", "<C-c>", "<cmd>normal ciw<cr>a", { silent = true })
 map('n', 'W', ':w<cr>', { silent = true })
 
 map('n', '<leader>q', '<cmd>q<cr>', {silent = true, desc = 'close' })
