@@ -1,6 +1,6 @@
 vim.g.mapleader = ' '
 
-require('user_settings')
+require('se7en_settings')
 require('options')
 require('mappings')
 require('autocmd')

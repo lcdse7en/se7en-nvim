@@ -2,7 +2,8 @@ return {
   'akinsho/toggleterm.nvim',
   enabled = false,
   lazy = false,
-  branch = "main",
+  version = "*",
+  -- branch = "main",
   dependencies = {
     {
       "sunjon/shade.nvim",

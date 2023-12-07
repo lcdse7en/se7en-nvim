@@ -643,3 +643,12 @@ vim.api.nvim_create_autocmd("FileType", {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.md, *.txt", command = "setlocal wrap" })
+
+--  NOTE: TermOpen
+-- vim.api.nvim_create_autocmd("TermOpen", {
+--   group = vim.api.nvim_create_augroup("TermOpen", {}),
+--   pattern = "term://*",
+--   command = [[startinsert]],
+-- })
