@@ -15,6 +15,8 @@ map('t', '<esc>', [[<C-\><C-n>]], { desc = 'Leave INSERT mode in terminal' })
 
 map('t', '<esc>', [[<C-\><C-n>]], { desc = 'Leave INSERT mode in terminal' })
 
+map("n", "<leader>r", "<cmd>silent source $MYVIMRC<cr>", { silent = true, desc = "source vimrc" })
+
 -- save in insert mode
 map("i", "<C-s>", "<cmd>:w<cr><esc>", { silent = true })
 map("n", "<C-s>", "<cmd>:w<cr><esc>", { silent = true })
