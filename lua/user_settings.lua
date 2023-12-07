@@ -29,7 +29,8 @@ PREF = {
     },
   },
 	ui = {
-		colorscheme = 'serenity',
+		-- colorscheme = 'serenity',
+		colorscheme = 'everforest',
     border = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
     italic_comment = true,
 	},
