@@ -23,6 +23,9 @@ map('n', 'W', ':w<cr>', { silent = true })
 
 map('n', '<leader>q', '<cmd>q<cr>', {silent = true, desc = 'close' })
 
+-- Delete a word backwards
+map("n", "dw", "vb_d", { silent = true } )
+
 map('n', 'H', '^', { silent = true })
 map('n', 'L', '$', { silent = true })
 map('x', '<', '<gv', { desc = 'One indent left and reselect' })
