@@ -66,9 +66,6 @@ map("n", "X", '"_X', { silent = true })
 map("v", "x", '"_x', { silent = true })
 map("v", "X", '"_X', { silent = true })
 
--- Comment Box
-map("n", "<leader>cb", "<cmd>lua require('comment-box').lbox()<CR>", { silent = true, desc = "Comment Box normal" })
-map("v", "<leader>cb", "<cmd>lua require('comment-box').lbox()<CR>", { silent = true, desc = "Comment Box visual" })
 
 -- Increment/decrement
 map("n", "+", "<C-a>", { silent = true })

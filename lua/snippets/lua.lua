@@ -843,4 +843,38 @@ return {
       }
     )
   ),
+  s(
+    {
+      trig = "mycob",
+      regTrig=false,
+      snippetType = "autosnippet",
+      priority = 2000,
+    },
+    fmta(
+      [[
+      -- ============================================================
+      -- <>
+      -- ============================================================
+      ]],
+      {
+        i(0)
+      }
+    )
+  ),
+  s(
+    {
+      trig = "mycob",
+      dscr = "comment-box",
+      regTrig=false,
+      snippetType = "snippet",
+    },
+    fmta(
+      [[
+
+      ]],
+      {
+
+      }
+    )
+  ),
 }
