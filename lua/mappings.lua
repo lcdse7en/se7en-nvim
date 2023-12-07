@@ -25,5 +25,38 @@ map('n', 'sa', cb('modules.surround', 'add'))
 map('n', 'sr', cb('modules.surround', 'remove'))
 map('n', 'sc', cb('modules.surround', 'replace'))
 
+-- Move selected line / block of text in visual mode
+map("x", "K", ":move '<-2<CR>gv-gv", { silent = true })
+map("x", "J", ":move '>+1<CR>gv-gv", { silent = true })
+
+map('n', 'j', "v:count == 0 ? 'gj' : 'j'", {
+  expr = true,
+  desc = 'Move cursor down (display and real line)',
+})
+map('n', 'k', "v:count == 0 ? 'gk' : 'k'", {
+  expr = true,
+  desc = 'Move cursor up (display and real line)',
+})
+-- Remove highlights
+map("n", "<leader><CR>", ":nohlsearch<CR>", { silent = true, desc = ":nohlsearch" })
+map("n", "<ESC>", ":noh<CR>", { silent = true, desc = "nohlsearch" })
+-- Don't yank on delete char
+map("n", "x", '"_x', { silent = true })
+map("n", "X", '"_X', { silent = true })
+map("v", "x", '"_x', { silent = true })
+map("v", "X", '"_X', { silent = true })
+
+-- Comment Box
+map("n", "<leader>cb", "<cmd>lua require('comment-box').lbox()<CR>", { silent = true, desc = "Comment Box normal" })
+map("v", "<leader>cb", "<cmd>lua require('comment-box').lbox()<CR>", { silent = true, desc = "Comment Box visual" })
+
+-- Increment/decrement
+map("n", "+", "<C-a>", { silent = true })
+map("v", "+", "<C-a>", { silent = true })
+map("n", "-", "<C-x>", { silent = true })
+map("v", "-", "<C-x>", { silent = true })
+
+-- Select all
+map("n", "<C-a>", "gg<S-v>G", { silent = true })
 
 del('n', 'Y')
