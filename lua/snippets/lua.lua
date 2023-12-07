@@ -395,21 +395,10 @@ return {
     fmta(
       [[
       config = function()
-        require("<>")
+        <>
       end,
-      <>
       ]],
       {
-        c(1, {
-          sn(nil, {
-            t "plugins.",
-            i(1),
-          }),
-          sn(nil, {
-            i(1),
-          }),
-        }),
-        -- i(1),
         i(0),
       }
     )
@@ -818,6 +807,40 @@ return {
 
       ]],
       {}
+    )
+  ),
+  s(
+    {
+      trig = "myrn",
+      regTrig=false,
+      snippetType = "autosnippet",
+      priority = 2000,
+    },
+    fmta(
+      [[
+      return {
+        <>
+      }
+      ]],
+      {
+        i(0)
+      }
+    )
+  ),
+  s(
+    {
+      trig = "myrn",
+      dscr = "return",
+      regTrig=false,
+      snippetType = "snippet",
+    },
+    fmta(
+      [[
+
+      ]],
+      {
+
+      }
     )
   ),
 }

@@ -83,6 +83,9 @@ return {
       f = {
         name = 'Find Files',
       },
+      w = {
+        name = 'Window Picker',
+      },
     }
 
     wk.register(normal_mode_mappings, opts)
