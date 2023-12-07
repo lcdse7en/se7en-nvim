@@ -59,7 +59,6 @@ local options = {
   iskeyword = vim.opt.iskeyword:append('-'),
   langmap = langmap,
   smoothscroll = true,
-  completeopt = { 'menuone', 'noselect' },
 }
 
 for option_name, value in pairs(options) do

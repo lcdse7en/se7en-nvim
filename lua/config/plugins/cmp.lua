@@ -24,8 +24,12 @@ return {
 		},
 	},
   config = function()
+    local cmp = require('cmp')
 		local lspkind = require "lspkind"
 		local types = require "cmp.types"
+    local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+    cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+    require('luasnip.loaders.from_vscode').lazy_load()
 
 
 		local P = function(v)
@@ -219,6 +223,7 @@ return {
 			treesitter = "  " .. "Tree",
 			zsh = "  " .. "ZSH",
 			look = "  " .. "LOOK",
+			rg = "  " .. "Rg",
 		}
 
 		local buffer_option = {
@@ -400,11 +405,24 @@ return {
 				{ name = "git", priority = 7 },
 				-- { name = "cmp_tabnine", priority = 7, max_num_results = 3 },
 				{ name = "luasnip", priority = 7, max_item_count = 5 },
-				{ name = "buffer", priority = 7, keyword_length = 3, option = buffer_option, max_item_count = 10 },
+				{
+          name = "buffer",
+          -- priority = 7,
+          -- keyword_length = 3,
+          option = {
+            get_bufnrs = function()
+              return vim.api.nvim_list_bufs()
+            end,
+          },
+          -- option = buffer_option,
+          -- max_item_count = 10,
+        },
 				{ name = "Color", priority = 6 },
 				{ name = "nvim_lua", priority = 5 },
 				{ name = "path", priority = 4 },
 				{ name = "calc", priority = 3 },
+				{ name = "rg", keyword_length = 3 },
+				{ name = "crates" },
 				{
 					name = "look",
 					priority = 2,
