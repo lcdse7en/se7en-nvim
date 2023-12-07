@@ -14,6 +14,7 @@ local source = {
   ['monokai-pro'] = 'monokai',
   ['rose-pine'] = 'rose-pine',
   midnight = 'midnight',
+  akane = 'akane',
 }
 
 local config = source[colorscheme]
