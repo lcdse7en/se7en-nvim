@@ -13,12 +13,25 @@ return {
     'saadparwaiz1/cmp_luasnip',
     'L3MON4D3/LuaSnip',
     'rafamadriz/friendly-snippets',
-  },
+    "petertriho/cmp-git",
+		{
+			"zbirenbaum/copilot-cmp",
+			enabled = true,
+			cond = true,
+			config = function()
+				require("copilot_cmp").setup()
+			end,
+		},
+	},
   config = function()
 		local lspkind = require "lspkind"
 		local types = require "cmp.types"
 
-		local _, tabnine = pcall(require, "cmp_tabnine.config")
+
+		local P = function(v)
+			print(vim.print(v))
+			return v
+		end
 
 		local cmp_status_ok, cmp = pcall(require, "cmp")
 		if not cmp_status_ok then
@@ -193,19 +206,19 @@ return {
 		-- │ Setup                                                    │
 		-- ╰──────────────────────────────────────────────────────────╯
 		local source_mapping = {
-			npm = Se7enVim.icons.terminal .. "NPM",
-			cmp_tabnine = Se7enVim.icons.light,
-			Copilot = Se7enVim.icons.copilot,
-			Codeium = Se7enVim.icons.codeium,
-			nvim_lsp = Se7enVim.icons.paragraph .. "LSP",
-			buffer = Se7enVim.icons.buffer .. "BUF",
-			nvim_lua = Se7enVim.icons.bomb .. "api",
-			luasnip = Se7enVim.icons.snippet .. "SNP",
-			calc = Se7enVim.icons.calculator,
-			path = Se7enVim.icons.folderOpen2 .. "Path",
-			treesitter = Se7enVim.icons.tree .. "Tree",
-			zsh = Se7enVim.icons.terminal .. "ZSH",
-			look = Se7enVim.icons.paragraph .. "LOOK",
+			npm = "  " .. "NPM",
+			-- cmp_tabnine = Se7enVim.icons.light,
+			-- Copilot = Se7enVim.icons.copilot,
+			-- Codeium = Se7enVim.icons.codeium,
+			nvim_lsp = "  " .. "LSP",
+			buffer = " ﬘ " .. "BUF",
+			nvim_lua = "  " .. "api",
+			luasnip = "  " .. "SNP",
+			-- calc = Se7enVim.icons.calculator,
+			path = " ﱮ " .. "Path",
+			treesitter = "  " .. "Tree",
+			zsh = "  " .. "ZSH",
+			look = "  " .. "LOOK",
 		}
 
 		local buffer_option = {
@@ -241,7 +254,7 @@ return {
 				["<CR>"] = cmp.mapping.confirm {
 					-- this is the important line for Copilot
 					behavior = cmp.ConfirmBehavior.Replace,
-					select = Se7enVim.plugins.completion.select_first_on_enter,
+					select = false,
 				},
 				["<Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
@@ -436,20 +449,5 @@ return {
 				max_view_entries = 100,
 			},
 		}
-
-		-- ╭──────────────────────────────────────────────────────────╮
-		-- │ Tabnine Setup                                            │
-		-- ╰──────────────────────────────────────────────────────────╯
-		if Se7enVim.plugins.ai.tabnine.enabled then
-			tabnine:setup {
-				max_lines = 1000,
-				max_num_results = 3,
-				sort = true,
-				show_prediction_strength = true,
-				run_on_every_keystroke = true,
-				snipper_placeholder = "..",
-				ignored_file_types = {},
-			}
-		end
 	end
 }

@@ -51,6 +51,7 @@ local options = {
   incsearch = true,   --- Start searching before pressing enter
   spell = false,
   guifont = "FiraCode Nerd Font Regular",
+  langmap = langmap,
 }
 
 for option_name, value in pairs(options) do

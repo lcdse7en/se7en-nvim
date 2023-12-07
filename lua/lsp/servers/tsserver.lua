@@ -80,11 +80,11 @@ local function filterReactDTS(value)
 end
 
 local handlers = {
-  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = Se7enVim.ui.float.border }),
-  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = Se7enVim.ui.float.border }),
+  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
+  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
   ["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics,
-    { virtual_text = Se7enVim.lsp.virtual_text }
+    { virtual_text = true }
   ),
   ["textDocument/definition"] = function(err, result, method, ...)
     if vim.tbl_islist(result) and #result > 1 then

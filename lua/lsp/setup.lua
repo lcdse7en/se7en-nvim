@@ -1,5 +1,4 @@
 -- Setup installer & lsp configs
-local typescript_ok, typescript = pcall(require, "typescript")
 local mason_ok, mason = pcall(require, "mason")
 local mason_lsp_ok, mason_lsp = pcall(require, "mason-lspconfig")
 local mason_tool_installer = require "mason-tool-installer"
@@ -18,15 +17,10 @@ require("neodev").setup {
   pathStrict = true,
 }
 require("fidget").setup()
-require("lspsaga").setup()
+-- require("lspsaga").setup()
 
 --  NOTE: mason
-mason.setup {
-  ui = {
-    -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
-    border = Se7enVim.ui.float.border or "rounded",
-  },
-}
+mason.setup {}
 
 --  NOTE: mason_lsp
 mason_lsp.setup {
@@ -93,12 +87,12 @@ local lspconfig = require "lspconfig"
 local handlers = {
   ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     silent = true,
-    border = Se7enVim.ui.float.border,
+    border = "rounded",
   }),
-  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = Se7enVim.ui.float.border }),
+  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
   ["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics,
-    { virtual_text = Se7enVim.lsp.virtual_text }
+    { virtual_text = true }
   ),
 }
 

@@ -13,7 +13,7 @@ return {
   config = function()
     require('mason').setup({
       ui = {
-        border = PREF.ui.border,
+        border = "rounded",
       },
     })
   end,
