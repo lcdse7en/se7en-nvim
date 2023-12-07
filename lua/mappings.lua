@@ -14,9 +14,15 @@ end
 map('t', '<esc>', [[<C-\><C-n>]], { desc = 'Leave INSERT mode in terminal' })
 
 map('t', '<esc>', [[<C-\><C-n>]], { desc = 'Leave INSERT mode in terminal' })
+
+-- save in insert mode
+map("i", "<C-s>", "<cmd>:w<cr><esc>", { silent = true })
+map("n", "<C-s>", "<cmd>:w<cr><esc>", { silent = true })
+map("n", "<C-c>", "<cmd>normal ciw<cr>a", { silent = true })
 map('n', 'W', ':w<cr>', { silent = true })
+
 map('n', '<leader>q', '<cmd>q<cr>', {silent = true, desc = 'close' })
-map('n', 'Q', '<cmd>q<cr>', {silent = true, desc = 'close' })
+
 map('n', 'H', '^', { silent = true })
 map('n', 'L', '$', { silent = true })
 map('x', '<', '<gv', { desc = 'One indent left and reselect' })
