@@ -87,7 +87,6 @@ return {
     { desc = 'Open File Browser with the path of the current buffer' })
     map('n', '<leader>ft', '<cmd>TodoTelescope<cr>', { desc = 'TodoTelescope: Search Todo Comments' })
     map('n', '<leader>fn', '<cmd>Telescope notify<CR>', { desc = 'Telescope: show notifications' })
-    map('n', '<leader>fu', '<cmd>Telescope undo<cr>', { desc = 'Telescope: show undo' })
     map('n', '<leader>fh', 'Telescope yank_history<cr>', { desc = 'Telescope: search yank_history' })
     map('n', '<leader>fp', '<cmd>lua require("plugins.telescope").project_files()<cr>', { desc = 'Project Files' })
     map('n', '<leader>fv',         function()

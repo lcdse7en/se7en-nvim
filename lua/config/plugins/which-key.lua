@@ -110,15 +110,16 @@ return {
         e = {
           name = "Edit NvimConf",
           a = { "<cmd>e ~/.config/nvim/lua/autocmd.lua<CR>", "Edit autocmds.lua" },
+          A = { "<cmd>e ~/.config/nvim/lua/config/plugins/alpha.lua<CR>", "Edit alpha.lua" },
           b = { "<cmd>e ~/.config/nvim/lua/config/plugins/browse.lua<CR>", "Edit browse.lua" },
           c = { "<cmd>e ~/.config/nvim/lua/config/plugins/cmp.lua<CR>", "Edit cmp.lua" },
-          h = { "<cmd>e ~/.config/nvim/lua/config/plugins/alpha.lua<CR>", "Edit alpha.lua" },
           i = { "<cmd>e $MYVIMRC<CR>", "Edit init.lua" },
           j = { "<cmd>e ~/.config/nvim/lazy-lock.json<CR>", "Edit lazy-lock.json" },
           l = { "<cmd>e ~/.config/nvim/lua/lsp/setup.lua<CR>", "Edit setup.lua(LSP)" },
           m = { "<cmd>e ~/.config/nvim/lua/mappings.lua<CR>", "Edit mappings.lua" },
           o = { "<cmd>e ~/.config/nvim/lua/options.lua<CR>", "Edit options.lua" },
-          P = { "<cmd>e ~/.config/nvim/lua/config/plugins/treesitter.lua<CR>", "Edit treesitter.lua" },
+          t = { "<cmd>e ~/.config/nvim/lua/config/plugins/telescope.lua<CR>", "Edit telescope.lua" },
+          T = { "<cmd>e ~/.config/nvim/lua/config/plugins/treesitter.lua<CR>", "Edit treesitter.lua" },
           w = { "<cmd>e ~/.config/nvim/lua/config/plugins/which-key.lua<CR>", "Edit which-key.lua" },
           --  NOTE: Snippets
           s = {
@@ -132,6 +133,18 @@ return {
             t = { "<cmd>e ~/.config/nvim/lua/snippets/tex.lua<CR>", "Edit tex.lua(Snippet)" },
             T = { "<cmd>e ~/.config/nvim/lua/snippets/typst.lua<CR>", "Edit typst.lua(Snippet)" },
           },
+        },
+        u = {
+          name = "[U]ndo | [F]recency | [Z]oxide",
+          f = { "<cmd> silent lua require('telescope').extensions.frecency.frecency()<CR>", "Frencency Search" },
+          u = { "<cmd>Telescope undo<CR>", "Undo History" },
+          z = { "<cmd> silent Telescope zoxide list<CR>", "zoxide" },
+        },
+        z = {
+          name = "edit configfile",
+          c = { "<cmd>e ~/.zshrc<cr>", "edit .zshrc" },
+          l = { "<cmd>e ~/.config/lf/lfrc<cr>", "edit lfrc(lf)" },
+          s = { "<cmd>e ~/.config/lf/shortcutrc<cr>", "edit shortcutrc(lf)" },
         },
       },
       o = {
