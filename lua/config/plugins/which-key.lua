@@ -101,12 +101,6 @@ return {
       },
       f = {
         name = 'Find Files | Marks',
-        m = {
-          name = "marks/bookmarks",
-          b = { "<cmd>Telescope vim_bookmarks current_file<cr>", "Search bookmarks on current file" },
-          B = { "<cmd>Telescope vim_bookmarks all<cr>", "Search all bookmarks" },
-          m = { "<cmd>Telescope marks<cr>", "Search marks" },
-        },
         e = {
           name = "Edit NvimConf",
           a = { "<cmd>e ~/.config/nvim/lua/autocmd.lua<CR>", "Edit autocmds.lua" },
@@ -134,6 +128,12 @@ return {
             T = { "<cmd>e ~/.config/nvim/lua/snippets/typst.lua<CR>", "Edit typst.lua(Snippet)" },
           },
         },
+        m = {
+          name = "marks/bookmarks",
+          b = { "<cmd>Telescope vim_bookmarks current_file<cr>", "Search bookmarks on current file" },
+          B = { "<cmd>Telescope vim_bookmarks all<cr>", "Search all bookmarks" },
+          m = { "<cmd>Telescope marks<cr>", "Search marks" },
+        },
         u = {
           name = "[U]ndo | [F]recency | [Z]oxide",
           f = { "<cmd> silent lua require('telescope').extensions.frecency.frecency()<CR>", "Frencency Search" },
@@ -147,8 +147,58 @@ return {
           s = { "<cmd>e ~/.config/lf/shortcutrc<cr>", "edit shortcutrc(lf)" },
         },
       },
+      g = {
+        name = "Git",
+        -- a = { "<cmd>!git add %:p<CR>", "add current" },
+        A = { "<cmd>!git add .<CR>", "add all" },
+        b = { '<cmd>lua require("internal.blame").open()<CR>', "blame" },
+        B = { "<cmd>Telescope git_branches<CR>", "branches" },
+        c = {
+          name = "Conflict",
+          b = { "<cmd>GitConflictChooseBoth<CR>", "choose both" },
+          n = { "<cmd>GitConflictNextConflict<CR>", "move to next conflict" },
+          o = { "<cmd>GitConflictChooseOurs<CR>", "choose ours" },
+          p = { "<cmd>GitConflictPrevConflict<CR>", "move to prev conflict" },
+          t = { "<cmd>GitConflictChooseTheirs<CR>", "choose theirs" },
+        },
+        D = { '<cmd>lua require("plugins.git.diffview").toggle_file_history()<CR>', "diff file" },
+        g = { "<cmd>LazyGit<CR>", "lazygit" },
+        h = {
+          name = "Hunk",
+          d = "diff hunk",
+          p = "preview",
+          R = "reset buffer",
+          r = "reset hunk",
+          s = "stage hunk",
+          S = "stage buffer",
+          t = "toggle deleted",
+          u = "undo stage",
+        },
+
+        l = {
+          name = "Log",
+          A = { '<cmd>lua require("plugins.telescope").my_git_commits()<CR>', "commits (Telescope)" },
+          a = { "<cmd>LazyGitFilter<CR>", "commits" },
+          C = { '<cmd>lua require("plugins.telescope").my_git_bcommits()<CR>', "buffer commits (Telescope)" },
+          c = { "<cmd>LazyGitFilterCurrentFile<CR>", "buffer commits" },
+        },
+        m = { "blame line" },
+        s = { '<cmd>lua require("plugins.git.diffview").toggle_status()<CR>', "status" },
+        S = { "<cmd>Telescope git_status<CR>", "telescope status" },
+        w = {
+          name = "Worktree",
+          w = "worktrees",
+          c = "create worktree",
+        },
+      },
       o = {
-        name = 'Terminal Float | URL',
+        name = 'Terminal Float | Open URL',
+        l = { "<cmd>silent !$BROWSER https://github.com/lcdse7en&<cr>", "Open Github: lcdse7en" }, --  NOTE: :silent 静默执行 & 后台运行
+        r = {
+          name = "register open url",
+          g = { ":silent !$BROWSER https://github.com/<C-r>+&<cr>", "Open https://github.com/++(On Register)" },
+          u = { ":silent !$BROWSER <C-r>+&<cr>", "Open URL(On Register)" },
+        }
       },
       s = {
         name = 'spectre',
