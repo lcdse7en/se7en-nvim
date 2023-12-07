@@ -24,13 +24,15 @@ local options = {
   cursorline = true,
   mouse = "a", --- Enable mouse
   cmdheight = 0,
+  pumheight = 10,
   signcolumn = 'yes',
   scrolloff = 3,
   sidescrolloff = 3,
   colorcolumn = tostring(textwidth),
   laststatus = 3,
-  cindent = true,
+  expandtab = true,
   smarttab = true,
+  cindent = true,
   shiftwidth = tabwidth,
   tabstop = tabwidth,
   ignorecase = true,
@@ -51,7 +53,13 @@ local options = {
   incsearch = true,   --- Start searching before pressing enter
   spell = false,
   guifont = "FiraCode Nerd Font Regular",
+  spelllang = 'en_us,ru_ru',
+  whichwrap = vim.opt.whichwrap:append('<,>,[,],h,l'),
+  shortmess = vim.opt.shortmess:append('c'),
+  iskeyword = vim.opt.iskeyword:append('-'),
   langmap = langmap,
+  smoothscroll = true,
+  completeopt = { 'menuone', 'noselect' },
 }
 
 for option_name, value in pairs(options) do
@@ -62,4 +70,3 @@ for option_name, value in pairs(options) do
 		vim.notify('Option ' .. option_name .. ' is not supported', vim.log.levels.WARN)
 	end
 end
-
