@@ -80,5 +80,48 @@ map(
   { noremap = true, silent = true }
 )
 
+-- Buffers
+map("n", "<Tab>", ":BufferLineCycleNext<CR>", { silent = true })
+map("n", "gn", ":bn<CR>", { silent = true })
+map("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { silent = true })
+map("n", "gp", ":bp<CR>", { silent = true })
+
+-- Move between barbar buffers
+map("n", "<Space>1", ":BufferLineGoToBuffer 1<CR>", { silent = true })
+map("n", "<Space>2", ":BufferLineGoToBuffer 2<CR>", { silent = true })
+map("n", "<Space>3", ":BufferLineGoToBuffer 3<CR>", { silent = true })
+map("n", "<Space>4", ":BufferLineGoToBuffer 4<CR>", { silent = true })
+map("n", "<Space>5", ":BufferLineGoToBuffer 5<CR>", { silent = true })
+map("n", "<Space>6", ":BufferLineGoToBuffer 6<CR>", { silent = true })
+map("n", "<Space>7", ":BufferLineGoToBuffer 7<CR>", { silent = true })
+map("n", "<Space>8", ":BufferLineGoToBuffer 8<CR>", { silent = true })
+map("n", "<Space>9", ":BufferLineGoToBuffer 9<CR>", { silent = true })
+map("n", "<A-1>", ":BufferLineGoToBuffer 1<CR>", { silent = true })
+map("n", "<A-2>", ":BufferLineGoToBuffer 2<CR>", { silent = true })
+map("n", "<A-3>", ":BufferLineGoToBuffer 3<CR>", { silent = true })
+map("n", "<A-4>", ":BufferLineGoToBuffer 4<CR>", { silent = true })
+map("n", "<A-5>", ":BufferLineGoToBuffer 5<CR>", { silent = true })
+map("n", "<A-6>", ":BufferLineGoToBuffer 6<CR>", { silent = true })
+map("n", "<A-7>", ":BufferLineGoToBuffer 7<CR>", { silent = true })
+map("n", "<A-8>", ":BufferLineGoToBuffer 8<CR>", { silent = true })
+map("n", "<A-9>", ":BufferLineGoToBuffer 9<CR>", { silent = true })
+
+-- Open url at cursor in browser
+map("n", "<Leader>ou", function()
+  local pos = vim.api.nvim_win_get_cursor(0)
+  local col, _ = vim.api.nvim_get_current_line():find "https?"
+  if not col then
+    return
+  end
+  vim.api.nvim_win_set_cursor(0, { pos[1], col - 1 })
+  open_url(vim.fn.expand "<cfile>")
+  vim.api.nvim_win_set_cursor(0, pos)
+end, { desc = "Open URL(On underline)" })
+
+-- Open plugin repository at cursor in browser
+map("n", "<Leader>og", function()
+  open_url(vim.fn.expand "<cfile>", [[https://github.com/]])
+end, { desc = "Search Gihub(On underline)" })
+
 del('n', 'Y')
 
