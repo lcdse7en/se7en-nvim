@@ -15,8 +15,8 @@ map('t', '<esc>', [[<C-\><C-n>]], { desc = 'Leave INSERT mode in terminal' })
 
 map('t', '<esc>', [[<C-\><C-n>]], { desc = 'Leave INSERT mode in terminal' })
 map('n', 'W', ':w<cr>', { silent = true })
-map('n', '<leader>q', '<cmd>q<cr>', {silent = true})
-map('n', 'Q', '<cmd>q<cr>', {silent = true})
+map('n', '<leader>q', '<cmd>q<cr>', {silent = true, desc = 'close' })
+map('n', 'Q', '<cmd>q<cr>', {silent = true, desc = 'close' })
 map('n', 'H', '^', { silent = true })
 map('n', 'L', '$', { silent = true })
 map('x', '<', '<gv', { desc = 'One indent left and reselect' })
@@ -60,4 +60,25 @@ map("v", "-", "<C-x>", { silent = true })
 -- Select all
 map("n", "<C-a>", "gg<S-v>G", { silent = true })
 
+--  NOTE: hlslens
+map(
+  "n",
+  "n",
+  [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+  { noremap = true, silent = true }
+)
+map(
+  "n",
+  "N",
+  [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+  { noremap = true, silent = true }
+)
+map(
+  "n",
+  "*",
+  [[*<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+  { noremap = true, silent = true }
+)
+
 del('n', 'Y')
+

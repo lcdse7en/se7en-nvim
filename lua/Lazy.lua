@@ -47,4 +47,4 @@ require('lazy').setup(configs, {
 })
 
 
-vim.keymap.set("n", "<leader>L", "<cmd>:Lazy<cr>")
+vim.keymap.set("n", "<leader>l", "<cmd>:Lazy<cr>", {desc = 'Open Lazy' })

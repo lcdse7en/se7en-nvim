@@ -16,18 +16,15 @@ return {
       'debugloop/telescope-undo.nvim',
     },
     { 'nvim-telescope/telescope-frecency.nvim', dependencies = { 'kkharji/sqlite.lua' } },
-    {
-      'crispgm/telescope-heading.nvim',
-      lazy = true,
-      ft = { 'markdown', 'org' },
-    },
     { 'jvgrootveld/telescope-zoxide' }, --  NOTE: sudo pacman -S zoxide | zoxide add path
     { 'nvim-telescope/telescope-live-grep-args.nvim' },
-    { 'nvim-telescope/telescope-media-files.nvim' },
   },
   config = function()
     local telescope = require('telescope')
     local pickers = require('telescope.builtin')
+    local actions = require "telescope.actions"
+    local fb_actions = require("telescope").extensions.file_browser.actions
+    local lga_actions = require "telescope-live-grep-args.actions"
 
     --  NOTE: Custom pickers
     function edit_neovim()
@@ -50,32 +47,59 @@ return {
       }))
     end
 
+    function project_files(opts)
+      opts = opts or {} -- define here if you want to define something
+      local ok = pcall(require("telescope.builtin").git_files, opts)
+      if not ok then
+        require("telescope.builtin").find_files(opts)
+      end
+    end
+
     local map = vim.keymap.set
     -- Builtins pickers
     map('n', '<leader>fb', '<cmd>silent BrowseBookmarks<cr>', { desc = 'Browse Bookmarks' })
+    map('n', '<leader>fB', pickers.buffers, { desc = 'Telescope: show open buffers' })
     map('n', '<leader>fc', pickers.find_files, { desc = 'Telescope: Find files in (cwd>' })
+    map('n', '<leader>fd', pickers.diagnostics, { desc = 'Telescope: show diagnostics' })
     map('n', '<leader>ff', '<cmd>lua edit_neovim()<cr>', { desc = 'Nvim Dotfiles' })
-    map('n', '<leader>fg', pickers.live_grep, { desc = 'Telescope: live grep (cwd>' })
-    map('n', '<localleader>b', pickers.buffers, { desc = 'Telescope: show open buffers' })
-    -- map('n', '<localleader>d', pickers.diagnostics, { desc = 'Telescope: show diagnostics' })
-    map('n', '<leader>fo', pickers.oldfiles, { desc = 'Telescope: show recent using files' })
-    map('n', '<localleader><localleader>', function()
-      pickers.current_buffer_fuzzy_find({ default_text = vim.fn.expand('<cword>') })
-    end, { desc = 'Telescope: fuzzy find word under cursor in current buffer' })
-    map('n', '<localleader>s', function()
-      pickers.live_grep({ default_text = vim.fn.expand('<cword>') })
-    end, { desc = 'Telescope: live grep word under cursor (cwd>' })
-    map('n', '<localleader>p', function()
-      pickers.find_files({ default_text = vim.fn.expand('<cword>') })
-    end, { desc = 'Telescope: find file under cursor (cwd)' })
-    map('n', '<localleader>T', function()
-      pickers.builtin({ include_extensions = true })
-    end)
+    map('n', '<leader>fg', '<cmd>lua require("telescope").extensions.live_grep_args.live_grep_args()<cr>', { desc = 'Find Text' })
+    map('n', '<leader>fG', pickers.live_grep, { desc = 'Telescope: live grep (cwd>' })
+    map('n', '<leader>fi', '<cmd>silent BrowseInputSearch<cr>', { desc = 'BrowseInputSearch' })
+    map('n', '<leader>fk', '<cmd>Telescope keymaps<cr>', { desc = 'Telescope: Find keymaps' })
+    map('n', '<leader>fo', pickers.oldfiles, { desc = 'Open Recent Files' })
+    map('n', '<leader>fO',
+        function()
+          local function telescope_buffer_dir()
+            return vim.fn.expand "%:p:h"
+          end
 
-    -- Plugin's pickers
-    map('n', '<localleader>n', ':Telescope notify<CR>', { desc = 'Telescope: show notifications' })
+          telescope.extensions.file_browser.file_browser {
+            path = "%:p:h",
+            cwd = telescope_buffer_dir(),
+            respect_gitignore = false,
+            hidden = true,
+            grouped = true,
+            previewer = false,
+            initial_mode = "normal",
+            layout_config = { height = 40 },
+          }
+        end,
+    { desc = 'Open File Browser with the path of the current buffer' })
+    map('n', '<leader>ft', '<cmd>TodoTelescope<cr>', { desc = 'TodoTelescope: Search Todo Comments' })
+    map('n', '<leader>fn', '<cmd>Telescope notify<CR>', { desc = 'Telescope: show notifications' })
+    map('n', '<leader>fu', '<cmd>Telescope undo<cr>', { desc = 'Telescope: show undo' })
+    map('n', '<leader>fh', 'Telescope yank_history<cr>', { desc = 'Telescope: search yank_history' })
+    map('n', '<leader>fp', '<cmd>lua require("plugins.telescope").project_files()<cr>', { desc = 'Project Files' })
+    map('n', '<leader>fv',         function()
+          local builtin = require "telescope.builtin"
+          builtin.treesitter()
+        end,
+    { desc = 'Lists FunctionNames | variables from Treesitter' })
 
-    -- WARNING: now works only with 'cwd' pickers, because no need know bufnr
+    map('n', '<leader>ot', '<cmd>silent ToggleTerm direction=float<CR>', { desc = 'Terminal Float' })
+
+
+    --  WARNING: now works only with 'cwd' pickers, because no need know bufnr
     local switch_picker = function(picker_name)
       return function(prompt_bufnr)
         local cur_picker = require('telescope.actions.state').get_current_picker(prompt_bufnr)
@@ -86,7 +110,6 @@ return {
       end
     end
 
-    local actions = require('telescope.actions')
     telescope.setup({
       defaults = {
         history = {
@@ -151,7 +174,93 @@ return {
       },
       extensions = {
         bookmarks = { selected_browser = 'chrome' }, -- edge firefox safari brave
+        fzf = {
+          fuzzy = true,
+          override_generic_sorter = true,
+          override_file_sorter = true,
+          case_mode = "smart_case",
+        },
+        file_browser = {
+          theme = "dropdown",
+          hijack_netrw = true,
+          mappings = {
+            ["n"] = {
+              ["N"] = fb_actions.create,
+              ["h"] = fb_actions.goto_parent_dir,
+              ["/"] = function()
+                vim.cmd "startinsert"
+              end,
+              ["<C-u>"] = function(prompt_bufnr)
+                for i = 1, 10 do
+                  actions.move_selection_previous(prompt_bufnr)
+                end
+              end,
+              ["<C-d"] = function(prompt_bufnr)
+                for i = 1, 10 do
+                  actions.move_selection_next(prompt_bufnr)
+                end
+              end,
+              ["<PageUp"] = actions.preview_scrolling_up,
+              ["<PageDown"] = actions.preview_scrolling_down,
+            },
+          },
+        },
+        frecency = {
+          ignore_patterns = {
+            "*.git/*",
+            "*/tmp/*",
+            "/home/se7en/dotfiles/*",
+          },
+          show_scores = true,
+          show_unindexed = true,
+          workspaces = {
+            ["dotfiles"] = "/home/se7en/.config/",
+            ["projects"] = "/home/se7en/PyProject/",
+          },
+          prompt_title = "Find Files",
+          preview_title = "Preview",
+          results_title = "Files",
+        },
+        live_grep_args = {
+          auto_quoting = true,
+          mappings = {
+            i = {
+              ["C-k"] = lga_actions.quote_prompt(),
+              ["C-i"] = lga_actions.quote_prompt { postfix = " --iglob" },
+            },
+          },
+        },
+        undo = {
+          use_delta = true,
+          side_by_side = true,
+          layout_strategy = "vertical",
+          layout_config = {
+            preview_height = 0.4,
+          },
+          mappings = {
+            i = {
+              ["<cr>"] = require("telescope-undo.actions").yank_additions,
+              ["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
+              ["<C-cr>"] = require("telescope-undo.actions").restore,
+            },
+          },
+          results_title = "Undo History",
+          prompt_title = "Search",
+          preview_title = "Edit Diff",
+        },
       },
     })
+
+    --  NOTE: Load Extensions
+    require("telescope").load_extension "fzf"
+    require("telescope").load_extension "repo"
+    require("telescope").load_extension "zoxide"
+    require("telescope").load_extension "file_browser"
+    -- require("telescope").load_extension "projects"
+    require("telescope").load_extension "git_worktree"
+    require("telescope").load_extension "vim_bookmarks" -- mm | <leader>a
+    -- require("telescope").load_extension "frecency"
+    require("telescope").load_extension "live_grep_args"
+    require("telescope").load_extension "undo"
   end,
 }
