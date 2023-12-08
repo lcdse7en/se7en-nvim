@@ -4,16 +4,16 @@
 -- Date:        2023-05-12                  *
 -- Description:                             *
 --*******************************************
-local ls = require "luasnip"
+local ls = require 'luasnip'
 local s = ls.snippet
 local sn = ls.snippet_node
 local t = ls.text_node
 local f = ls.function_node
 local i = ls.insert_node
 local d = ls.dynamic_node
-local fmta = require("luasnip.extras.fmt").fmta
-local rep = require("luasnip.extras").rep
-local line_begin = require("luasnip.extras.expand_conditions").line_begin
+local fmta = require('luasnip.extras.fmt').fmta
+local rep = require('luasnip.extras').rep
+local line_begin = require('luasnip.extras.expand_conditions').line_begin
 -- local tex = require "utils.latex"
 
 local get_visual = function(args, parent)
@@ -26,7 +26,7 @@ end
 
 return {
   s(
-    { trig = "fmta", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'fmta', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
         s(
@@ -47,16 +47,16 @@ return {
         ),
       ]],
       {
-        i(1, "key"),
-        t "[[",
+        i(1, 'key'),
+        t '[[',
         i(2),
-        t "]]",
+        t ']]',
         i(0),
       }
     )
   ),
   s(
-    { trig = "fmta", snippetType = "snippet" },
+    { trig = 'fmta', snippetType = 'snippet' },
     fmta(
       [[
         s(
@@ -72,16 +72,16 @@ return {
         ),
       ]],
       {
-        i(1, "key"),
-        t "[[",
-        i(2, "data"),
-        t "]]",
-        i(3, "test"),
+        i(1, 'key'),
+        t '[[',
+        i(2, 'data'),
+        t ']]',
+        i(3, 'test'),
       }
     )
   ),
   s(
-    { trig = "fmts", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'fmts', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
         s(
@@ -102,17 +102,17 @@ return {
         ),
       ]],
       {
-        i(1, "key"),
-        i(2, "dscr"),
-        t "[[",
+        i(1, 'key'),
+        i(2, 'dscr'),
+        t '[[',
         i(3),
-        t "]]",
+        t ']]',
         i(4),
       }
     )
   ),
   s(
-    { trig = "fmts", dscr = "dscr", regTrig = false, snippetType = "snippet" },
+    { trig = 'fmts', dscr = 'dscr', regTrig = false, snippetType = 'snippet' },
     fmta(
       [[
 
@@ -122,9 +122,9 @@ return {
   ),
   s(
     {
-      trig = "myin",
+      trig = 'myin',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -134,15 +134,15 @@ return {
       {
         c(1, {
           sn(nil, {
-            t "i(",
-            i(1, "1"),
-            t "),",
+            t 'i(',
+            i(1, '1'),
+            t '),',
           }),
           sn(nil, {
-            t "i(",
-            i(1, "1"),
+            t 'i(',
+            i(1, '1'),
             t ',"',
-            i(2, "text"),
+            i(2, 'text'),
             t '"),',
           }),
         }),
@@ -151,10 +151,10 @@ return {
   ),
   s(
     {
-      trig = "myin",
-      dscr = "insert_node",
+      trig = 'myin',
+      dscr = 'insert_node',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -163,21 +163,21 @@ return {
     )
   ),
   s(
-    { trig = "mycn", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'mycn', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
               c(<>, { t "<>", t"<>", t "<>"}),
       ]],
       {
-        i(1, "id"),
-        i(2, "text1"),
-        i(3, "text2"),
-        i(4, "text3"),
+        i(1, 'id'),
+        i(2, 'text1'),
+        i(3, 'text2'),
+        i(4, 'text3'),
       }
     )
   ),
   s(
-    { trig = "mycn", snippetType = "snippet" },
+    { trig = 'mycn', snippetType = 'snippet' },
     fmta(
       [[
 
@@ -186,15 +186,15 @@ return {
     )
   ),
   s(
-    { trig = "myref", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'myref', snippetType = 'autosnippet', priority = 2000 },
     c(1, { sn(nil, { t '"$', i(1), t '"' }), sn(nil, { t '"${', i(1), t '}"' }) })
   ),
   s(
     {
-      trig = "myref",
-      dscr = "dscr",
+      trig = 'myref',
+      dscr = 'dscr',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -205,9 +205,9 @@ return {
   ),
   s(
     {
-      trig = "myuse",
+      trig = 'myuse',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -225,20 +225,20 @@ return {
     )
   ),
   s(
-    { trig = "myuse1", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'myuse1', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
           use { "<>/<>", config = "require('plugins.<>')", }
       ]],
       {
-        i(1, "author"),
-        i(2, "package"),
-        i(3, "conf"),
+        i(1, 'author'),
+        i(2, 'package'),
+        i(3, 'conf'),
       }
     )
   ),
   s(
-    { trig = "myuse", snippetType = "snippet" },
+    { trig = 'myuse', snippetType = 'snippet' },
     fmta(
       [[
 
@@ -247,19 +247,19 @@ return {
     )
   ),
   s(
-    { trig = "myzw", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'myzw', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       <><>
       ]],
       {
-        t "<>",
-        i(1, ""),
+        t '<>',
+        i(1, ''),
       }
     )
   ),
   s(
-    { trig = "mysn", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'mysn', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
           c(1, {
@@ -284,7 +284,7 @@ return {
     )
   ),
   s(
-    { trig = "mypc", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'mypc', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       local status_ok, <> = pcall(require, "<>")
@@ -299,28 +299,28 @@ return {
       ]],
       {
         f(function(import_name)
-          local parts = vim.split(import_name[1][1], ".", true)
-          return parts[#parts] or ""
+          local parts = vim.split(import_name[1][1], '.', true)
+          return parts[#parts] or ''
         end, { 1 }),
         i(1),
         f(function(import_name)
-          local parts = vim.split(import_name[1][1], ".", true)
-          return parts[#parts] or ""
+          local parts = vim.split(import_name[1][1], '.', true)
+          return parts[#parts] or ''
         end, { 1 }),
         f(function(import_name)
-          local parts = vim.split(import_name[1][1], ".", true)
-          return parts[#parts] or ""
+          local parts = vim.split(import_name[1][1], '.', true)
+          return parts[#parts] or ''
         end, { 1 }),
-        i(0, "--config"),
+        i(0, '--config'),
       }
     )
   ),
   s(
     {
-      trig = "mypc",
-      dscr = "dscr",
+      trig = 'mypc',
+      dscr = 'dscr',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -330,22 +330,22 @@ return {
     )
   ),
   s(
-    { trig = "mynote", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'mynote', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       --  <>: <>
       ]],
       {
-        c(1, { t "NOTE", t "TODO", t "WARN", t "FIX", t "HACK", t "PERF" }),
+        c(1, { t 'NOTE', t 'TODO', t 'WARN', t 'FIX', t 'HACK', t 'PERF' }),
         i(2),
       }
     )
   ),
   s(
     {
-      trig = "mytuse",
+      trig = 'mytuse',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -355,17 +355,17 @@ return {
       {
         c(1, {
           sn(nil, {
-            t "\\usepackage{",
+            t '\\usepackage{',
             i(1),
-            t "}",
+            t '}',
           }),
           sn(nil, {
-            t "\\usepackage[",
+            t '\\usepackage[',
             i(1),
-            t "]",
-            t "{",
+            t ']',
+            t '{',
             i(2),
-            t "}",
+            t '}',
           }),
         }),
       }
@@ -373,10 +373,10 @@ return {
   ),
   s(
     {
-      trig = "mytuse",
-      dscr = "LaTex usepackage",
+      trig = 'mytuse',
+      dscr = 'LaTex usepackage',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -387,9 +387,9 @@ return {
   ),
   s(
     {
-      trig = "myconf",
+      trig = 'myconf',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -405,10 +405,10 @@ return {
   ),
   s(
     {
-      trig = "myconf",
-      dscr = "dscr",
+      trig = 'myconf',
+      dscr = 'dscr',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -419,9 +419,9 @@ return {
   ),
   s(
     {
-      trig = "mydep",
+      trig = 'mydep',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -447,10 +447,10 @@ return {
   ),
   s(
     {
-      trig = "mydep",
-      dscr = "dscr",
+      trig = 'mydep',
+      dscr = 'dscr',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -461,9 +461,9 @@ return {
   ),
   s(
     {
-      trig = "myks",
+      trig = 'myks',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -475,23 +475,23 @@ return {
       <>
       ]],
       {
-        t "<leader>",
+        t '<leader>',
         i(1),
-        i(2, "cmd"),
-        i(3, "desc"),
-        t "<leader>",
+        i(2, 'cmd'),
+        i(3, 'desc'),
+        t '<leader>',
         i(4),
-        i(5, "cmd"),
-        i(6, "desc"),
+        i(5, 'cmd'),
+        i(6, 'desc'),
         i(0),
       }
     )
   ),
   s(
     {
-      trig = "myncc",
+      trig = 'myncc',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -501,16 +501,16 @@ return {
       })
       ]],
       {
-        i(1, "event"),
+        i(1, 'event'),
         i(2),
       }
     )
   ),
   s(
     {
-      trig = "myncc",
+      trig = 'myncc',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
       priority = 2000,
     },
     fmta(
@@ -522,9 +522,9 @@ return {
   ),
   s(
     {
-      trig = "mynca",
+      trig = 'mynca',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -533,16 +533,16 @@ return {
       <>
       ]],
       {
-        i(1, "groupName"),
+        i(1, 'groupName'),
         i(2),
       }
     )
   ),
   s(
     {
-      trig = "mynca",
+      trig = 'mynca',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
       priority = 2000,
     },
     fmta(
@@ -553,9 +553,9 @@ return {
   ),
   s(
     {
-      trig = "mycb",
+      trig = 'mycb',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -571,9 +571,9 @@ return {
   ),
   s(
     {
-      trig = "mycb",
+      trig = 'mycb',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
       priority = 2000,
     },
     fmta(
@@ -585,9 +585,9 @@ return {
   ),
   s(
     {
-      trig = "mybsi",
+      trig = 'mybsi',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -595,17 +595,17 @@ return {
       ["<>"] = "https://<>",
       ]],
       {
-        i(1, "name"),
+        i(1, 'name'),
         i(2),
       }
     )
   ),
   s(
     {
-      trig = "mybsi",
-      dscr = "browser link",
+      trig = 'mybsi',
+      dscr = 'browser link',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -616,9 +616,9 @@ return {
   ),
   s(
     {
-      trig = "mybsc",
+      trig = 'mybsc',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -639,10 +639,10 @@ return {
   ),
   s(
     {
-      trig = "mybsc",
-      dscr = "dscr",
+      trig = 'mybsc',
+      dscr = 'dscr',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -653,9 +653,9 @@ return {
   ),
   s(
     {
-      trig = "mybss",
+      trig = 'mybss',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -672,10 +672,10 @@ return {
   ),
   s(
     {
-      trig = "mybss",
-      dscr = "dscr",
+      trig = 'mybss',
+      dscr = 'dscr',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -686,9 +686,9 @@ return {
   ),
   s(
     {
-      trig = "myeve",
+      trig = 'myeve',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -696,16 +696,16 @@ return {
       event = "<>",
       ]],
       {
-        i(1, "VeryLazy"),
+        i(1, 'VeryLazy'),
       }
     )
   ),
   s(
     {
-      trig = "myeve",
-      dscr = "event",
+      trig = 'myeve',
+      dscr = 'event',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -716,9 +716,9 @@ return {
   ),
   s(
     {
-      trig = "mytd",
+      trig = 'mytd',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -726,17 +726,17 @@ return {
       --  <>: <>
       ]],
       {
-        c(1, { t "NOTE", t "TODO", t "ISSUE" }),
+        c(1, { t 'NOTE', t 'TODO', t 'ISSUE' }),
         i(2),
       }
     )
   ),
   s(
     {
-      trig = "mytd",
-      dscr = "TODO",
+      trig = 'mytd',
+      dscr = 'TODO',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -747,9 +747,9 @@ return {
   ),
   s(
     {
-      trig = "myreq",
+      trig = 'myreq',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -758,8 +758,8 @@ return {
       ]],
       {
         f(function(import_name)
-          local parts = vim.split(import_name[1][1], ".", true)
-          return parts[#parts] or ""
+          local parts = vim.split(import_name[1][1], '.', true)
+          return parts[#parts] or ''
         end, { 1 }),
         i(1),
       }
@@ -767,10 +767,10 @@ return {
   ),
   s(
     {
-      trig = "myreq",
-      dscr = "local require",
+      trig = 'myreq',
+      dscr = 'local require',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -781,9 +781,9 @@ return {
   ),
   s(
     {
-      trig = "myen",
+      trig = 'myen',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -791,16 +791,16 @@ return {
       enabled = <>,
       ]],
       {
-        i(1, "false"),
+        i(1, 'false'),
       }
     )
   ),
   s(
     {
-      trig = "myen",
-      dscr = "dscr",
+      trig = 'myen',
+      dscr = 'dscr',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -811,43 +811,59 @@ return {
   ),
   s(
     {
-      trig = "myrn",
-      regTrig=false,
-      snippetType = "autosnippet",
+      trig = 'myrn',
+      regTrig = false,
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
       [[
       return {
-        <>
+        '<>/<>',
+        enabled = true,
+        config = function()
+          local <> = require('<>')
+          <>.setup {
+            <>
+          }
+        end
       }
       ]],
       {
-        i(0)
+        i(1, 'gitName'),
+        i(2),
+        i(3),
+        f(function(import_name)
+          local parts = vim.split(import_name[1][1], '.', true)
+          return parts[1] or ''
+        end, { 2 }),
+        f(function(import_name)
+          local parts = vim.split(import_name[1][1], '.', true)
+          return parts[1] or ''
+        end, { 3 }),
+        i(0),
       }
     )
   ),
   s(
     {
-      trig = "myrn",
-      dscr = "return",
-      regTrig=false,
-      snippetType = "snippet",
+      trig = 'myrn',
+      dscr = 'return',
+      regTrig = false,
+      snippetType = 'snippet',
     },
     fmta(
       [[
 
       ]],
-      {
-
-      }
+      {}
     )
   ),
   s(
     {
-      trig = "mycob",
-      regTrig=false,
-      snippetType = "autosnippet",
+      trig = 'mycob',
+      regTrig = false,
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -857,31 +873,29 @@ return {
       -- ============================================================
       ]],
       {
-        i(0)
+        i(0),
       }
     )
   ),
   s(
     {
-      trig = "mycob",
-      dscr = "comment-box",
-      regTrig=false,
-      snippetType = "snippet",
+      trig = 'mycob',
+      dscr = 'comment-box',
+      regTrig = false,
+      snippetType = 'snippet',
     },
     fmta(
       [[
 
       ]],
-      {
-
-      }
+      {}
     )
   ),
   s(
     {
-      trig = "myjh",
-      regTrig=false,
-      snippetType = "autosnippet",
+      trig = 'myjh',
+      regTrig = false,
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -890,23 +904,41 @@ return {
       ]],
       {
         t '',
-        i(0)
+        i(0),
       }
     )
   ),
   s(
     {
-      trig = "myjh",
-      dscr = "jiahao symbol",
-      regTrig=false,
-      snippetType = "snippet",
+      trig = 'myjh',
+      dscr = 'jiahao symbol',
+      regTrig = false,
+      snippetType = 'snippet',
     },
     fmta(
       [[
 
       ]],
+      {}
+    )
+  ),
+  s(
+    {
+      trig = 'myrep',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+        f(function(import_name)
+          local parts = vim.split(import_name[1][1], ".", true)
+          return parts[#parts] or ""
+        end, { 1 }),
+        <>
+      ]],
       {
-
+        i(0),
       }
     )
   ),
