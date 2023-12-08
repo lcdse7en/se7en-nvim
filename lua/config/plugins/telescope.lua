@@ -130,6 +130,7 @@ return {
         multi_icon = '',
         vimgrep_arguments = {
           'rg',
+          '-L',
           '--color=never',
           '--no-heading',
           '--with-filename',
@@ -145,9 +146,9 @@ return {
           prompt_position = 'top',
         },
         file_sorter = require('telescope.sorters').get_fzy_sorter,
-        prompt_prefix = ' ',
+        prompt_prefix = ' ',
         selection_caret = ' ',
-        path_display = { 'smart' },
+        path_display = { 'truncate' }, --- smart | truncate
         layout_strategy = 'horizontal',
         file_ignore_patterns = { '.git/', 'node_modules/*' },
         sorting_strategy = 'ascending',
