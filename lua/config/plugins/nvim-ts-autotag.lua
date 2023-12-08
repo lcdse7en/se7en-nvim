@@ -8,7 +8,7 @@
 return {
   "windwp/nvim-ts-autotag",
   enabled = true,
+  event = "InsertEnter",
   ft = { 'html', 'javascript', 'typescript', 'typescriptreact' },
   config = true,
-  event = "InsertEnter",
 }
