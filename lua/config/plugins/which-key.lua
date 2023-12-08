@@ -90,7 +90,7 @@ return {
     local normal_mode_mappings = {
       -- single
       ['='] = { '<cmd>vertical resize +5<CR>', 'resize +5' },
-      ['-'] = { '<cmd>vertical resize -5<CR>', 'resize +5' },
+      ['-'] = { '<cmd>vertical resize -5<CR>', 'resize -5' },
       ['v'] = { '<C-W>v', 'split right' },
       ['V'] = { '<C-W>s', 'split below' },
 
