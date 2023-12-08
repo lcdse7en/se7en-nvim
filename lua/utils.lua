@@ -6,7 +6,7 @@ P = function(v)
 end
 
 RELOAD = function(...)
-  return require("plenary.reload").reload_module(...)
+  return require('plenary.reload').reload_module(...)
 end
 
 R = function(name)
@@ -15,11 +15,11 @@ R = function(name)
 end
 
 function _G.launch_ext_prog(prog, ...)
-  vim.fn.system(prog .. " " .. table.concat({ ... }, " "))
+  vim.fn.system(prog .. ' ' .. table.concat({ ... }, ' '))
 end
 
 function _G.open_url(url, prefix)
-  launch_ext_prog("google-chrome-stable", (prefix or "") .. url)
+  launch_ext_prog('google-chrome-stable', (prefix or '') .. url)
 end
 
 --- Trim newline at eof, trailing whitespace.
@@ -38,7 +38,7 @@ function _G.perform_cleanup()
   local view = vim.fn.winsaveview()
 
   for _, v in pairs(patterns) do
-    vim.cmd(string.format("keepjumps keeppatterns silent! %s", v))
+    vim.cmd(string.format('keepjumps keeppatterns silent! %s', v))
   end
 
   vim.fn.winrestview(view)
@@ -85,7 +85,7 @@ function M.list_contains(list, value)
 end
 
 function M.char_on_pos(pos)
-  pos = pos or vim.fn.getpos('.')
+  pos = pos or vim.fn.getpos '.'
   return tostring(vim.fn.getline(pos[1])):sub(pos[2], pos[2])
 end
 
@@ -94,7 +94,7 @@ function M.get_object_range()
   local end_ = vim.api.nvim_buf_get_mark(0, ']')
   end_[2] = end_[2] + 1
 
-  return vim.tbl_flatten({ start, end_ })
+  return vim.tbl_flatten { start, end_ }
 end
 
 -- From: https://neovim.discourse.group/t/how-do-you-work-with-strings-with-multibyte-characters-in-lua/2437/4
@@ -118,11 +118,11 @@ local function char_byte_count(s, i)
 end
 
 function M.get_visual_range()
-  local sr, sc = unpack(vim.fn.getpos('v'), 2, 3)
-  local er, ec = unpack(vim.fn.getpos('.'), 2, 3)
+  local sr, sc = unpack(vim.fn.getpos 'v', 2, 3)
+  local er, ec = unpack(vim.fn.getpos '.', 2, 3)
 
   -- To correct work with non-single byte chars
-  local byte_c = char_byte_count(M.char_on_pos({ er, ec }))
+  local byte_c = char_byte_count(M.char_on_pos { er, ec })
   ec = ec + (byte_c - 1)
 
   local range = {}
@@ -151,7 +151,7 @@ function M.split_padline(line, side)
   local pad_left, pad_right = '', ''
 
   if is_left then
-    local start, end_ = line:find('^%s+')
+    local start, end_ = line:find '^%s+'
     if start then
       pad_left = line:sub(start, end_)
       line = line:sub(end_ + 1)
@@ -159,7 +159,7 @@ function M.split_padline(line, side)
   end
 
   if is_right then
-    local start, end_ = line:find('%s+$')
+    local start, end_ = line:find '%s+$'
     if start then
       pad_right = line:sub(start, end_)
       line = line:sub(1, -(#pad_right + 1))
@@ -210,8 +210,8 @@ function M.git_status()
 
   if vim.loop.fs_stat(vim.loop.cwd() .. '/.git') then
     status.exist = true
-    status.branch = system('git branch --show-current')
-    status.remote_url = system('git remote get-url --push origin')
+    status.branch = system 'git branch --show-current'
+    status.remote_url = system 'git remote get-url --push origin'
     status.repo = vim.fn.substitute(status.remote_url, skip, '', 'g')
   end
 
@@ -220,7 +220,7 @@ end
 
 function M.current_branch()
   if vim.loop.fs_stat(vim.loop.cwd() .. '/.git') then
-    return vim.fn.system('git branch --show-current')
+    return vim.fn.system 'git branch --show-current'
   end
   return ''
 end
@@ -272,7 +272,7 @@ end
 function M.disable_autocmd(group)
   local ok, aus = pcall(vim.api.nvim_get_autocmds, { group = group })
   if ok then
-    vim.api.nvim_clear_autocmds({ group = group })
+    vim.api.nvim_clear_autocmds { group = group }
     local function make_opts(au)
       local opts = {
         group = au.group,
@@ -319,7 +319,7 @@ function M.show_image(path, win_opts, image_opts)
     return
   end
 
-  local term = require('image.utils.term')
+  local term = require 'image.utils.term'
   local term_size = term.get_size()
   local image_rows = math.floor(image.image_height / term_size.cell_height)
   local image_columns = math.floor(image.image_width / term_size.cell_width)
@@ -352,7 +352,7 @@ function M.show_image(path, win_opts, image_opts)
         image:clear()
         vim.api.nvim_win_close(win, true)
         vim.api.nvim_buf_delete(buf, { force = true })
-        vim.api.nvim_del_augroup_by_name('__image__')
+        vim.api.nvim_del_augroup_by_name '__image__'
       end
     end,
   })
