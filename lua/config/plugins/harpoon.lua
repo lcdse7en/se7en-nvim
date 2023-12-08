@@ -11,8 +11,8 @@ return {
   lazy = true,
   cmd = 'Telescope harpoon marks',
   keys = {
-    { '<leader>ha', '<cmd>lua rquire("harpoon.mark").add_file()<cr>', desc = 'Add File' },
-    { '<leader>hd', '<cmd>lua rquire("harpoon.mark").rm_file()<cr>', desc = 'Remove File' },
+    { '<leader>ha', '<cmd>lua require("harpoon.mark").add_file()<cr>', desc = 'Add File' },
+    { '<leader>hd', '<cmd>lua require("harpoon.mark").rm_file()<cr>', desc = 'Remove File' },
     { '<leader>hh', '<cmd>Telescope harpoon marks<cr>', desc = 'Telescope: Harpoon' },
     { '<leader>hm', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', desc = 'Toggle Menu' },
   },
