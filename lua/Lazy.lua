@@ -1,8 +1,8 @@
-local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 local configs = 'config.plugins'
 
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
+  vim.fn.system {
     'git',
     'clone',
     '--filter=blob:none',
@@ -10,7 +10,7 @@ if not vim.loop.fs_stat(lazypath) then
     'https://github.com/folke/lazy.nvim.git',
     '--branch=stable', -- latest stable release
     lazypath,
-  })
+  }
 end
 
 vim.opt.runtimepath:prepend(lazypath)
@@ -46,5 +46,4 @@ require('lazy').setup(configs, {
   },
 })
 
-
-vim.keymap.set("n", "<leader>l", "<cmd>:Lazy<cr>", {desc = 'Open Lazy' })
+vim.keymap.set('n', '<leader>l', '<cmd>:Lazy<cr>', { desc = 'Open Lazy' })
