@@ -222,6 +222,9 @@ return {
           u = { ":silent !$BROWSER <C-r>+&<cr>", "Open URL(On Register)" },
         }
       },
+      r = {
+        name = 'rename on LSP',
+      },
       s = {
         name = 'spectre  Source vimrc',
       },

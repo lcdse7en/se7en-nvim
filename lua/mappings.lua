@@ -139,5 +139,23 @@ map("n", "<Leader>og", function()
   open_url(vim.fn.expand "<cfile>", [[https://github.com/]])
 end, { desc = "Search Gihub(On underline)" })
 
+-- ============================================================
+-- LSP
+-- ============================================================
+map("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", { silent = true, desc = "rename" }) --  NOTE: <C-k>: ESC
+map("n", "<leader>cf", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", { silent = true, desc = 'LSP Format' })
+map("v", "<leader>cf", function()
+  local start_row, _ = table.unpack(vim.api.nvim_buf_get_mark(0, "<"))
+  local end_row, _ = table.unpack(vim.api.nvim_buf_get_mark(0, ">"))
+
+  vim.lsp.buf.format {
+    range = {
+      ["start"] = { start_row, 0 },
+      ["end"] = { end_row, 0 },
+    },
+    async = true,
+  }
+end,{ silent = true })
+
 del('n', 'Y')
 
