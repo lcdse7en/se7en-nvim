@@ -99,6 +99,9 @@ return {
         n = { '<cmd>set nonumber!<CR>', 'line numbers' },
         r = { '<cmd>set norelativenumber!<CR>', 'relative number' },
       },
+      c = {
+        name = 'LSP  Format',
+      },
       f = {
         name = 'Find Files  Marks',
         e = {
