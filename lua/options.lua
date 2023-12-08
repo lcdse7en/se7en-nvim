@@ -72,7 +72,7 @@ local globals = {
   mapleader = " ",                --- Map leader key to SPC
   speeddating_no_mappings = 1,    --- Disable default mappings for speeddating
   tex_flavor = "latex",           --- set latex filetypes
-  autoformat_enabled = true,
+  autoformat_enabled = false,
   icons_enabled = true,
   diagnostics_mode = 3,           --- set the visibility of diagnostics in the UI (0=off, 1=only show in status line, 2=virtual text off, 3=all on)
   highlighturl_enabled = true,    --- highlight URLs by                                                                                  default

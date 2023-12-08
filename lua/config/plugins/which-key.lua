@@ -112,6 +112,7 @@ return {
           c = { '<cmd>e ~/.config/nvim/lua/config/plugins/cmp.lua<CR>', 'Edit cmp.lua' },
           C = { '<cmd>e ~/.config/nvim/lua/config/plugins/colorschemes.lua<CR>', 'Edit colorschemes.lua' },
           d = { '<cmd>e ~/.config/nvim/lua/se7en_settings.lua<CR>', 'Edit se7en_settings.lua' },
+          f = { '<cmd>e ~/.config/nvim/lua/config/plugins/conform.lua<CR>', 'Edit conform.lua' },
           i = { '<cmd>e $MYVIMRC<CR>', 'Edit init.lua' },
           j = { '<cmd>e ~/.config/nvim/lazy-lock.json<CR>', 'Edit lazy-lock.json' },
           l = { '<cmd>e ~/.config/nvim/lua/lsp/setup.lua<CR>', 'Edit setup.lua(LSP)' },
