@@ -62,7 +62,6 @@ return {
         ['ecosse3'] = 'https://github.com/ecosse3/nvim',
         ['christianchiarulli'] = 'https://github.com/ChristianChiarulli/nvim',
         ['folke'] = 'https://github.com/folke/dot/tree/master/nvim',
-        ['jinzhongjia'] = 'https://github.com/jinzhongjia/nvim-config',
         ['willothy'] = 'https://github.com/willothy/nvim-config',
         ['ayamir'] = 'https://github.com/ayamir/nvimdots',
         ['jdhao'] = 'https://github.com/jdhao/nvim-config',
