@@ -1,4 +1,4 @@
 return {
-	enable = true,
-  "nvim-lua/popup.nvim"
+  enable = true,
+  'nvim-lua/popup.nvim'
 }

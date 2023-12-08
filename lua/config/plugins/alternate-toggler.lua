@@ -7,7 +7,7 @@ return {
       '<leader>aa',
       '<cmd>ToggleAlternate<cr>',
       mode = { 'n' },
-      { silent = true, desc = 'Toggle Alternate False | True' },
+      desc = 'Toggle Alternate False  True' ,
     },
   },
 }

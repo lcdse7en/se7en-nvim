@@ -2,7 +2,7 @@ return {
   'folke/zen-mode.nvim',
   enabled = true,
   keys = {
-    { '<leader>zm', '<cmd>ZenMode<CR>', { silent = true, desc = 'ZenMode' } },
+    { '<leader>zm', '<cmd>ZenMode<CR>', mode = { 'n' }, desc = 'ZenMode'},
   },
   config = function()
     require('zen-mode').setup({
