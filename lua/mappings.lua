@@ -15,7 +15,7 @@ map('t', '<esc>', [[<C-\><C-n>]], { desc = 'Leave INSERT mode in terminal' })
 
 map('t', '<esc>', [[<C-\><C-n>]], { desc = 'Leave INSERT mode in terminal' })
 
-map("n", "<leader>r", "<cmd>silent source $MYVIMRC<cr>", { silent = true, desc = "source vimrc" })
+map("n", "<leader>sr", "<cmd>silent source $MYVIMRC<cr>", { silent = true, desc = "source vimrc" })
 
 -- save in insert mode
 map("i", "<C-s>", "<cmd>:w<cr><esc>", { silent = true })
@@ -108,10 +108,10 @@ map("n", "<Space>2", ":BufferLineGoToBuffer 2<CR>", { silent = true })
 map("n", "<Space>3", ":BufferLineGoToBuffer 3<CR>", { silent = true })
 map("n", "<Space>4", ":BufferLineGoToBuffer 4<CR>", { silent = true })
 map("n", "<Space>5", ":BufferLineGoToBuffer 5<CR>", { silent = true })
-map("n", "<Space>6", ":BufferLineGoToBuffer 6<CR>", { silent = true })
-map("n", "<Space>7", ":BufferLineGoToBuffer 7<CR>", { silent = true })
-map("n", "<Space>8", ":BufferLineGoToBuffer 8<CR>", { silent = true })
-map("n", "<Space>9", ":BufferLineGoToBuffer 9<CR>", { silent = true })
+-- map("n", "<Space>6", ":BufferLineGoToBuffer 6<CR>", { silent = true })
+-- map("n", "<Space>7", ":BufferLineGoToBuffer 7<CR>", { silent = true })
+-- map("n", "<Space>8", ":BufferLineGoToBuffer 8<CR>", { silent = true })
+-- map("n", "<Space>9", ":BufferLineGoToBuffer 9<CR>", { silent = true })
 map("n", "<A-1>", ":BufferLineGoToBuffer 1<CR>", { silent = true })
 map("n", "<A-2>", ":BufferLineGoToBuffer 2<CR>", { silent = true })
 map("n", "<A-3>", ":BufferLineGoToBuffer 3<CR>", { silent = true })

@@ -212,7 +212,7 @@ return {
         }
       },
       s = {
-        name = 'spectre',
+        name = 'spectre | Source vimrc',
       },
       w = {
         name = 'Window Picker',
