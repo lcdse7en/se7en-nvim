@@ -30,7 +30,7 @@ local options = {
   scrolloff = 5,
   sidescrolloff = 5,
   colorcolumn = tostring(textwidth),
-  laststatus = 3,
+  laststatus = 3,                       --- global statusline
   expandtab = true,                     --- Use spaces instead of tabs
   smarttab = true,
   cindent = true,
@@ -59,6 +59,7 @@ local options = {
   confirm = false,                       --- Confirm to save changes before exiting modified buffer
   incsearch = true,                      --- Start searching before pressing enter
   writebackup = false,                   --- Not needed
+  copyindent = true,                     --- copy the previous indentation on autoindenting
   spell = false,
   conceallevel = 0,                      --- Show `` in markdown files
   guifont = "FiraCode Nerd Font Regular",
@@ -71,19 +72,22 @@ local options = {
 }
 
 local globals = {
-  mapleader = " ",                --- Map leader key to SPC
-  speeddating_no_mappings = 1,    --- Disable default mappings for speeddating
-  tex_flavor = "latex",           --- set latex filetypes
+  mapleader = " ",                 --- Map leader key to SPC
+  cmp_enabled = true,              --- enable completion at start
+  codelens_enabled = true,         -- enable or disable automatic codelens refreshing for lsp that support it
+  icons_enabled = true,            --- disable icons in the UI (disable if no nerd font is available)
+  speeddating_no_mappings = 1,     --- Disable default mappings for speeddating
+  tex_flavor = "latex",            --- set latex filetypes
   autoformat_enabled = false,
-  icons_enabled = true,
-  diagnostics_mode = 3,           --- set the visibility of diagnostics in the UI (0=off, 1=only show in status line, 2=virtual text off, 3=all on)
-  highlighturl_enabled = true,    --- highlight URLs by                                                                                  default
-  lsp_handlers_enabled = true,    --- enable or disable default vim.lsp.handlers (hover and signature                                    help)
-  semantic_tokens_enabled = true, --- enable or disable LSP semantic tokens on                                                        startup
+  diagnostics_mode = 3,            --- set the visibility of diagnostics in the UI (0=off, 1=only show in status line, 2=virtual text off, 3=all on)
+  highlighturl_enabled = true,     --- highlight URLs by                                                                                  default
+  lsp_handlers_enabled = true,     --- enable or disable default vim.lsp.handlers (hover and signature                                    help)
+  semantic_tokens_enabled = true,  --- enable or disable LSP semantic tokens on                                                        startup
+  ui_notifications_enabled = true, --- disable notifications (TODO: rename to  notifications_enabled in AstroNvim v4)
+  git_worktrees = nil,             --- enable git integration for detached worktrees (specify a table where each entry is of the form { toplevel = vim.env.HOME, gitdir=vim.env.HOME .. "/.dotfiles" })
   resession_enabled = true,
   transparent_background = true,
-  inlay_hints_enabled = true,     ---  NOTE: enable or disable LSP inlay hints on startup (Neovim v0.10+ only)
-  browser = "google-chrome-stable",
+  inlay_hints_enabled = true,      ---  NOTE: enable or disable LSP inlay hints on startup (Neovim v0.10+ only)
 }
 
 for option_name, value in pairs(options) do
