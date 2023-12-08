@@ -62,8 +62,8 @@ local options = {
   incsearch = true,                      --- Start searching before pressing enter
   writebackup = false,                   --- Not needed
   copyindent = true,                     --- copy the previous indentation on autoindenting
-  spell = false,
   conceallevel = 0,                      --- Show `` in markdown files
+  spell = false,
   guifont = "FiraCode Nerd Font Regular",
   spelllang = 'en_us,ru_ru',
   whichwrap = vim.opt.whichwrap:append('<,>,[,],h,l'),
@@ -71,6 +71,13 @@ local options = {
   iskeyword = vim.opt.iskeyword:append('-'),
   langmap = langmap,
   smoothscroll = true,
+  -- ============================================================
+  -- Fold
+  -- ============================================================
+  foldcolumn = '0',                      --- '0' is not bad
+  foldlevel = 99,                        --- Using ufo provider need a large value, feel free to decrease the value
+  foldlevelstart = 99,
+  foldenable = true,
 }
 
 local globals = {
