@@ -197,6 +197,9 @@ return {
           c = 'create worktree',
         },
       },
+      L = {
+        name = 'Lf',
+      },
       m = {
         name = 'Marks Add  MarkdownPreview',
         a = { '<cmd>silent BookmarkAnnotate<cr>', 'Marks Annotate' },
