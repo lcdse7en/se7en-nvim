@@ -1,10 +1,8 @@
 PREF = {
-	common = {
-		textwidth = 100,
-		tabwidth = 2,
-		escape_keys = { 'jj', 'jk' },
-	},
-
+  common = {
+    textwidth = 100,
+    tabwidth = 2,
+  },
   lsp = {
     format_on_save = false,
     virtual_text = false,
@@ -28,12 +26,12 @@ PREF = {
       'ltex',
     },
   },
-	ui = {
-		-- colorscheme = 'serenity',
-		colorscheme = 'everforest',
+  ui = {
+    -- colorscheme = 'serenity',
+    colorscheme = 'everforest',
     border = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
     italic_comment = true,
-	},
+  },
   git = {
     show_blame = false,
     show_signcolumn = true,

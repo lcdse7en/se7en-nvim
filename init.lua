@@ -5,20 +5,19 @@
 -- Description :                             *
 --********************************************
 
-
-require('se7en_settings')
-require('options')
-require('mappings')
-require('autocmd')
-require('Lazy')
-require('utils')
-require('config.colorscheme')
-require('modules.thincc')
-require('lsp.config')
-require('lsp.setup')
-require('lsp.functions')
-require('lsp.autocmd')
-require('utils.globals')
-require('utils.FloatWin')
-require('utils.CodeRunning')
-require('vm.vmlens')
+require 'se7en_settings'
+require 'options'
+require 'mappings'
+require 'autocmd'
+require 'Lazy'
+require 'utils'
+require 'config.colorscheme'
+require 'modules.thincc'
+require 'lsp.config'
+require 'lsp.setup'
+require 'lsp.functions'
+require 'lsp.autocmd'
+require 'utils.globals'
+require 'utils.FloatWin'
+require 'utils.CodeRunning'
+require 'vm.vmlens'
