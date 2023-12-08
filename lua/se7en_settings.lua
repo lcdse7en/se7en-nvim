@@ -31,7 +31,6 @@ PREF = {
 	ui = {
 		-- colorscheme = 'serenity',
 		colorscheme = 'everforest',
-		-- colorscheme = 'oh-my-monokai',
     border = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
     italic_comment = true,
 	},

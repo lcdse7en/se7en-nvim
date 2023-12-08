@@ -141,6 +141,7 @@ end, { silent = true, desc = "Search Gihub(On underline)" })
 -- ============================================================
 -- LSP
 -- ============================================================
+map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { silent = true, desc = 'Hover Documentation' })
 map("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", { silent = true, desc = "rename" }) --  NOTE: <C-k>: ESC
 map("n", "<leader>cf", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", { silent = true, desc = 'LSP Format' })
 map("v", "<leader>cf", function()

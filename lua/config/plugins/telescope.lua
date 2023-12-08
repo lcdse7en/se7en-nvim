@@ -100,7 +100,7 @@ return {
     -- LSP
     -- ============================================================
     map('n', "<leader>cf", "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", { desc = "telescope: goto Definition" })
-    map('n', "<leader>cr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", { desc = "telescope: goto References" })
+    map('n', "<leader>cr", require('telescope.builtin').lsp_references, { desc = "telescope: goto References" })
     map('n', "<leader>ci", "<cmd>lua require('telescope.builtin').lsp_implementations()<cr>", { desc = "telescope: goto Implementations" })
 
 
