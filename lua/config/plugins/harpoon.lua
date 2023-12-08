@@ -15,12 +15,22 @@ return {
     { '<leader>hd', '<cmd>lua require("harpoon.mark").rm_file()<cr>', desc = 'Remove File' },
     { '<leader>hh', '<cmd>Telescope harpoon marks<cr>', desc = 'Telescope: Harpoon' },
     { '<leader>hm', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', desc = 'Toggle Menu' },
-    { '<leader>ht', '<cmd>lua require("harpoon.term").gotoTerminal(1)<cr>', desc = 'Term' },
+    {
+      '<leader>hr',
+      '<cmd>silent lua require("harpoon.term").sendCommand(1, term.cmds)<cr>',
+      desc = 'Term run',
+    },
+    {
+      '<leader>ht',
+      '<cmd>lua require("harpoon.term").gotoTerminal(1)<cr>',
+      desc = 'Open Term',
+    },
   },
   dependencies = {
     'nvim-lua/plenary.nvim',
   },
   config = function()
+    vim.g.harpoon_log_level = error
     require('harpoon').setup {
       global_settings = {
         -- sets the marks upon calling `toggle` on the ui, instead of require `:w`.
@@ -46,9 +56,15 @@ return {
         tabline_prefix = '  ',
         tabline_suffix = '  ',
       },
+      -- ============================================================
+      -- Use a dynamic width for the Harpoon popup menu
+      -- ============================================================
       menu = {
         width = vim.api.nvim_win_get_width(0) - 4,
       },
+      -- ============================================================
+      -- To preconfigure terminal commands for later use
+      -- ============================================================
       projects = {
         -- Yes $HOME works
         ['$HOME/PyProject/se7en-rye/movies'] = {
