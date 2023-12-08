@@ -8,7 +8,7 @@ return {
   },
   cmd = { 'Mason', 'MasonInstall', 'MasonUnistall', 'MasonUpdate' },
   keys = {
-    { '<leader>fm', '<cmd>Mason<cr>', desc = 'Mason' },
+    { '<leader>om', '<cmd>Mason<cr>', desc = 'Mason' },
   },
   config = function()
     require('mason').setup({

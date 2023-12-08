@@ -204,7 +204,7 @@ return {
         p = { "<cmd>silent MarkdownPreviewToggle<cr>", "MarkdownPreviewToggle" },
       },
       o = {
-        name = 'Terminal Float  Open URL  Octo',
+        name = 'Mason  Terminal Float  Open URL  Octo',
         l = { "<cmd>silent !$BROWSER https://github.com/lcdse7en&<cr>", "Open Github: lcdse7en" }, --  NOTE: :silent 静默执行 & 后台运行
         o = {
           name = 'Octo',
