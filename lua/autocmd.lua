@@ -1,7 +1,6 @@
-
 --  NOTE: Jump out of parenthetical quotation marks
-vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = "*",
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+  pattern = '*',
   callback = function()
     vim.cmd [[
     inoremap <silent> ii <C-\><C-n>:call search('[>)\]}"'']', 'W')<CR>a
@@ -10,10 +9,10 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 })
 
 -- resize splits if window got resized
-vim.api.nvim_create_autocmd({ "VimResized" }, {
-  group = vim.api.nvim_create_augroup("resize_splits", { clear = true }),
+vim.api.nvim_create_autocmd({ 'VimResized' }, {
+  group = vim.api.nvim_create_augroup('resize_splits', { clear = true }),
   callback = function()
-    vim.cmd "tabdo wincmd ="
+    vim.cmd 'tabdo wincmd ='
   end,
 })
 
@@ -33,39 +32,38 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   end,
 })
 --  NOTE: Remove all trailing whitespace on save
-local TrimWhiteSpaceGrp = vim.api.nvim_create_augroup("TrimWhiteSpaceGrp", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePre", {
+local TrimWhiteSpaceGrp = vim.api.nvim_create_augroup('TrimWhiteSpaceGrp', { clear = true })
+vim.api.nvim_create_autocmd('BufWritePre', {
   command = [[:%s/\s\+$//e]],
   group = TrimWhiteSpaceGrp,
 })
 -- Highlight on yank
-vim.api.nvim_create_autocmd("TextYankPost", {
+vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
-    vim.highlight.on_yank { higroup = "IncSearch", timeout = 100 }
+    vim.highlight.on_yank { higroup = 'IncSearch', timeout = 100 }
   end,
 })
 
-
 --  NOTE: Fix fold issue of files opened by telescope
-vim.api.nvim_create_autocmd({ "BufRead" }, {
-  group = vim.api.nvim_create_augroup("Telescope_fold", { clear = true }),
+vim.api.nvim_create_autocmd({ 'BufRead' }, {
+  group = vim.api.nvim_create_augroup('Telescope_fold', { clear = true }),
   callback = function()
-    vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+    vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
       once = true,
-      command = "normal! zx",
+      command = 'normal! zx',
     })
   end,
 })
 
 --  NOTE: auto close NvimTree
-vim.api.nvim_create_autocmd("BufEnter", {
-  group = vim.api.nvim_create_augroup("NvimTreeClose", { clear = true }),
-  pattern = "NvimTree_*",
+vim.api.nvim_create_autocmd('BufEnter', {
+  group = vim.api.nvim_create_augroup('NvimTreeClose', { clear = true }),
+  pattern = 'NvimTree_*',
   callback = function()
-    local layout = vim.api.nvim_call_function("winlayout", {})
+    local layout = vim.api.nvim_call_function('winlayout', {})
     if
-      layout[1] == "leaf"
-      and vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(layout[2]), "filetype") == "NvimTree"
+      layout[1] == 'leaf'
+      and vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(layout[2]), 'filetype') == 'NvimTree'
       and layout[3] == nil
     then
       vim.api.nvim_command [[confirm quit]]
@@ -74,63 +72,62 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 --  NOTE: Automaically reload the file if it is changed outsize of Nvim
-local group = vim.api.nvim_create_augroup("auto_read", { clear = true })
-vim.api.nvim_create_autocmd({ "FileChangedShellPost" }, {
-  pattern = "*",
+local group = vim.api.nvim_create_augroup('auto_read', { clear = true })
+vim.api.nvim_create_autocmd({ 'FileChangedShellPost' }, {
+  pattern = '*',
   group = group,
   callback = function()
-    vim.notify("File changed on disk. Buffer reloaded!", vim.log.levels.WARN, { title = "nvim-config" })
+    vim.notify('File changed on disk. Buffer reloaded!', vim.log.levels.WARN, { title = 'nvim-config' })
   end,
 })
-vim.api.nvim_create_autocmd({ "FocusGained", "CursorHold", "TermClose", "TermLeave" }, {
-  pattern = "*",
+vim.api.nvim_create_autocmd({ 'FocusGained', 'CursorHold', 'TermClose', 'TermLeave' }, {
+  pattern = '*',
   group = group,
   callback = function()
-    if vim.fn.getcmdwintype() == "" then
-      vim.cmd "checktime"
+    if vim.fn.getcmdwintype() == '' then
+      vim.cmd 'checktime'
     end
   end,
 })
 
-
 --  NOTE:  Don't auto commenting new lines
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
+vim.api.nvim_create_autocmd({ 'BufEnter' }, {
   command = [[set formatoptions-=cro]],
 })
 --  NOTE: auto close some filetypes with <q>
-local close_with_q = vim.api.nvim_create_augroup("close_with_q", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
+local close_with_q = vim.api.nvim_create_augroup('close_with_q', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
   group = close_with_q,
   pattern = {
-    "fugitive",
-    "tsplayground",
-    "PlenaryTestPopup",
-    "qf",
-    "toggleterm",
-    "help",
-    "lspinfo",
-    "man",
-    "notify",
-    "aerial",
-    "qf",
-    "NvimTree",
-    "dap-float",
-    "null-ls-info",
-    "checkhealth",
-    "spectre_panel",
-    "startuptime",
-    "neotest-output",
-    "neotest-summary",
-    "neotest-output-panel",
-    "terminal",
-    "copilot",
+    'fugitive',
+    'tsplayground',
+    'PlenaryTestPopup',
+    'qf',
+    'toggleterm',
+    'help',
+    'lspinfo',
+    'man',
+    'notify',
+    'aerial',
+    'qf',
+    'NvimTree',
+    'dap-float',
+    'null-ls-info',
+    'checkhealth',
+    'spectre_panel',
+    'startuptime',
+    'neotest-output',
+    'neotest-summary',
+    'neotest-output-panel',
+    'terminal',
+    'copilot',
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
-    vim.keymap.set("n", "q", ":q<cr>", { buffer = event.buf, silent = true })
+    vim.keymap.set('n', 'q', ':q<cr>', { buffer = event.buf, silent = true })
   end,
 })
-vim.api.nvim_create_autocmd("FileType", { pattern = "man", command = [[nnoremap <buffer><silent> q :quit<CR>]] })
+vim.api.nvim_create_autocmd('FileType', { pattern = 'man', command = [[nnoremap <buffer><silent> q :quit<CR>]] })
 
 -- Autoformatting
 if PREF.lsp.format_on_save then
@@ -143,7 +140,6 @@ if PREF.lsp.format_on_save then
     end,
   })
 end
-
 
 -- Set default colorcolumn
 vim.api.nvim_create_autocmd('BufWinEnter', {
@@ -159,11 +155,10 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
   pattern = { '*.txt' },
   callback = function()
     if vim.bo.filetype == 'help' then
-      vim.cmd.wincmd('L')
+      vim.cmd.wincmd 'L'
     end
   end,
 })
-
 
 -- Autoenable when 'relativenumber' is set to true. Need to restart neovim
 if vim.opt.relativenumber:get() then
@@ -185,7 +180,7 @@ if vim.opt.relativenumber:get() then
       local win = vim.api.nvim_get_current_win()
       if vim.wo[win].relativenumber then
         vim.wo[win].relativenumber = false
-        vim.cmd('redraw')
+        vim.cmd 'redraw'
         set_relnum_back(win)
       end
     end,
@@ -204,27 +199,26 @@ vim.api.nvim_create_autocmd('BufHidden', {
 })
 
 --  NOTE: show cursor line only in active window
-vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
-  pattern = "*",
-  command = "set cursorline",
-  group = vim.api.nvim_create_augroup("CursorLine", { clear = true }),
+vim.api.nvim_create_autocmd({ 'InsertLeave', 'WinEnter' }, {
+  pattern = '*',
+  command = 'set cursorline',
+  group = vim.api.nvim_create_augroup('CursorLine', { clear = true }),
 })
-vim.api.nvim_create_autocmd({ "InsertEnter", "WinLeave" }, {
-  pattern = "*",
-  command = "set nocursorline",
-  group = vim.api.nvim_create_augroup("noCursorLine", { clear = true }),
+vim.api.nvim_create_autocmd({ 'InsertEnter', 'WinLeave' }, {
+  pattern = '*',
+  command = 'set nocursorline',
+  group = vim.api.nvim_create_augroup('noCursorLine', { clear = true }),
 })
-
 
 --  NOTE: markdown vim-table-mode
-vim.api.nvim_create_autocmd("BufEnter", {
-  group = vim.api.nvim_create_augroup("vimtablemode", { clear = true }),
-  pattern = { "*.md" },
-  command = "silent! TableModeEnable",
+vim.api.nvim_create_autocmd('BufEnter', {
+  group = vim.api.nvim_create_augroup('vimtablemode', { clear = true }),
+  pattern = { '*.md' },
+  command = 'silent! TableModeEnable',
 })
 
 --  NOTE: LuaSnipChoiceListSelecttions
-local current_nsid = vim.api.nvim_create_namespace "LuaSnipChoiceListSelections"
+local current_nsid = vim.api.nvim_create_namespace 'LuaSnipChoiceListSelections'
 local current_win = nil
 
 local function window_for_choiceNode(choiceNode)
@@ -250,15 +244,15 @@ local function window_for_choiceNode(choiceNode)
     current_nsid,
     row_selection,
     0,
-    { hl_group = "incsearch", end_line = row_selection + row_offset }
+    { hl_group = 'incsearch', end_line = row_selection + row_offset }
   )
   local win = vim.api.nvim_open_win(buf, false, {
-    relative = "win",
+    relative = 'win',
     width = w,
     height = h,
     bufpos = choiceNode.mark:pos_begin_end(),
-    style = "minimal",
-    border = "rounded",
+    style = 'minimal',
+    border = 'rounded',
   })
 
   return { win_id = win, extmark = extmark, buf = buf }
@@ -533,15 +527,14 @@ vim.cmd [[
     augroup end
 ]]
 
-
 --  NOTE: Set scripts to be executable from the shell
 vim.cmd [[ au BufWritePost * if getline(1) =~ "^#!" | silent !chmod +x <afile> | endif ]]
 
 --  NOTE: shell
-vim.api.nvim_create_autocmd("FileType", {
-  group = vim.api.nvim_create_augroup("sh", { clear = true }),
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('sh', { clear = true }),
   pattern = {
-    "sh",
+    'sh',
   },
   callback = function()
     vim.bo.shiftwidth = 4
@@ -550,15 +543,15 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo.cindent = true
     vim.bo.expandtab = true
     vim.bo.smartindent = true
-    vim.opt.colorcolumn = "100"
+    vim.opt.colorcolumn = '100'
     vim.opt.wrap = false
   end,
 })
 --  NOTE: python
-vim.api.nvim_create_autocmd("FileType", {
-  group = vim.api.nvim_create_augroup("python", { clear = true }),
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('python', { clear = true }),
   pattern = {
-    "python",
+    'python',
   },
   callback = function()
     vim.bo.shiftwidth = 4
@@ -568,29 +561,29 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo.expandtab = true
     vim.bo.smartindent = true
     vim.bo.copyindent = true
-    vim.opt.colorcolumn = "100"
+    vim.opt.colorcolumn = '100'
     vim.opt.wrap = false
   end,
 })
 --  NOTE: latex
-vim.api.nvim_create_autocmd("FileType", {
-  group = vim.api.nvim_create_augroup("tex", { clear = true }),
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('tex', { clear = true }),
   pattern = {
-    "tex",
+    'tex',
   },
   callback = function()
     vim.bo.shiftwidth = 2
     vim.bo.softtabstop = 2
     vim.bo.expandtab = true
-    vim.opt.colorcolumn = "120"
+    vim.opt.colorcolumn = '120'
     vim.opt.wrap = false
   end,
 })
 --  NOTE: typst
-vim.api.nvim_create_autocmd("FileType", {
-  group = vim.api.nvim_create_augroup("typst", { clear = true }),
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('typst', { clear = true }),
   pattern = {
-    "typst",
+    'typst',
   },
   callback = function()
     vim.bo.shiftwidth = 4
@@ -600,42 +593,41 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo.expandtab = true
     vim.bo.smartindent = true
     vim.bo.copyindent = true
-    vim.opt.colorcolumn = "100"
+    vim.opt.colorcolumn = '100'
     vim.opt.wrap = false
   end,
 })
 
 vim.api.nvim_create_autocmd({
-  "TermResponse",
+  'TermResponse',
 }, {
   group = group,
   callback = function()
-    vim.cmd "checktime"
+    vim.cmd 'checktime'
   end,
 })
 
-vim.api.nvim_create_autocmd("BufWinLeave", {
+vim.api.nvim_create_autocmd('BufWinLeave', {
   callback = function(ev)
-    if vim.bo[ev.buf].filetype == "TelescopePrompt" then
-      vim.cmd "silent! stopinsert!"
+    if vim.bo[ev.buf].filetype == 'TelescopePrompt' then
+      vim.cmd 'silent! stopinsert!'
     end
   end,
 })
 
-
 --  NOTE: Fix conceallevel for json & help files
-vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "json", "jsonc" },
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+  pattern = { 'json', 'jsonc' },
   callback = function()
     vim.wo.spell = false
     vim.wo.conceallevel = 0
   end,
 })
 
-vim.api.nvim_create_autocmd("FileType", {
+vim.api.nvim_create_autocmd('FileType', {
   callback = function()
     local commentstrings = {
-      dts = "// %s",
+      dts = '// %s',
     }
     local ft = vim.bo.filetype
     if commentstrings[ft] then
@@ -644,13 +636,13 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, { pattern = "*.md, *.txt", command = "setlocal wrap" })
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { pattern = '*.md, *.txt', command = 'setlocal wrap' })
 
 --  NOTE: TermOpen
-vim.api.nvim_create_autocmd("TermOpen", {
-  group = vim.api.nvim_create_augroup("se7enTermOpen", { clear = true }),
-  pattern = "term://*",
+vim.api.nvim_create_autocmd('TermOpen', {
+  group = vim.api.nvim_create_augroup('se7enTermOpen', { clear = true }),
+  pattern = 'term://*',
   callback = function()
-    vim.cmd "startinsert"
+    vim.cmd 'startinsert'
   end,
 })
