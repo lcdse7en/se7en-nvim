@@ -130,10 +130,10 @@ return {
           },
         },
         m = {
-          name = "marks/bookmarks",
-          b = { "<cmd>Telescope vim_bookmarks current_file<cr>", "Search bookmarks on current file" },
-          B = { "<cmd>Telescope vim_bookmarks all<cr>", "Search all bookmarks" },
-          m = { "<cmd>Telescope marks<cr>", "Search marks" },
+          name = "Telescope: search Marks  Annotation",
+          a = { "<cmd>Telescope vim_bookmarks all<cr>", "Search all bookmarks  Annotation" },
+          c = { "<cmd>Telescope vim_bookmarks current_file<cr>", "Search bookmarks on current file" },
+          m = { "<cmd>Telescope marks<cr>", "Search all marks" },
         },
         u = {
           name = "[U]ndo | [F]recency | [Z]oxide",
@@ -191,6 +191,17 @@ return {
           w = "worktrees",
           c = "create worktree",
         },
+      },
+      m = {
+        name = "Marks Add  MarkdownPreview",
+        a = { "<cmd>silent BookmarkAnnotate<cr>", "Marks Annotate" },
+        c = { "<cmd>silent BookmarkClear<cr>", "Marks Clear" },
+        j = { "<cmd>silent BookmarkNext<cr>", "Marks Next" },
+        k = { "<cmd>silent BookmarkPrev<cr>", "Marks Prev" },
+        s = { "<cmd>silent BookmarkShowAll<cr>", "Marks ShowAll" },
+        t = { "<cmd>silent BookmarkToggle<cr>", "Marks Toggle" },
+        x = { "<cmd>BookmarkClearAll<cr>", "Marks Clear All" },
+        p = { "<cmd>silent MarkdownPreviewToggle<cr>", "MarkdownPreviewToggle" },
       },
       o = {
         name = 'Terminal Float  Open URL  Octo',
