@@ -92,6 +92,9 @@ return {
     end, { desc = 'Open File Browser with the path of the current buffer' })
     map('n', '<leader>fr', pickers.registers, { desc = 'Telescope: Find registers' })
     map('n', '<leader>ft', '<cmd>TodoTelescope<cr>', { desc = 'TodoTelescope: Search Todo Comments' })
+    map('n', '<leader>fT', function()
+      require('telescope.builtin').colorscheme { enable_preview = true }
+    end, { desc = 'Telescope: Find themes' })
     map('n', '<leader>fn', '<cmd>Telescope notify<CR>', { desc = 'Telescope: show notifications' })
     map('n', '<leader>fh', 'Telescope yank_history<cr>', { desc = 'Telescope: search yank_history' })
     map('n', '<leader>fp', '<cmd>lua require("plugins.telescope").project_files()<cr>', { desc = 'Project Files' })
