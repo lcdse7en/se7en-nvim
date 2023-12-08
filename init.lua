@@ -5,7 +5,6 @@
 -- Description :                             *
 --********************************************
 
-vim.g.mapleader = ' '
 
 require('se7en_settings')
 require('options')

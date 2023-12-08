@@ -60,7 +60,8 @@ return {
     map('n', '<leader>fb', '<cmd>silent BrowseBookmarks<cr>', { desc = 'Browse Bookmarks' })
     map('n', '<leader>fB', pickers.buffers, { desc = 'Telescope: show open buffers' })
     map('n', '<leader>fc', pickers.find_files, { desc = 'Telescope: Find files in (cwd>' })
-    map('n', '<leader>fd', pickers.diagnostics, { desc = 'Telescope: show diagnostics' })
+    map('n', "<leader>fd", "<cmd>Telescope diagnostics bufnr=0<cr>", { desc = "telescope: Document Diagnostics" })
+    map('n', '<leader>fD', pickers.diagnostics, { desc = 'Telescope: workspace diagnostics' })
     map('n', '<leader>ff', '<cmd>lua edit_neovim()<cr>', { desc = 'Nvim Dotfiles' })
     map('n', '<leader>fg', '<cmd>lua require("telescope").extensions.live_grep_args.live_grep_args()<cr>', { desc = 'Find Text' })
     map('n', '<leader>fG', pickers.live_grep, { desc = 'Telescope: live grep (cwd>' })
@@ -89,7 +90,7 @@ return {
     map('n', '<leader>fn', '<cmd>Telescope notify<CR>', { desc = 'Telescope: show notifications' })
     map('n', '<leader>fh', 'Telescope yank_history<cr>', { desc = 'Telescope: search yank_history' })
     map('n', '<leader>fp', '<cmd>lua require("plugins.telescope").project_files()<cr>', { desc = 'Project Files' })
-    map('n', '<leader>fv',         function()
+    map('n', '<leader>fv', function()
           local builtin = require "telescope.builtin"
           builtin.treesitter()
         end,
@@ -98,8 +99,6 @@ return {
     -- ============================================================
     -- LSP
     -- ============================================================
-    map('n', "<leader>cd", "<cmd>Telescope diagnostics bufnr=0<cr>", { desc = "telescope: Document Diagnostics" })
-    map('n', "<leader>cD", "<cmd>lua require('telescope.builtin').diagnostics()<cr>", { desc = "telescope: Workspace Diagnostics" })
     map('n', "<leader>cf", "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", { desc = "telescope: goto Definition" })
     map('n', "<leader>cr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", { desc = "telescope: goto References" })
     map('n', "<leader>ci", "<cmd>lua require('telescope.builtin').lsp_implementations()<cr>", { desc = "telescope: goto Implementations" })

@@ -6,11 +6,10 @@ local del = vim.keymap.del
 local u = require('utils')
 local cb = u.lazy_rhs_cb
 
--- Escape mappings
-for _, keys in ipairs(PREF.common.escape_keys) do
-  map('t', keys, [[<C-\><C-n>]], { desc = 'Leave INSERT mode in terminal' })
-  map('i', keys, '<Esc>', { desc = 'Leave INSERT mode' })
-end
+
+-- ESC
+map("i", "jj", "<ESC>", { silent = true, desc = 'Leave Insert mode' })
+
 map('t', '<esc>', [[<C-\><C-n>]], { desc = 'Leave INSERT mode in terminal' })
 
 map('t', '<esc>', [[<C-\><C-n>]], { desc = 'Leave INSERT mode in terminal' })

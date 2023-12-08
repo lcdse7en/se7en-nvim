@@ -20,14 +20,15 @@ local options = {
   number = true,
   relativenumber = true,                --- Enables relative number
   termguicolors = true,
-  numberwidth = 3,
+  numberwidth = 4,
   cursorline = true,
   mouse = "a",                          --- Enable mouse
   cmdheight = 0,
   pumheight = 10,
-  signcolumn = 'yes',
-  scrolloff = 3,
-  sidescrolloff = 3,
+  signcolumn = 'yes:2',
+  history = 10000,
+  scrolloff = 5,
+  sidescrolloff = 5,
   colorcolumn = tostring(textwidth),
   laststatus = 3,
   expandtab = true,                     --- Use spaces instead of tabs
@@ -40,18 +41,24 @@ local options = {
   hlsearch = true,
   infercase = true,
   grepprg = "rg --hidden --vimgrep --smart-case --",
-  autoindent = true,                    --- Good auto indent
-  smartindent = true,                   --- Makes indenting smart
+  autoindent = true,                     --- Good auto indent
+  smartindent = true,                    --- Makes indenting smart
   backup = false,
   swapfile = false,
   textwidth = PREF.common.textwidth,
   wrap = false,
   linebreak = true,
-  timeoutlen = 350,                     --- Faster completion (cannot be lower than 200 because then commenting doesn't work)
-  updatetime = 100,                     --- Faster completion
-  confirm = false,                      --- Confirm to save changes before exiting modified buffer
-  incsearch = true,                     --- Start searching before pressing enter
+  completeopt = "menu,menuone,noselect", --- Better autocompletion
+  undofile = true,                       --- Sets undo to file
+  undodir = os.getenv "HOME" .. "/.cache/nvim/undodir",
+  timeoutlen = 350,                      --- Faster completion (cannot be lower than 200 because then commenting doesn't work)
+  updatetime = 100,                      --- Faster completion
+  viminfo = "'1000",                     --- Increase the size of file history
+  confirm = false,                       --- Confirm to save changes before exiting modified buffer
+  incsearch = true,                      --- Start searching before pressing enter
+  writebackup = false,                   --- Not needed
   spell = false,
+  conceallevel = 0,                      --- Show `` in markdown files
   guifont = "FiraCode Nerd Font Regular",
   spelllang = 'en_us,ru_ru',
   whichwrap = vim.opt.whichwrap:append('<,>,[,],h,l'),
@@ -61,6 +68,22 @@ local options = {
   smoothscroll = true,
 }
 
+local globals = {
+  mapleader = " ",                --- Map leader key to SPC
+  speeddating_no_mappings = 1,    --- Disable default mappings for speeddating
+  tex_flavor = "latex",           --- set latex filetypes
+  autoformat_enabled = true,
+  icons_enabled = true,
+  diagnostics_mode = 3,           --- set the visibility of diagnostics in the UI (0=off, 1=only show in status line, 2=virtual text off, 3=all on)
+  highlighturl_enabled = true,    --- highlight URLs by                                                                                  default
+  lsp_handlers_enabled = true,    --- enable or disable default vim.lsp.handlers (hover and signature                                    help)
+  semantic_tokens_enabled = true, --- enable or disable LSP semantic tokens on                                                        startup
+  resession_enabled = true,
+  transparent_background = true,
+  inlay_hints_enabled = true,     ---  NOTE: enable or disable LSP inlay hints on startup (Neovim v0.10+ only)
+  browser = "google-chrome-stable",
+}
+
 for option_name, value in pairs(options) do
 	local ok, _ = pcall(vim.api.nvim_get_option_info2, option_name, {})
 	if ok then
@@ -68,4 +91,9 @@ for option_name, value in pairs(options) do
 	else
 		vim.notify('Option ' .. option_name .. ' is not supported', vim.log.levels.WARN)
 	end
+end
+
+
+for k, v in pairs(globals) do
+  vim.g[k] = v
 end
