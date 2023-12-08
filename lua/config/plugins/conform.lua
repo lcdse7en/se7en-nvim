@@ -10,19 +10,35 @@ return {
   enabled = true,
   event = 'VeryLazy',
   config = function()
+    local prettier = { { 'prettierd', 'prettier' } }
+    local util = require 'conform.util'
+
     local opts = {
       formatters_by_ft = {
         lua = { 'stylua' },
         c = { 'clang_format' },
         cpp = { 'clang_format' },
+        sh = { 'shfmt' },
         rust = { 'rustfmt' },
-        javascript = { { 'prettierd', 'prettier' } },
-        typescript = { { 'prettierd', 'prettier' } },
-        css = { { 'prettierd', 'prettier' } },
-        scss = { { 'prettierd', 'prettier' } },
-        html = { { 'prettierd', 'prettier' } },
+        tex = { 'latexindent' },
+        python = function(bufnr)
+          if require('conform').get_formatter_info('yapf', bufnr).available then
+            return { 'yapf' } --  NOTE: pip instal yapf
+          else
+            return { 'isort', 'black' }
+          end
+        end,
+        javascript = prettier,
+        typescript = prettier,
+        javascriptreact = prettier,
+        typescriptreact = prettier,
+        css = prettier,
+        scss = prettier,
+        html = prettier,
         markdown = { { 'markdownlint', 'prettierd', 'prettier' } },
-        json = { { 'jq', 'prettierd', 'prettier' } },
+        json = { 'jq' },
+        jsonc = { 'prettierd' },
+        zig = { 'zigfmt' },
         proto = { { 'buf', 'protolint' } },
       },
       -- format_on_save = {
@@ -36,6 +52,95 @@ return {
         end
         return { timeout_ms = 500, lsp_fallback = true }
       end,
+
+      formatters = {
+        -- lua
+        stylua = {
+          command = 'stylua',
+          args = { '--search-parent-directories', '--stdin-filepath', '$FILENAME', '-' },
+          range_args = function(ctx)
+            local start_offset, end_offset = util.get_offsets_from_range(ctx.buf, ctx.range)
+            return {
+              '--search-parent-directories',
+              '--stdin-filepath',
+              '$FILENAME',
+              '--range-start',
+              tostring(start_offset),
+              '--range-end',
+              tostring(end_offset),
+              '-',
+            }
+          end,
+          cwd = util.root_file {
+            '.stylua.toml',
+            'stylua.toml',
+          },
+        },
+        -- python
+        yapf = {
+          command = 'yapf',
+          args = {
+            '--quiet',
+            '--style',
+            '{based_on_style: google, force_multiline_dict: true, indent_width: 4, column_limit: 100, spaces_around_dict_delimiters: true, spaces_around_tuple_delimiters: true, coalesce_brackets: false, split_before_dict_set_generator: true, dedent_closing_brackets: true, spaces_before_comment: 2,}',
+            '--parallel',
+          },
+          range_args = function(ctx)
+            return { '--quiet', '--lines', string.format('%d-%d', ctx.range.start[1], ctx.range['end'][1]) }
+          end,
+        },
+        -- shell
+        shfmt = {
+          -- stdin = true,
+          command = 'shfmt',
+          args = { '-i', '4', '-filename', '$FILENAME' },
+          -- inherit = true,
+          -- prepend_args = { "-i", "4" },
+        },
+        rustfmt = {
+          prepend_args = { '--edition', '2021' },
+        },
+        -- C | C++
+        clang_format = {
+          command = 'clang-format',
+          args = { '-assume-filename', '$FILENAME' },
+          range_args = function(ctx)
+            local start_offset, end_offset = util.get_offsets_from_range(ctx.buf, ctx.range)
+            local length = end_offset - start_offset
+            return {
+              '-assume-filename',
+              '$FILENAME',
+              '--offset',
+              tostring(start_offset),
+              '--length',
+              tostring(length),
+            }
+          end,
+        },
+        -- yaml
+        yamlfix = {
+          command = 'yamlfix',
+          -- Adds environment args to the yamlfix formatter
+          env = {
+            YAMLFIX_SEQUENCE_STYLE = 'block_style',
+          },
+        },
+        --  NOTE: json
+        jq = {
+          command = 'jq',
+        },
+        --  NOTE: latex
+        latexindent = {
+          command = 'latexindent',
+          args = { '-l', 'defaultSettings.yaml', '-y', 'lookForAlignDelims', '{bNiceMatrix: 1}' },
+          -- stdin = true,
+        },
+        --  NOTE: typst
+        typst = {
+          command = 'typstfmt',
+          stdin = false,
+        },
+      },
     }
 
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
