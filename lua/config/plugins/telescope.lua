@@ -95,6 +95,17 @@ return {
         end,
     { desc = 'Lists FunctionNames | variables from Treesitter' })
 
+    -- ============================================================
+    -- LSP
+    -- ============================================================
+    map('n', "<leader>cd", "<cmd>Telescope diagnostics bufnr=0<cr>", { desc = "telescope: Document Diagnostics" })
+    map('n', "<leader>cD", "<cmd>lua require('telescope.builtin').diagnostics()<cr>", { desc = "telescope: Workspace Diagnostics" })
+    map('n', "<leader>cf", "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", { desc = "telescope: goto Definition" })
+    map('n', "<leader>cr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", { desc = "telescope: goto References" })
+    map('n', "<leader>ci", "<cmd>lua require('telescope.builtin').lsp_implementations()<cr>", { desc = "telescope: goto Implementations" })
+
+
+
     map('n', '<leader>ot', '<cmd>silent ToggleTerm direction=float<CR>', { desc = 'Terminal Float' })
 
 
