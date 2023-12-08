@@ -7,7 +7,7 @@
 
 return {
   'stevearc/conform.nvim',
-  enabled = false,
+  enabled = true,
   event = 'VeryLazy',
   config = function()
     local opts = {

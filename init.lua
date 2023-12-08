@@ -21,4 +21,3 @@ require 'utils.globals'
 require 'utils.FloatWin'
 require 'utils.CodeRunning'
 require 'vm.vmlens'
-
