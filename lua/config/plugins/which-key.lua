@@ -227,6 +227,13 @@ return {
           u = { ':silent !$BROWSER <C-r>+&<cr>', 'Open URL(On Register)' },
         },
       },
+      p = {
+        name = 'Project',
+        p = { --  NOTE: -- sudo pacman -S plocate && sudo updatedb
+          "<cmd>lua require'telescope'.extensions.repo.cached_list{file_ignore_patterns={'/%.cache/', '/%.cargo/', '/%.local/', '/%timeshift/', '/usr/', '/srv/', '/%.oh%-my%-zsh', '/Library/', '/%.cocoapods/'}}<CR>",
+          'Project lists',
+        },
+      },
       r = {
         name = 'rename on LSP',
       },
@@ -241,6 +248,16 @@ return {
       },
     }
 
+    local visual_mode_mappings = {
+      t = {
+        name = 'Table Mode',
+        t = { 'tableize' },
+      },
+    }
+
+    -- ============================================================
+    -- register
+    -- ============================================================
     wk.register(normal_mode_mappings, opts)
     wk.register(visual_mode_mappings, visual_opts)
   end,
