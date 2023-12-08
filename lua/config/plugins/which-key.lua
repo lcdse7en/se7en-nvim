@@ -100,7 +100,7 @@ return {
         r = { '<cmd>set norelativenumber!<CR>', 'relative number' },
       },
       c = {
-        name = 'LSP   Comment  Format',
+        name = 'LSP  Comment  Format',
       },
       f = {
         name = 'Find Files  Marks',
