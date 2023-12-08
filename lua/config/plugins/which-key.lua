@@ -95,12 +95,12 @@ return {
       ['V'] = { '<C-W>s', 'split below' },
 
       a = {
-        name = 'Set Number | [A]lternate true | false',
+        name = 'Set Number  [A]lternate true  false',
         n = { '<cmd>set nonumber!<CR>', 'line numbers' },
         r = { '<cmd>set norelativenumber!<CR>', 'relative number' },
       },
       f = {
-        name = 'Find Files | Marks',
+        name = 'Find Files  Marks',
         e = {
           name = "Edit NvimConf",
           a = { "<cmd>e ~/.config/nvim/lua/autocmd.lua<CR>", "Edit autocmds.lua" },
@@ -193,7 +193,7 @@ return {
         },
       },
       o = {
-        name = 'Terminal Float | Open URL | Octo',
+        name = 'Terminal Float  Open URL  Octo',
         l = { "<cmd>silent !$BROWSER https://github.com/lcdse7en&<cr>", "Open Github: lcdse7en" }, --  NOTE: :silent 静默执行 & 后台运行
         o = {
           name = 'Octo',
@@ -212,11 +212,14 @@ return {
         }
       },
       s = {
-        name = 'spectre | Source vimrc',
+        name = 'spectre  Source vimrc',
       },
       w = {
         name = 'Window Picker',
       },
+      z = {
+        name = 'ZenMode'
+      }
     }
 
     wk.register(normal_mode_mappings, opts)
