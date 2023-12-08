@@ -3,10 +3,10 @@ return {
   enabled = true,
   event = 'InsertEnter',
   config = function()
-    local autopairs = require('nvim-autopairs')
-    local Rule = require('nvim-autopairs.rule')
+    local autopairs = require 'nvim-autopairs'
+    local Rule = require 'nvim-autopairs.rule'
 
-    autopairs.setup({
+    autopairs.setup {
       fast_wrap = {},
       disable_filetype = {},
       disable_in_macro = false,
@@ -22,14 +22,14 @@ return {
       map_bs = true,
       map_c_h = false,
       map_c_w = false,
-    })
+    }
 
-    autopairs.add_rules({
+    autopairs.add_rules {
       Rule(' ', ' '):with_pair(function(opts)
         local pair = opts.line:sub(opts.col - 1, opts.col)
         return vim.tbl_contains({ '()', '[]', '{}' }, pair)
       end),
       Rule('|', '|', 'rust'),
-    })
+    }
   end,
 }
