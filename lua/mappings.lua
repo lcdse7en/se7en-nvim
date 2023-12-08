@@ -131,12 +131,12 @@ map("n", "<Leader>ou", function()
   vim.api.nvim_win_set_cursor(0, { pos[1], col - 1 })
   open_url(vim.fn.expand "<cfile>")
   vim.api.nvim_win_set_cursor(0, pos)
-end, { desc = "Open URL(On underline)" })
+end, { silent = true, desc = "Open URL(On underline)" })
 
 -- Open plugin repository at cursor in browser
 map("n", "<Leader>og", function()
   open_url(vim.fn.expand "<cfile>", [[https://github.com/]])
-end, { desc = "Search Gihub(On underline)" })
+end, { silent = true, desc = "Search Gihub(On underline)" })
 
 -- ============================================================
 -- LSP
