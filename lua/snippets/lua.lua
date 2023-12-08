@@ -877,4 +877,37 @@ return {
       }
     )
   ),
+  s(
+    {
+      trig = "myjh",
+      regTrig=false,
+      snippetType = "autosnippet",
+      priority = 2000,
+    },
+    fmta(
+      [[
+      <> <>
+      ]],
+      {
+        t '',
+        i(0)
+      }
+    )
+  ),
+  s(
+    {
+      trig = "myjh",
+      dscr = "jiahao symbol",
+      regTrig=false,
+      snippetType = "snippet",
+    },
+    fmta(
+      [[
+
+      ]],
+      {
+
+      }
+    )
+  ),
 }
