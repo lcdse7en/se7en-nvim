@@ -197,6 +197,9 @@ return {
           c = 'create worktree',
         },
       },
+      h = {
+        name = 'harpoon',
+      },
       L = {
         name = 'Lf',
       },

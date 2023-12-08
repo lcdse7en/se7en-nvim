@@ -7,7 +7,7 @@
 
 return {
   'nvim-zh/colorful-winsep.nvim',
-  enabled = true,
+  enabled = false,
   lazy = true,
   event = 'WinNew',
   config = function()

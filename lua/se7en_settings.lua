@@ -28,7 +28,8 @@ PREF = {
   },
   ui = {
     -- colorscheme = 'serenity',
-    colorscheme = 'everforest',
+    -- colorscheme = 'everforest',
+    colorscheme = 'rose-pine',
     border = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
     italic_comment = true,
   },
