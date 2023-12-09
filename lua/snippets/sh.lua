@@ -956,4 +956,67 @@ return {
       }
     )
   ),
+  s(
+    {
+      trig = 'mypac',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      sudo pacman -S --noconfirm "<><>"
+      ]],
+      {
+        t '$',
+        i(1, 'element'),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'mypac',
+      dscr = 'dscr',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
+  s(
+    {
+      trig = 'myit',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      installed=<>(sudo pacman -Qs "<><>")
+      ]],
+      {
+        t '$',
+        t '$',
+        i(1, 'element'),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'myit',
+      dscr = 'installed',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
 }
