@@ -91,8 +91,8 @@ return {
       -- single
       ['='] = { '<cmd>vertical resize +5<CR>', 'resize +5' },
       ['-'] = { '<cmd>vertical resize -5<CR>', 'resize -5' },
-      ['v'] = { '<C-W>v', 'split right' },
-      ['V'] = { '<C-W>s', 'split below' },
+      ['v'] = { '<C-W>v<C-W>w', 'split right' },
+      ['V'] = { '<C-W>s<C-W>j', 'split below' },
 
       a = {
         name = 'Set Number  [A]lternate true  false',
