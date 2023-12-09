@@ -541,7 +541,7 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.bo.softtabstop = 4
     vim.bo.autoindent = true
     vim.bo.cindent = true
-    vim.bo.expandtab = true
+    vim.bo.expandtab = false
     vim.bo.smartindent = true
     vim.opt.colorcolumn = '100'
     vim.opt.wrap = false

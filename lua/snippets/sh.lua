@@ -4,16 +4,17 @@
 -- Date:        2023-05-12                  *
 -- Description:                             *
 --*******************************************
-local ls = require "luasnip"
+local ls = require 'luasnip'
 local s = ls.snippet
 local sn = ls.snippet_node
 local t = ls.text_node
 local f = ls.function_node
 local i = ls.insert_node
 local d = ls.dynamic_node
-local fmta = require("luasnip.extras.fmt").fmta
-local rep = require("luasnip.extras").rep
-local line_begin = require("luasnip.extras.expand_conditions").line_begin
+local c = ls.choice_node
+local fmta = require('luasnip.extras.fmt').fmta
+local rep = require('luasnip.extras').rep
+local line_begin = require('luasnip.extras.expand_conditions').line_begin
 -- local tex = require "utils.latex"
 
 local get_visual = function(args, parent)
@@ -26,7 +27,7 @@ end
 
 return {
   s(
-    { trig = "myarr", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'myarr', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       <>=(
@@ -34,17 +35,17 @@ return {
       )
       ]],
       {
-        i(1, "array"),
+        i(1, 'array'),
         i(2),
       }
     )
   ),
   s(
     {
-      trig = "myarr",
-      dscr = "array",
+      trig = 'myarr',
+      dscr = 'array',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -54,22 +55,22 @@ return {
     )
   ),
   s(
-    { trig = "mynote", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'mynote', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       #  <>: <>
       ]],
       {
-        c(1, { t "NOTE", t "TODO", t "WARN", t "FIX", t "HACK", t "PERF" }),
+        c(1, { t 'NOTE', t 'TODO', t 'WARN', t 'FIX', t 'HACK', t 'PERF' }),
         i(2),
       }
     )
   ),
   s(
     {
-      trig = "mycs",
+      trig = 'mycs',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -88,22 +89,22 @@ return {
       esac
       ]],
       {
-        i(1, "InfoText"),
-        i(2, "var"),
+        i(1, 'InfoText'),
+        i(2, 'var'),
         rep(2),
-        i(3, "1"),
+        i(3, '1'),
         i(4),
-        i(5, "2"),
+        i(5, '2'),
         i(6),
       }
     )
   ),
   s(
     {
-      trig = "mycs",
-      dscr = "case...esac",
+      trig = 'mycs',
+      dscr = 'case...esac',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -114,9 +115,9 @@ return {
   ),
   s(
     {
-      trig = "myfunc",
+      trig = 'myfunc',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -126,17 +127,17 @@ return {
       }
       ]],
       {
-        i(1, "FuncName"),
-        i(0, "pass"),
+        i(1, 'FuncName'),
+        i(0, 'pass'),
       }
     )
   ),
   s(
     {
-      trig = "myfunc",
-      dscr = "function",
+      trig = 'myfunc',
+      dscr = 'function',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -147,9 +148,9 @@ return {
   ),
   s(
     {
-      trig = "mymain",
+      trig = 'mymain',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -166,10 +167,10 @@ return {
   ),
   s(
     {
-      trig = "mymain",
-      dscr = "Function Main",
+      trig = 'mymain',
+      dscr = 'Function Main',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -180,9 +181,9 @@ return {
   ),
   s(
     {
-      trig = "myvar",
+      trig = 'myvar',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -190,17 +191,17 @@ return {
       <>=<>
       ]],
       {
-        i(1, "VarName"),
-        i(2, "VarValue"),
+        i(1, 'VarName'),
+        i(2, 'VarValue'),
       }
     )
   ),
   s(
     {
-      trig = "myvar",
-      dscr = "Var",
+      trig = 'myvar',
+      dscr = 'Var',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -211,9 +212,9 @@ return {
   ),
   s(
     {
-      trig = "mydefc",
+      trig = 'mydefc',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -230,10 +231,10 @@ return {
   ),
   s(
     {
-      trig = "mydefc",
-      dscr = "dscr",
+      trig = 'mydefc',
+      dscr = 'dscr',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -244,31 +245,41 @@ return {
   ),
   s(
     {
-      trig = "myif",
+      trig = 'myif',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
       [[
-      if <> <> <>; then
+      if <> <> <> <><><> <>; then
+          <>
+      else
           <>
       fi
       ]],
       {
-        t "[[",
-        i(1),
-        t "]]",
+        t '[[',
+        t '!',
+        c(1, {
+          sn(nil, { t '-d', i(1) }),
+          sn(nil, { t '-f', i(1) }),
+        }),
+        t '"',
         i(2),
+        t '"',
+        t ']]',
+        i(3),
+        i(4),
       }
     )
   ),
   s(
     {
-      trig = "myif",
-      dscr = "if..fi",
+      trig = 'myif',
+      dscr = 'if..fi',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -279,9 +290,9 @@ return {
   ),
   s(
     {
-      trig = "myiif",
+      trig = 'myiif',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -293,9 +304,9 @@ return {
       fi
       ]],
       {
-        t "[[",
+        t '[[',
         i(1),
-        t "]]",
+        t ']]',
         i(2),
         i(3),
       }
@@ -303,10 +314,10 @@ return {
   ),
   s(
     {
-      trig = "myiif",
-      dscr = "if..else...fi",
+      trig = 'myiif',
+      dscr = 'if..else...fi',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -317,9 +328,9 @@ return {
   ),
   s(
     {
-      trig = "myfor",
+      trig = 'myfor',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -329,9 +340,9 @@ return {
       done
       ]],
       {
-        i(1, "element"),
+        i(1, 'element'),
         t '"',
-        i(2, "array"),
+        i(2, 'array'),
         t '"',
         t '"',
         rep(1),
@@ -341,10 +352,10 @@ return {
   ),
   s(
     {
-      trig = "myfor",
-      dscr = "for...do...done",
+      trig = 'myfor',
+      dscr = 'for...do...done',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -355,30 +366,30 @@ return {
   ),
   s(
     {
-      trig = "myeof",
+      trig = 'myeof',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
       [[
       sudo tee -a <> <<<<-EOF
-      <><>
-      EOF
+      <>
+      <>EOF
       ]],
       {
-        i(1, "file"),
-        t "\t",
+        i(1, 'file'),
         i(2),
+        t '\t\t',
       }
     )
   ),
   s(
     {
-      trig = "myeof",
-      dscr = "dscr",
+      trig = 'myeof',
+      dscr = 'dscr',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -389,9 +400,9 @@ return {
   ),
   s(
     {
-      trig = "myread",
+      trig = 'myread',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -399,18 +410,18 @@ return {
       read <> "<>" -e <>
       ]],
       {
-        c(1, { t "-p", t "-s", t "-t" }),
-        i(2, "InfoText"),
-        i(3, "VarName"),
+        c(1, { t '-p', t '-s', t '-t' }),
+        i(2, 'InfoText'),
+        i(3, 'VarName'),
       }
     )
   ),
   s(
     {
-      trig = "myread",
-      dscr = "dscr",
+      trig = 'myread',
+      dscr = 'dscr',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -421,9 +432,9 @@ return {
   ),
   s(
     {
-      trig = "mydate",
+      trig = 'mydate',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -431,16 +442,16 @@ return {
       $(date +"<>")
       ]],
       {
-        c(1, { t "%F %T", t "%Y-%m-%d %H:%M" }),
+        c(1, { t '%F %T', t '%Y-%m-%d %H:%M' }),
       }
     )
   ),
   s(
     {
-      trig = "mydate",
-      dscr = "date",
+      trig = 'mydate',
+      dscr = 'date',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -451,9 +462,9 @@ return {
   ),
   s(
     {
-      trig = "mylibs",
+      trig = 'mylibs',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -467,10 +478,10 @@ return {
   ),
   s(
     {
-      trig = "mylibs",
-      dscr = "dscr",
+      trig = 'mylibs',
+      dscr = 'dscr',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -481,9 +492,9 @@ return {
   ),
   s(
     {
-      trig = "myps",
+      trig = 'myps',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -491,16 +502,16 @@ return {
       push array <>
       ]],
       {
-        i(1, "addElement"),
+        i(1, 'addElement'),
       }
     )
   ),
   s(
     {
-      trig = "myps",
-      dscr = "dscr",
+      trig = 'myps',
+      dscr = 'dscr',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -511,9 +522,9 @@ return {
   ),
   s(
     {
-      trig = "myecc",
+      trig = 'myecc',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -521,16 +532,16 @@ return {
       echo -e "$<>"
       ]],
       {
-        c(1, { t "SkyBlue", t "Plain", t "Green" }),
+        c(1, { t 'SkyBlue', t 'Plain', t 'Green' }),
       }
     )
   ),
   s(
     {
-      trig = "myecc",
-      dscr = "echo color",
+      trig = 'myecc',
+      dscr = 'echo color',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -541,9 +552,9 @@ return {
   ),
   s(
     {
-      trig = "myecho",
+      trig = 'myecho',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -557,10 +568,10 @@ return {
   ),
   s(
     {
-      trig = "myecho",
-      dscr = "echo",
+      trig = 'myecho',
+      dscr = 'echo',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -571,10 +582,10 @@ return {
   ),
   s(
     {
-      trig = "myel",
-      dscr = "echo color",
+      trig = 'myel',
+      dscr = 'echo color',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -585,9 +596,9 @@ return {
   ),
   s(
     {
-      trig = "myrps",
+      trig = 'myrps',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -595,17 +606,17 @@ return {
       repeat_str "<>" <>
       ]],
       {
-        c(1, { t "*", t "-" }),
-        i(2, "num"),
+        c(1, { t '*', t '-' }),
+        i(2, 'num'),
       }
     )
   ),
   s(
     {
-      trig = "myrps",
-      dscr = "repeat_str",
+      trig = 'myrps',
+      dscr = 'repeat_str',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -616,9 +627,9 @@ return {
   ),
   s(
     {
-      trig = "myct",
+      trig = 'myct',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -626,17 +637,17 @@ return {
       center -l <> "<>"
       ]],
       {
-        i(1, "num"),
-        i(2, "text"),
+        i(1, 'num'),
+        i(2, 'text'),
       }
     )
   ),
   s(
     {
-      trig = "myct",
-      dscr = "center",
+      trig = 'myct',
+      dscr = 'center',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -647,9 +658,9 @@ return {
   ),
   s(
     {
-      trig = "mytd",
+      trig = 'mytd',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -657,18 +668,18 @@ return {
 	    #  <><> <>
 	    ]],
       {
-        c(1, { t "NOTE", t "TODO", t "ISSUE" }),
-        t ":",
+        c(1, { t 'NOTE', t 'TODO', t 'ISSUE' }),
+        t ':',
         i(2),
       }
     )
   ),
   s(
     {
-      trig = "mytd",
-      dscr = "todo comment",
+      trig = 'mytd',
+      dscr = 'todo comment',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -679,9 +690,9 @@ return {
   ),
   s(
     {
-      trig = "mypff",
+      trig = 'mypff',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -689,20 +700,20 @@ return {
       printf "<>" <><><><>
       ]],
       {
-        t "*%.0s",
-        t "{",
-        t "1..",
-        i(1, "endNum"),
-        t "}",
+        t '*%.0s',
+        t '{',
+        t '1..',
+        i(1, 'endNum'),
+        t '}',
       }
     )
   ),
   s(
     {
-      trig = "mypff",
-      dscr = "dscr",
+      trig = 'mypff',
+      dscr = 'dscr',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -713,9 +724,9 @@ return {
   ),
   s(
     {
-      trig = "mynt",
+      trig = 'mynt',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -729,10 +740,10 @@ return {
   ),
   s(
     {
-      trig = "mynt",
-      dscr = "dscr",
+      trig = 'mynt',
+      dscr = 'dscr',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -743,9 +754,9 @@ return {
   ),
   s(
     {
-      trig = "myas",
+      trig = 'myas',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -761,22 +772,22 @@ return {
       if
       ]],
       {
-        i(1, "Have you already download python"),
-        t "[[",
-        t "]]",
-        t "[[",
-        t "]]",
-        i(2, "Install_1"),
-        i(3, "Install_2"),
+        i(1, 'Have you already download python'),
+        t '[[',
+        t ']]',
+        t '[[',
+        t ']]',
+        i(2, 'Install_1'),
+        i(3, 'Install_2'),
       }
     )
   ),
   s(
     {
-      trig = "myas",
-      dscr = "answer",
+      trig = 'myas',
+      dscr = 'answer',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -787,27 +798,28 @@ return {
   ),
   s(
     {
-      trig = "mypc",
+      trig = 'mypf',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
       [[
-      printf "${<>}%s${RESET}\n" "<>"
+      printf "${<>}%s<>${RESET}\n" "<>"
       ]],
       {
-        i(1, "SKYBLUE"),
-        i(2, "text"),
+        i(1, 'SKYBLUE'),
+        i(2),
+        i(3, 'text'),
       }
     )
   ),
   s(
     {
-      trig = "mypc",
-      dscr = "printf",
+      trig = 'mypf',
+      dscr = 'printf',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -818,9 +830,9 @@ return {
   ),
   s(
     {
-      trig = "mydot",
+      trig = 'mydot',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -830,16 +842,16 @@ return {
       printf "${RESET}%s\n"
       ]],
       {
-        i(1, "60"),
+        i(1, '60'),
       }
     )
   ),
   s(
     {
-      trig = "mydot",
-      dscr = "dots",
+      trig = 'mydot',
+      dscr = 'dots',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -850,9 +862,9 @@ return {
   ),
   s(
     {
-      trig = "myva",
+      trig = 'myva',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -860,18 +872,18 @@ return {
       <>=${<>:=<>}
       ]],
       {
-        i(1, "VarName"),
+        i(1, 'VarName'),
         rep(1),
-        i(2, "VarValue"),
+        i(2, 'VarValue'),
       }
     )
   ),
   s(
     {
-      trig = "myva",
-      dscr = "var",
+      trig = 'myva',
+      dscr = 'var',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -882,9 +894,9 @@ return {
   ),
   s(
     {
-      trig = "mywl",
+      trig = 'mywl',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -894,20 +906,20 @@ return {
       done
       ]],
       {
-        t "[",
-        i(1, "$#"),
-        i(2, "-gt"),
-        t "];",
+        t '[',
+        i(1, '$#'),
+        i(2, '-gt'),
+        t '];',
         i(0),
       }
     )
   ),
   s(
     {
-      trig = "mywl",
-      dscr = "while",
+      trig = 'mywl',
+      dscr = 'while',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -918,9 +930,9 @@ return {
   ),
   s(
     {
-      trig = "myex",
+      trig = 'myex',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -934,13 +946,13 @@ return {
       fi
       ]],
       {
-        i(1, "target_dir"),
+        i(1, 'target_dir'),
         i(2),
-        t "[[",
+        t '[[',
         rep(1),
-        t "]]",
-        i(3, "exies"),
-        i(4, "not exies"),
+        t ']]',
+        i(3, 'exies'),
+        i(4, 'not exies'),
       }
     )
   ),
