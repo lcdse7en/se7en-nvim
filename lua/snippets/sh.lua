@@ -754,7 +754,7 @@ return {
   ),
   s(
     {
-      trig = 'myas',
+      trig = 'myans',
       regTrig = false,
       snippetType = 'autosnippet',
       priority = 2000,
@@ -769,7 +769,7 @@ return {
           <>
       else
           <>
-      if
+      fi
       ]],
       {
         i(1, 'Have you already download python'),
@@ -784,7 +784,7 @@ return {
   ),
   s(
     {
-      trig = 'myas',
+      trig = 'myans',
       dscr = 'answer',
       regTrig = false,
       snippetType = 'snippet',
