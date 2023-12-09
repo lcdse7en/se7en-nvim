@@ -15,16 +15,16 @@ return {
     { '<leader>hd', '<cmd>lua require("harpoon.mark").rm_file()<cr>', desc = 'Remove File' },
     { '<leader>hh', '<cmd>Telescope harpoon marks<cr>', desc = 'Telescope: Harpoon' },
     { '<leader>hm', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', desc = 'Toggle Menu' },
-    {
-      '<leader>hr',
-      '<cmd>silent lua require("harpoon.term").sendCommand(1, term.cmds)<cr>',
-      desc = 'Term run',
-    },
-    {
-      '<leader>ht',
-      '<cmd>lua require("harpoon.term").gotoTerminal(1)<cr>',
-      desc = 'Open Term',
-    },
+    -- {
+    --   '<leader>hr',
+    --   '<cmd>silent lua require("harpoon.term").sendCommand(1, term.cmds)<cr>',
+    --   desc = 'Term run',
+    -- },
+    -- {
+    --   '<leader>ht',
+    --   '<cmd>lua require("harpoon.term").gotoTerminal(1)<cr>',
+    --   desc = 'Open Term',
+    -- },
   },
   dependencies = {
     'nvim-lua/plenary.nvim',
