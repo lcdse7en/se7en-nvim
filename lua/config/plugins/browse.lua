@@ -25,6 +25,11 @@ return {
         ['server'] = 'http://localhost:8000',
         ['torrent'] = 'http://localhost:9091',
       },
+      --  NOTE: hyprland
+      ['hypr'] = {
+        ['name'] = 'Hyprland',
+        ['hyprland'] = 'https://github.com/soldoestech/hyprv4',
+      },
 
       --  NOTE: BiliBili
       ['bili'] = {
