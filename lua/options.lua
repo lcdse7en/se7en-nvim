@@ -70,7 +70,6 @@ local options = {
   shortmess = vim.opt.shortmess:append('c'),
   iskeyword = vim.opt.iskeyword:append('-'),
   langmap = langmap,
-  smoothscroll = true,
   -- ============================================================
   -- Fold
   -- ============================================================
