@@ -16,7 +16,7 @@ PREF = {
       'lua_ls',
       'html',
       'emmet_ls',
-      'marksman',
+      -- 'marksman',
       'cssls',
       'jsonls',
       'rust_analyzer',

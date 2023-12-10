@@ -28,7 +28,7 @@ return {
       --  NOTE: hyprland
       ['hypr'] = {
         ['name'] = 'Hyprland',
-        ['hyprland'] = 'https://github.com/soldoestech/hyprv4',
+        ['install'] = 'https://github.com/kshitijdhara/Arch-hyprland',
       },
 
       --  NOTE: BiliBili
