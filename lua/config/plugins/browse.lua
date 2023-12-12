@@ -25,10 +25,12 @@ return {
         ['server'] = 'http://localhost:8000',
         ['torrent'] = 'http://localhost:9091',
       },
+
       --  NOTE: hyprland
       ['hypr'] = {
         ['name'] = 'Hyprland',
         ['install'] = 'https://github.com/kshitijdhara/Arch-hyprland',
+        ['hypr-config'] = 'https://github.com/prasanthrangan/hyprdots',
       },
 
       --  NOTE: BiliBili
