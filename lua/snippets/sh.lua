@@ -374,13 +374,14 @@ return {
     fmta(
       [[
       sudo tee -a <> <<<<-EOF
-      <>
+      <><>
       <>EOF
       ]],
       {
         i(1, 'file'),
-        i(2),
-        t '\t\t',
+        t '\t',
+        i(0),
+        t '\t',
       }
     )
   ),
