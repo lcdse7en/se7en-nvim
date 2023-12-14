@@ -136,6 +136,13 @@ return {
             t = { '<cmd>e ~/.config/nvim/lua/snippets/tex.lua<CR>', 'Edit tex.lua(Snippet)' },
             T = { '<cmd>e ~/.config/nvim/lua/snippets/typst.lua<CR>', 'Edit typst.lua(Snippet)' },
           },
+          --  NOTE: hyprland
+          h = {
+            name = 'Edit hyprland conf',
+            k = { '<cmd>e ~/.config/hypr/keybindings.conf<CR>', 'Edit hypr: keybindings.conf' },
+            h = { '<cmd>e ~/.config/hypr/hyprland.conf<CR>', 'Edit hypr: hyprland.conf' },
+            w = { '<cmd>e ~/.config/waybar/config.ctl<CR>', 'Edit waybar: config.ctl' },
+          },
         },
         m = {
           name = 'Telescope: search Marks  Annotation',
