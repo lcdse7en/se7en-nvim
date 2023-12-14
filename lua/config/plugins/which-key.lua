@@ -95,7 +95,7 @@ return {
       ['V'] = { '<C-W>s<C-W>j', 'split below' },
 
       a = {
-        name = 'Set Number  [A]lternate true  false',
+        name = 'Set Number  [A]lternate  aerial',
         n = { '<cmd>set nonumber!<CR>', 'line numbers' },
         r = { '<cmd>set norelativenumber!<CR>', 'relative number' },
       },
