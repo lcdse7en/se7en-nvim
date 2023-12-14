@@ -102,6 +102,9 @@ return {
       c = {
         name = 'LSP  Comment  Format',
       },
+      d = {
+        name = 'diffview',
+      },
       f = {
         name = 'Find Files  Marks',
         e = {
