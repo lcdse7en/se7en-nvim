@@ -28,7 +28,7 @@ return {
 
       --  NOTE: localhost
       ['extension'] = {
-        ['name'] = 'chrome extension',
+        ['name'] = 'chrome extensions',
         ['extension'] = 'https://chrome.zzzmh.cn/#/extension',
       },
 
