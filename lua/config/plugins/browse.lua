@@ -26,6 +26,12 @@ return {
         ['torrent'] = 'http://localhost:9091',
       },
 
+      --  NOTE: localhost
+      ['extension'] = {
+        ['name'] = 'chrome extension',
+        ['extension'] = 'https://chrome.zzzmh.cn/#/extension',
+      },
+
       --  NOTE: hyprland
       ['hypr'] = {
         ['name'] = 'Hyprland',
