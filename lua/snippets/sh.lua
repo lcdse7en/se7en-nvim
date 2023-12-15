@@ -373,15 +373,19 @@ return {
     },
     fmta(
       [[
-      sudo tee -a <> <<<<-EOF
+      sudo <> <> <<<<-EOF
       <><>
       <>EOF
       ]],
       {
-        i(1, 'file'),
-        t '\t',
+        c(1, {
+          sn(nil, { i(1, 'tee') }),
+          sn(nil, { i(1, 'tee -a') }),
+        }),
+        i(2, 'file'),
+        t '\t\t',
         i(0),
-        t '\t',
+        t '\t\t',
       }
     )
   ),
