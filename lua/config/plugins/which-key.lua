@@ -142,6 +142,7 @@ return {
             k = { '<cmd>e ~/.config/hypr/keybindings.conf<CR>', 'Edit hypr: keybindings.conf' },
             h = { '<cmd>e ~/.config/hypr/hyprland.conf<CR>', 'Edit hypr: hyprland.conf' },
             t = { '<cmd>e ~/.config/hypr/theme.ctl<CR>', 'Edit hypr: theme.ctl' },
+            i = { '<cmd>e ~/dotfiles/install_hypr.sh<CR>', 'Edit hypr: install_hypr.sh' },
             w = { '<cmd>e ~/.config/waybar/config.ctl<CR>', 'Edit waybar: config.ctl' },
           },
         },
