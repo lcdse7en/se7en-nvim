@@ -30,6 +30,6 @@
   "glance.nvim": { "branch": "master", "commit": "8ed5cf3b3b1231ea696d88c9efd977027429d869" },
   "gruvbox-material": { "branch": "master", "commit": "7f56d9f9c4860df528031539d321a61f6e081dee" },
   "harpoon": { "branch": "master", "commit": "867e212ac153e793f95b316d1731f3ca1894625e" },
-  "indent-blankline.nvim": { "branch": "master", "commit": "7206c77cb931f79885fc47f88ae18f99148392eb" },
+  "indent-blankline.nvim": { "branch": "master", "commit": "5a433f0e274e28c6da8b71ec1f86711345cf3f54" },
   "kanagawa.nvim": { "branch": "master", "commit": "c19b9023842697ec92caf72cd3599f7dd7be4456" },
   "langmapper.nvim": { "branch": "main", "commit": "9d98285b2e45d1c392c6a03e7adedde97d2aa71a" },
