@@ -4,7 +4,7 @@ P = function(v)
 end
 
 RELOAD = function(...)
-  return require("plenary.reload").reload_module(...)
+  return require('plenary.reload').reload_module(...)
 end
 
 R = function(name)
@@ -13,11 +13,12 @@ R = function(name)
 end
 
 function _G.launch_ext_prog(prog, ...)
-  vim.fn.system(prog .. " " .. table.concat({ ... }, " "))
+  vim.fn.system(prog .. ' ' .. table.concat({ ... }, ' '))
 end
 
 function _G.open_url(url, prefix)
-  launch_ext_prog("google-chrome-stable", (prefix or "") .. url)
+  -- launch_ext_prog("google-chrome-stable", (prefix or "") .. url)
+  launch_ext_prog('firefox', (prefix or '') .. url)
 end
 
 --- Trim newline at eof, trailing whitespace.
@@ -36,7 +37,7 @@ function _G.perform_cleanup()
   local view = vim.fn.winsaveview()
 
   for _, v in pairs(patterns) do
-    vim.cmd(string.format("keepjumps keeppatterns silent! %s", v))
+    vim.cmd(string.format('keepjumps keeppatterns silent! %s', v))
   end
 
   vim.fn.winrestview(view)

@@ -19,7 +19,8 @@ function _G.launch_ext_prog(prog, ...)
 end
 
 function _G.open_url(url, prefix)
-  launch_ext_prog('google-chrome-stable', (prefix or '') .. url)
+  -- launch_ext_prog('google-chrome-stable', (prefix or '') .. url)
+  launch_ext_prog('firefox', (prefix or '') .. url)
 end
 
 --- Trim newline at eof, trailing whitespace.
