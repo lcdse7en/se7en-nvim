@@ -29,7 +29,7 @@ local options = {
   pumheight = 10,                        --- Max num of items in completion menu
   signcolumn = "yes",                    --- Add extra sign column next to line number
   history = 10000,
-  scrolloff = 12,                         --- Always keep space when scrolling to bottom/top edge
+  scrolloff = 12,                        --- Always keep space when scrolling to bottom/top edge
   sidescrolloff = 12,
   laststatus = 3,                        --- global statusline
   expandtab = true,                      --- Use spaces instead of tabs
@@ -71,8 +71,10 @@ local options = {
   iskeyword = vim.opt.iskeyword:append('-'),
   langmap = langmap,
   -- ============================================================
-  -- Fold
+  -- Fold  listchars
   -- ============================================================
+  list = true,                           --- enable or disable listchars
+  listchars = { tab = "▸ ", trail = " ", eol = " ", extends = "→", precedes = "←" },
   foldcolumn = '0',                      --- '0' is not bad
   foldlevel = 99,                        --- Using ufo provider need a large value, feel free to decrease the value
   foldlevelstart = 99,
@@ -80,22 +82,22 @@ local options = {
 }
 
 local globals = {
-  mapleader = " ",                 --- Map leader key to SPC
-  cmp_enabled = false,              --- enable completion at start
-  codelens_enabled = true,         -- enable or disable automatic codelens refreshing for lsp that support it
-  icons_enabled = true,            --- disable icons in the UI (disable if no nerd font is available)
-  speeddating_no_mappings = 1,     --- Disable default mappings for speeddating
-  tex_flavor = "latex",            --- set latex filetypes
+  mapleader = " ",                       --- Map leader key to SPC
+  cmp_enabled = false,                   --- enable completion at start
+  codelens_enabled = true,               --- enable or disable automatic codelens refreshing for lsp that support it
+  icons_enabled = true,                  --- disable icons in the UI (disable if no nerd font is available)
+  speeddating_no_mappings = 1,           --- Disable default mappings for speeddating
+  tex_flavor = "latex",                  --- set latex filetypes
   autoformat_enabled = false,
-  diagnostics_mode = 3,            --- set the visibility of diagnostics in the UI (0=off, 1=only show in status line, 2=virtual text off, 3=all on)
-  highlighturl_enabled = true,     --- highlight URLs by                                                                                  default
-  lsp_handlers_enabled = true,     --- enable or disable default vim.lsp.handlers (hover and signature                                    help)
-  semantic_tokens_enabled = true,  --- enable or disable LSP semantic tokens on                                                        startup
-  ui_notifications_enabled = true, --- disable notifications (TODO: rename to  notifications_enabled in AstroNvim v4)
-  git_worktrees = nil,             --- enable git integration for detached worktrees (specify a table where each entry is of the form { toplevel = vim.env.HOME, gitdir=vim.env.HOME .. "/.dotfiles" })
+  diagnostics_mode = 3,                  --- set the visibility of diagnostics in the UI (0=off, 1=only show in status line, 2=virtual text off, 3=all on)
+  highlighturl_enabled = true,           --- highlight URLs by                                                                                  default
+  lsp_handlers_enabled = true,           --- enable or disable default vim.lsp.handlers (hover and signature                                    help)
+  semantic_tokens_enabled = true,        --- enable or disable LSP semantic tokens on                                                        startup
+  ui_notifications_enabled = true,       --- disable notifications (TODO: rename to  notifications_enabled in AstroNvim v4)
+  git_worktrees = nil,                   --- enable git integration for detached worktrees (specify a table where each entry is of the form { toplevel = vim.env.HOME, gitdir=vim.env.HOME .. "/.dotfiles" })
   resession_enabled = true,
   transparent_background = true,
-  inlay_hints_enabled = true,      ---  NOTE: enable or disable LSP inlay hints on startup (Neovim v0.10+ only)
+  inlay_hints_enabled = true,            ---  NOTE: enable or disable LSP inlay hints on startup (Neovim v0.10+ only)
 }
 
 for option_name, value in pairs(options) do
