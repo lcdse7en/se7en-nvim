@@ -21,6 +21,7 @@ return {
         sh = { 'shfmt' },
         rust = { 'rustfmt' },
         tex = { 'latexindent' },
+        typst = { 'typstfmt' },
         python = function(bufnr)
           if require('conform').get_formatter_info('yapf', bufnr).available then
             return { 'yapf' } --  NOTE: pip instal yapf
