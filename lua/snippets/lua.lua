@@ -262,24 +262,19 @@ return {
     { trig = 'mysn', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
-          c(1, {
+          c(<>, {
             sn(nil, {
-              t "<>",
-              i(1),
-              t "<>",
+              <>
             }),
             sn(nil, {
-              t "<>",
-              i(1),
-              t "<>",
+              <>
             }),
-          })
+          }),
       ]],
       {
-        i(1),
+        i(1, '1'),
         i(2),
         i(3),
-        i(4),
       }
     )
   ),
@@ -933,11 +928,19 @@ return {
       [[
         f(function(import_name)
           local parts = vim.split(import_name[1][1], ".", true)
-          return parts[#parts] or ""
+          return parts[<>] or ""
         end, { 1 }),
         <>
       ]],
       {
+        c(1, {
+          sn(nil, {
+            i(1, '#parts'),
+          }),
+          sn(nil, {
+            i(1, '1'),
+          }),
+        }),
         i(0),
       }
     )
