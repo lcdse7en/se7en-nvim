@@ -202,7 +202,7 @@ return {
         },
       },
       extensions = {
-        bookmarks = { selected_browser = 'chrome' }, -- edge firefox safari brave
+        bookmarks = { selected_browser = 'firefox' }, -- edge firefox safari brave
         fzf = {
           fuzzy = true,
           override_generic_sorter = true,
