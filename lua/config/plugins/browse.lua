@@ -11,7 +11,8 @@ return {
 
     browse.setup {
       -- provider = "brave",
-      provider = 'bing',
+      -- provider = 'bing',
+      provider = 'firefox',
     }
 
     local bookmarks = {
