@@ -40,6 +40,12 @@ return {
         ['hypr-config'] = 'https://github.com/prasanthrangan/hyprdots',
       },
 
+      --  NOTE: Typst
+      ['typst'] = {
+        ['name'] = 'Typst-packages',
+        ['typst-packages'] = 'https://typst-doc-cn.github.io/docs/packages/',
+      },
+
       --  NOTE: BiliBili
       ['bili'] = {
         ['name'] = 'BiliBili',
