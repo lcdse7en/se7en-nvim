@@ -1,4 +1,4 @@
-nnoremap <buffer> <F5> <cmd>vsplit<cr><cmd>terminal typst-live %<cr>A
+" nnoremap <buffer> <F5> <cmd>vsplit<cr><cmd>terminal typst-live %<cr>A
 
 augroup remember_folds
   autocmd!
