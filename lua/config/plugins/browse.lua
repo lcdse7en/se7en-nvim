@@ -44,6 +44,7 @@ return {
       ['typst'] = {
         ['name'] = 'Typst-packages',
         ['typst-packages'] = 'https://typst-doc-cn.github.io/docs/packages/',
+        ['typst-preview'] = 'https://githubfast.com/Enter-tainer/typst-preview/releases',
       },
 
       --  NOTE: BiliBili
