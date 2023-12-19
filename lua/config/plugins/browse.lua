@@ -45,6 +45,7 @@ return {
         ['name'] = 'Typst-packages',
         ['typst-packages'] = 'https://typst-doc-cn.github.io/docs/packages/',
         ['typst-preview'] = 'https://githubfast.com/Enter-tainer/typst-preview/releases',
+        ['tablex'] = 'https://githubfast.com/PgBiel/typst-tablex',
         ['cetz'] = 'https://github.com/johannes-wolf/cetz',
       },
 
