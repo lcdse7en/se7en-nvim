@@ -516,4 +516,68 @@ return {
       }
     )
   ),
+  s(
+    {
+      trig = 'myali',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #align(center)[
+        <>
+      ]
+      ]],
+      {
+        i(1),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'myali',
+      dscr = 'align',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
+  s(
+    {
+      trig = 'myimg',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #image("<>", width: <><>)
+      ]],
+      {
+        i(1, 'image.jpg'),
+        i(2),
+        t '%',
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'myimg',
+      dscr = 'image',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
 }
