@@ -271,11 +271,19 @@ return {
     },
     fmta(
       [[
-      #text(fill: <>)[<>]
+      #text(fill: <>.lighten(<>%))[<>]
       ]],
       {
-        i(1, 'purple'),
-        i(2),
+        c(1, {
+          sn(nil, {
+            i(1, 'purple'),
+          }),
+          sn(nil, {
+            i(1, 'yellow'),
+          }),
+        }),
+        i(2, '20'),
+        i(3),
       }
     )
   ),
