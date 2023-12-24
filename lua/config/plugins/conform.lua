@@ -21,7 +21,7 @@ return {
         sh = { 'shfmt' },
         rust = { 'rustfmt' },
         tex = { 'latexindent' },
-        typst = { 'typstfmt' },
+        -- typst = { 'prettypst' },
         python = function(bufnr)
           if require('conform').get_formatter_info('yapf', bufnr).available then
             return { 'yapf' } --  NOTE: pip instal yapf
@@ -138,8 +138,8 @@ return {
         },
         --  NOTE: typst
         typst = {
-          command = 'typstfmt',
-          stdin = false,
+          -- command = 'typstfmt',
+          -- stdin = false,
         },
       },
     }

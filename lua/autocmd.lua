@@ -216,6 +216,12 @@ vim.api.nvim_create_autocmd('BufEnter', {
   pattern = { '*.md' },
   command = 'silent! TableModeEnable',
 })
+--  NOTE: typst format
+vim.api.nvim_create_autocmd('BufWritePost', {
+  group = vim.api.nvim_create_augroup('typstformat', { clear = true }),
+  pattern = { '*.typ' },
+  command = 'silent! :!prettypst --use-configuration %',
+})
 
 --  NOTE: LuaSnipChoiceListSelecttions
 local current_nsid = vim.api.nvim_create_namespace 'LuaSnipChoiceListSelections'
