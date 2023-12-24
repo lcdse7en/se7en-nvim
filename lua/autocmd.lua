@@ -220,7 +220,8 @@ vim.api.nvim_create_autocmd('BufEnter', {
 vim.api.nvim_create_autocmd('BufWritePost', {
   group = vim.api.nvim_create_augroup('typstformat', { clear = true }),
   pattern = { '*.typ' },
-  command = 'silent! :!prettypst --use-configuration %',
+  -- command = 'silent! :!prettypst --use-configuration %',
+  command = 'silent! :!prettypst --file-location=~/.config/nvim/prettypst.toml %',
 })
 
 --  NOTE: LuaSnipChoiceListSelecttions
