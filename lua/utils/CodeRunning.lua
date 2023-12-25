@@ -53,7 +53,7 @@ local function Run()
   elseif vim.bo.filetype == 'typst' then
     fwin()
     -- vim.cmd('term typst-live  ' .. filename)
-    vim.cmd 'term typst-live  main.typ'
+    vim.cmd 'term typst-live  *.typ'
   elseif vim.bo.filetype == 'javascript' then
     fwin()
     vim.cmd('term node  ' .. filename)

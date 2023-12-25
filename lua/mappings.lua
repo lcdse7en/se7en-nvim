@@ -156,3 +156,9 @@ map('v', '<leader>cf', function()
 end, { silent = true })
 
 del('n', 'Y')
+
+vim.api.nvim_set_keymap('i', '<C-t>', '<cmd>lua _G.dynamic_node_external_update(1)<Cr>', { noremap = true })
+vim.api.nvim_set_keymap('s', '<C-t>', '<cmd>lua _G.dynamic_node_external_update(1)<Cr>', { noremap = true })
+
+vim.api.nvim_set_keymap('i', '<C-e>', '<cmd>lua _G.dynamic_node_external_update(2)<Cr>', { noremap = true })
+vim.api.nvim_set_keymap('s', '<C-e>', '<cmd>lua _G.dynamic_node_external_update(2)<Cr>', { noremap = true })

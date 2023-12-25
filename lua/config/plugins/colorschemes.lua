@@ -12,6 +12,7 @@ return vim.tbl_map(set_prior, {
   'rebelot/kanagawa.nvim',
   'sainnhe/gruvbox-material',
   'sam4llis/nvim-tundra',
+  'LunarVim/darkplus.nvim',
   {
     -- 'Wansmer/serenity.nvim',
     -- dev = false,
