@@ -27,8 +27,8 @@ PREF = {
     },
   },
   ui = {
-    colorscheme = 'tokyonight',
-    -- colorscheme = 'everforest',
+    -- colorscheme = 'tokyonight',
+    colorscheme = 'everforest',
     -- colorscheme = 'darkplus',
     border = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
     italic_comment = true,
