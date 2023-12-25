@@ -12,6 +12,10 @@ R = function(name)
   return require(name)
 end
 
+GIT_CWD = function()
+  return vim.fn.systemlist('git rev-parse --show-toplevel')[1] .. '/'
+end
+
 function _G.launch_ext_prog(prog, ...)
   vim.fn.system(prog .. ' ' .. table.concat({ ... }, ' '))
 end
