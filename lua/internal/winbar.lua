@@ -101,25 +101,25 @@ vim.api.nvim_create_autocmd({ 'CursorMoved', 'BufWinEnter', 'BufFilePost' }, {
 
     if vim.bo.filetype == 'dapui_watches' then
       local hl_group = 'EcovimSecondary'
-      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. require('utils.icons').watch .. 'Watches' .. '%*'
+      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. '  ' .. 'Watches' .. '%*'
       return
     end
 
     if vim.bo.filetype == 'dapui_stacks' then
       local hl_group = 'EcovimSecondary'
-      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. require('utils.icons').git .. 'Stacks' .. '%*'
+      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. '  ' .. 'Stacks' .. '%*'
       return
     end
 
     if vim.bo.filetype == 'dapui_breakpoints' then
       local hl_group = 'EcovimSecondary'
-      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. require('utils.icons').bigCircle .. 'Breakpoints' .. '%*'
+      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. '  ' .. 'Breakpoints' .. '%*'
       return
     end
 
     if vim.bo.filetype == 'dapui_scopes' then
       local hl_group = 'EcovimSecondary'
-      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. require('utils.icons').telescope .. 'Scopes' .. '%*'
+      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. '  ' .. 'Scopes' .. '%*'
       return
     end
 
@@ -137,7 +137,7 @@ vim.api.nvim_create_autocmd({ 'CursorMoved', 'BufWinEnter', 'BufFilePost' }, {
 
     if vim.bo.filetype == 'dapui_console' then
       local hl_group = 'EcovimSecondary'
-      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. require('utils.icons').console .. 'Console' .. '%*'
+      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. ' 󰞷 ' .. 'Console' .. '%*'
       return
     end
 
@@ -148,7 +148,7 @@ vim.api.nvim_create_autocmd({ 'CursorMoved', 'BufWinEnter', 'BufFilePost' }, {
 
     if vim.bo.filetype == 'GitBlame' then
       local hl_group = 'EcovimSecondary'
-      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. require('utils.icons').git .. 'Blame' .. '%*'
+      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. '  ' .. 'Blame' .. '%*'
       return
     end
 
