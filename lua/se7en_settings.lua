@@ -1,6 +1,6 @@
 PREF = {
   common = {
-    textwidth = 100,
+    textwidth = 110,
     tabwidth = 2,
   },
   lsp = {

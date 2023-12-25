@@ -590,17 +590,17 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('typst', { clear = true }),
   pattern = {
-    'typst',
+    '*.typ',
   },
   callback = function()
-    vim.bo.shiftwidth = 4
-    vim.bo.softtabstop = 4
+    vim.bo.shiftwidth = 2
+    vim.bo.softtabstop = 2
     vim.bo.autoindent = true
     vim.bo.cindent = true
     vim.bo.expandtab = true
     vim.bo.smartindent = true
     vim.bo.copyindent = true
-    vim.opt.colorcolumn = '100'
+    vim.opt.colorcolumn = '120'
     vim.opt.wrap = false
   end,
 })
