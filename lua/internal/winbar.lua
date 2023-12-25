@@ -1,38 +1,37 @@
 local M = {}
 
-local status_navic_ok, navic = pcall(require, "nvim-navic")
+local status_navic_ok, navic = pcall(require, 'nvim-navic')
 if not status_navic_ok then
   return
 end
 
 local function isempty(s)
-  return s == nil or s == ""
+  return s == nil or s == ''
 end
 
 M.filename = function()
-  local filename = vim.fn.expand("%:t")
-  local file_path = vim.fn.expand("%:p")
-  local parent_dir = string.match(file_path, ".*/([^/]+)/[^/]+$")
-  local extension = ""
-  local file_icon = ""
-  local file_icon_color = ""
-  local default_file_icon = ""
-  local default_file_icon_color = ""
+  local filename = vim.fn.expand '%:t'
+  local file_path = vim.fn.expand '%:p'
+  local parent_dir = string.match(file_path, '.*/([^/]+)/[^/]+$')
+  local extension = ''
+  local file_icon = ''
+  local file_icon_color = ''
+  local default_file_icon = ''
+  local default_file_icon_color = ''
 
   if not isempty(filename) then
-    extension = vim.fn.expand("%:e")
+    extension = vim.fn.expand '%:e'
 
     local default = false
 
     if isempty(extension) then
-      extension = ""
+      extension = ''
       default = true
     end
 
-    file_icon, file_icon_color =
-        require("nvim-web-devicons").get_icon_color(filename, extension, { default = default })
+    file_icon, file_icon_color = require('nvim-web-devicons').get_icon_color(filename, extension, { default = default })
 
-    local hl_group = "FileIconColor" .. extension
+    local hl_group = 'FileIconColor' .. extension
 
     vim.api.nvim_set_hl(0, hl_group, { fg = file_icon_color })
     if file_icon == nil then
@@ -41,12 +40,12 @@ M.filename = function()
     end
 
     -- Return filename if parent dir doesn't exist
-    if (parent_dir == nil or parent_dir == '') then
-      return " " .. "%#" .. hl_group .. "#" .. file_icon .. "%*" .. " " .. "%#LineNr#" .. filename .. "%*"
+    if parent_dir == nil or parent_dir == '' then
+      return ' ' .. '%#' .. hl_group .. '#' .. file_icon .. '%*' .. ' ' .. '%#LineNr#' .. filename .. '%*'
     end
 
     -- Return parent dir
-    return " " .. "%#" .. hl_group .. "#" .. file_icon .. "%*" .. " " .. "%#LineNr#" .. parent_dir .. "%*"
+    return ' ' .. '%#' .. hl_group .. '#' .. file_icon .. '%*' .. ' ' .. '%#LineNr#' .. parent_dir .. '%*'
   end
 end
 
@@ -62,83 +61,83 @@ M.gps = function()
 
   local retval = M.filename()
 
-  if navic_location == "error" then
-    return ""
+  if navic_location == 'error' then
+    return ''
   else
     if not isempty(navic_location) then
-      local hl_group = "LineNr"
-      return retval .. " " .. "%#" .. hl_group .. "#" .. EcoVim.icons.caretRight .. "%*" .. " " .. navic_location
+      local hl_group = 'LineNr'
+      return retval .. ' ' .. '%#' .. hl_group .. '#' .. '' .. '%*' .. ' ' .. navic_location
     else
       return retval
     end
   end
 end
 
-vim.api.nvim_create_autocmd({ "CursorMoved", "BufWinEnter", "BufFilePost" }, {
+vim.api.nvim_create_autocmd({ 'CursorMoved', 'BufWinEnter', 'BufFilePost' }, {
   callback = function()
     local winbar_filetype_exclude = {
-      "help",
-      "startify",
-      "dashboard",
-      "packer",
-      "neogitstatus",
-      "NvimTree",
-      "Trouble",
-      "alpha",
-      "lir",
-      "Outline",
-      "spectre_panel",
-      "TelescopePrompt",
-      "DressingInput",
-      "DressingSelect",
-      "neotest-summary",
-      "toggleterm",
-      "octo",
+      'help',
+      'startify',
+      'dashboard',
+      'packer',
+      'neogitstatus',
+      'NvimTree',
+      'Trouble',
+      'alpha',
+      'lir',
+      'Outline',
+      'spectre_panel',
+      'TelescopePrompt',
+      'DressingInput',
+      'DressingSelect',
+      'neotest-summary',
+      'toggleterm',
+      'octo',
     }
 
-    if vim.api.nvim_win_get_config(0).relative ~= "" then
+    if vim.api.nvim_win_get_config(0).relative ~= '' then
       return
     end
 
-    if vim.bo.filetype == "dapui_watches" then
-      local hl_group = "EcovimSecondary"
-      vim.opt_local.winbar = " " .. "%#" .. hl_group .. "#" .. require("utils.icons").watch .. "Watches" .. "%*"
+    if vim.bo.filetype == 'dapui_watches' then
+      local hl_group = 'EcovimSecondary'
+      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. require('utils.icons').watch .. 'Watches' .. '%*'
       return
     end
 
-    if vim.bo.filetype == "dapui_stacks" then
-      local hl_group = "EcovimSecondary"
-      vim.opt_local.winbar = " " .. "%#" .. hl_group .. "#" .. require("utils.icons").git .. "Stacks" .. "%*"
+    if vim.bo.filetype == 'dapui_stacks' then
+      local hl_group = 'EcovimSecondary'
+      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. require('utils.icons').git .. 'Stacks' .. '%*'
       return
     end
 
-    if vim.bo.filetype == "dapui_breakpoints" then
-      local hl_group = "EcovimSecondary"
-      vim.opt_local.winbar = " " .. "%#" .. hl_group .. "#" .. require("utils.icons").bigCircle .. "Breakpoints" .. "%*"
+    if vim.bo.filetype == 'dapui_breakpoints' then
+      local hl_group = 'EcovimSecondary'
+      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. require('utils.icons').bigCircle .. 'Breakpoints' .. '%*'
       return
     end
 
-    if vim.bo.filetype == "dapui_scopes" then
-      local hl_group = "EcovimSecondary"
-      vim.opt_local.winbar = " " .. "%#" .. hl_group .. "#" .. require("utils.icons").telescope .. "Scopes" .. "%*"
+    if vim.bo.filetype == 'dapui_scopes' then
+      local hl_group = 'EcovimSecondary'
+      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. require('utils.icons').telescope .. 'Scopes' .. '%*'
       return
     end
 
-    if vim.bo.filetype == "dap-repl" then
-      local hl_group = "EcovimSecondary"
-      vim.opt_local.winbar = " "
-          .. "%#"
-          .. hl_group
-          .. "#"
-          .. require("utils.icons").consoleDebug
-          .. "Debug Console"
-          .. "%*"
+    if vim.bo.filetype == 'dap-repl' then
+      local hl_group = 'EcovimSecondary'
+      vim.opt_local.winbar = ' '
+        .. '%#'
+        .. hl_group
+        .. '#'
+        .. require('utils.icons').consoleDebug
+        .. 'Debug Console'
+        .. '%*'
       return
     end
 
-    if vim.bo.filetype == "dapui_console" then
-      local hl_group = "EcovimSecondary"
-      vim.opt_local.winbar = " " .. "%#" .. hl_group .. "#" .. require("utils.icons").console .. "Console" .. "%*"
+    if vim.bo.filetype == 'dapui_console' then
+      local hl_group = 'EcovimSecondary'
+      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. require('utils.icons').console .. 'Console' .. '%*'
       return
     end
 
@@ -147,14 +146,14 @@ vim.api.nvim_create_autocmd({ "CursorMoved", "BufWinEnter", "BufFilePost" }, {
       return
     end
 
-    if vim.bo.filetype == "GitBlame" then
-      local hl_group = "EcovimSecondary"
-      vim.opt_local.winbar = " " .. "%#" .. hl_group .. "#" .. require("utils.icons").git .. "Blame" .. "%*"
+    if vim.bo.filetype == 'GitBlame' then
+      local hl_group = 'EcovimSecondary'
+      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. require('utils.icons').git .. 'Blame' .. '%*'
       return
     end
 
-    local winbar_present, winbar = pcall(require, "internal.winbar")
-    if not winbar_present or type(winbar) == "boolean" then
+    local winbar_present, winbar = pcall(require, 'internal.winbar')
+    if not winbar_present or type(winbar) == 'boolean' then
       vim.opt_local.winbar = nil
       return
     end
