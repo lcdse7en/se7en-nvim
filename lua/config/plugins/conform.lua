@@ -41,6 +41,7 @@ return {
         jsonc = { 'prettierd' },
         zig = { 'zigfmt' },
         proto = { { 'buf', 'protolint' } },
+        ['*'] = { 'trim_whitespace', 'squeeze_blanks', 'trim_newlines' },
       },
       -- format_on_save = {
       --   timeout_ms = 500,

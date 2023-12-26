@@ -1,16 +1,16 @@
-local u = require('utils')
+local u = require 'utils'
 
 return {
   'goolord/alpha-nvim',
   enabled = true,
   event = 'VimEnter',
   config = function()
-    local alpha = require('alpha')
-    local dashboard = require('alpha.themes.dashboard')
-    local icons = require('utils.icons')
+    local alpha = require 'alpha'
+    local dashboard = require 'alpha.themes.dashboard'
+    local icons = require 'utils.icons'
     local if_nil = vim.F.if_nil
     local fn = vim.fn
-    local config_dir = fn.stdpath('config')
+    local config_dir = fn.stdpath 'config'
 
     -- ╭──────────────────────────────────────────────────────────╮
     -- │ Header                                                   │
@@ -50,14 +50,14 @@ return {
     -- ╰──────────────────────────────────────────────────────────╯
 
     local thingy =
-      io.popen('echo "$(LANG=en_us_88591; date +%a) $(date +%d) $(LANG=en_us_88591; date +%b)" | tr -d "\n"')
+      io.popen 'echo "$(LANG=en_us_88591; date +%a) $(date +%d) $(LANG=en_us_88591; date +%b)" | tr -d "\n"'
     if thingy == nil then
       return
     end
-    local date = thingy:read('*a')
+    local date = thingy:read '*a'
     thingy:close()
 
-    local datetime = os.date(' %H:%M')
+    local datetime = os.date ' %H:%M'
 
     local hi_top_section = {
       type = 'text',
@@ -138,7 +138,8 @@ return {
       button('r', icons.fileRecent .. ' ' .. 'Recents Files', '<cmd>Telescope oldfiles hidden=true<CR>', {}),
       button('s', '  ' .. ' ' .. 'Load Last Session', '<cmd>SessionManager load_last_session<CR>', {}),
       button('u', icons.container .. ' ' .. 'Lazy update', '<cmd>Lazy update<CR>', {}),
-      button('l', '💤 ' .. ' ' .. 'Lazy', '<cmd>Lazy<CR>', {}),
+      -- button('l', '💤 ' .. ' ' .. 'Lazy', '<cmd>Lazy<CR>', {}),
+      button('l', '󰒲  ' .. ' ' .. 'Lazy', '<cmd>Lazy<CR>', {}),
       button('m', '  ' .. ' ' .. 'Mason', '<cmd>Mason<CR>', {}),
       button('c', icons.cog .. ' ' .. 'Config File', '<cmd>e $MYVIMRC<CR>', {}),
       button('q', icons.exit .. ' ' .. 'Exit', '<cmd>exit<CR>', {}),
