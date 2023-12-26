@@ -65,7 +65,15 @@ require('lazy').setup(configs, {
       },
     },
     debug = false,
-    ui = { border = PREF.ui.border },
+    ui = {
+      icons = {
+        ft = '',
+        lazy = '󰂠 ',
+        loaded = '',
+        not_loaded = '',
+      },
+      border = PREF.ui.border,
+    },
   },
 })
 
