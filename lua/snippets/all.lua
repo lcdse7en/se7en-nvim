@@ -1,14 +1,30 @@
-local ls = require "luasnip"
+local ls = require 'luasnip'
 local s = ls.snippet
 local sn = ls.snippet_node
+local isn = ls.indent_snippet_node
 local t = ls.text_node
 local i = ls.insert_node
 local f = ls.function_node
 local d = ls.dynamic_node
 local c = ls.choice_node
-local fmt = require("luasnip.extras.fmt").fmt
-local fmta = require("luasnip.extras.fmt").fmta
-local rep = require("luasnip.extras").rep
+local r = ls.restore_node
+local events = require 'luasnip.util.events'
+local ai = require 'luasnip.nodes.absolute_indexer'
+local extras = require 'luasnip.extras'
+local l = extras.lambda
+local p = extras.partial
+local m = extras.match
+local n = extras.nonempty
+local dl = extras.dynamic_lambda
+local fmt = require('luasnip.extras.fmt').fmt
+local fmta = require('luasnip.extras.fmt').fmta
+local rep = require('luasnip.extras').rep
+local conds = require 'luasnip.extras.expand_conditions'
+local postfix = require('luasnip.extras.postfix').postfix
+local types = require 'luasnip.util.types'
+local parse = require('luasnip.util.parser').parse_snippet
+local ms = ls.multi_snippet
+local k = require('luasnip.nodes.key_indexer').new_key
 
 local get_visual = function(args, parent)
   if #parent.snippet.env.SELECT_RAW > 0 then
@@ -19,15 +35,15 @@ local get_visual = function(args, parent)
 end
 
 return {
-  s("choicenode", c(1, { t "choice 1", t "choice 2", t "choice 3" })),
+  s('choicenode', c(1, { t 'choice 1', t 'choice 2', t 'choice 3' })),
   s(
-    "date",
+    'date',
     f(function()
-      return os.date "%D - %H:%M"
+      return os.date '%D - %H:%M'
     end)
   ),
   s(
-    { trig = "my}", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'my}', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       {<>}
@@ -40,7 +56,7 @@ return {
     )
   ),
   s(
-    { trig = "my)", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'my)', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       (<>)
@@ -53,7 +69,7 @@ return {
     )
   ),
   s(
-    { trig = "my]", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'my]', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       [<>]
@@ -66,7 +82,7 @@ return {
     )
   ),
   s(
-    { trig = "my'", snippetType = "autosnippet", priority = 2000 },
+    { trig = "my'", snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       "<>"
@@ -80,9 +96,9 @@ return {
   ),
   s(
     {
-      trig = "myghp",
+      trig = 'myghp',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -90,16 +106,16 @@ return {
       https://github.com/lcdse7en/<>
       ]],
       {
-        i(1, "repo"),
+        i(1, 'repo'),
       }
     )
   ),
   s(
     {
-      trig = "myghp",
-      dscr = "lcdse7en",
+      trig = 'myghp',
+      dscr = 'lcdse7en',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -110,9 +126,9 @@ return {
   ),
   s(
     {
-      trig = "mygit",
+      trig = 'mygit',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -126,10 +142,10 @@ return {
   ),
   s(
     {
-      trig = "mygit",
-      dscr = "dscr",
+      trig = 'mygit',
+      dscr = 'dscr',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
