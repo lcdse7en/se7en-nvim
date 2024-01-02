@@ -4,16 +4,16 @@
 -- Date:        2023-05-12                  *
 -- Description:                             *
 --*******************************************
-local ls = require "luasnip"
+local ls = require 'luasnip'
 local s = ls.snippet
 local sn = ls.snippet_node
 local t = ls.text_node
 local f = ls.function_node
 local i = ls.insert_node
 local d = ls.dynamic_node
-local fmta = require("luasnip.extras.fmt").fmta
-local rep = require("luasnip.extras").rep
-local line_begin = require("luasnip.extras.expand_conditions").line_begin
+local fmta = require('luasnip.extras.fmt').fmta
+local rep = require('luasnip.extras').rep
+local line_begin = require('luasnip.extras.expand_conditions').line_begin
 -- local tex = require "utils.latex"
 
 local get_visual = function(args, parent)
@@ -26,7 +26,7 @@ end
 
 return {
   s(
-    { trig = "h1", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'h1', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       # <>
@@ -37,7 +37,7 @@ return {
     )
   ),
   s(
-    { trig = "h2", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'h2', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       ## <>
@@ -48,7 +48,7 @@ return {
     )
   ),
   s(
-    { trig = "h3", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'h3', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       ### <>
@@ -59,7 +59,7 @@ return {
     )
   ),
   s(
-    { trig = "h4", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'h4', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       #### <>
@@ -70,31 +70,31 @@ return {
     )
   ),
   s(
-    { trig = "mylink", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'mylink', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       [<>](<>)
       ]],
       {
-        i(1, "desc"),
-        i(2, "net"),
+        i(1, 'desc'),
+        i(2, 'net'),
       }
     )
   ),
   s(
-    { trig = "mylink", snippetType = "snippet" },
+    { trig = 'mylink', snippetType = 'snippet' },
     fmta(
       [[
       [<>](<>)
       ]],
       {
-        i(1, "desc"),
-        i(2, "net"),
+        i(1, 'desc'),
+        i(2, 'net'),
       }
     )
   ),
   s(
-    { trig = "mycb", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'mycb', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       ```<>
@@ -102,13 +102,13 @@ return {
       ```
       ]],
       {
-        c(1, { t "python", t "shell", t "latex" }),
+        c(1, { t 'python', t 'shell', t 'latex' }),
         i(2),
       }
     )
   ),
   s(
-    { trig = "mycb", snippetType = "snippet" },
+    { trig = 'mycb', snippetType = 'snippet' },
     fmta(
       [[
       ```<>
@@ -116,64 +116,64 @@ return {
       ```
       ]],
       {
-        c(1, { t "python", t "shell", t "latex" }),
+        c(1, { t 'python', t 'shell', t 'latex' }),
         i(2),
       }
     )
   ),
   s(
-    { trig = "mycl", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'mycl', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       `<>`
       ]],
       {
-        i(1, "code"),
+        i(1, 'code'),
       }
     )
   ),
   s(
-    { trig = "mycl", snippetType = "snippet" },
+    { trig = 'mycl', snippetType = 'snippet' },
     fmta(
       [[
       `<>`
       ]],
       {
-        i(1, "code"),
+        i(1, 'code'),
       }
     )
   ),
   s(
-    { trig = "myimg", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'myimg', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       ![<>](<>.<> =400x400)
       ]],
       {
-        i(1, "alt text"),
-        i(2, "image"),
-        c(3, { t "png", t "jpg", t "jpeg" }),
+        i(1, 'alt text'),
+        i(2, 'image'),
+        c(3, { t 'png', t 'jpg', t 'jpeg' }),
       }
     )
   ),
   s(
-    { trig = "myimg", snippetType = "snippet" },
+    { trig = 'myimg', snippetType = 'snippet' },
     fmta(
       [[
       ![<>](<>.<> =400x400)
       ]],
       {
-        i(1, "alt text"),
-        i(2, "image"),
-        c(3, { t "png", t "jpg", t "jpeg" }),
+        i(1, 'alt text'),
+        i(2, 'image'),
+        c(3, { t 'png', t 'jpg', t 'jpeg' }),
       }
     )
   ),
   s(
     {
-      trig = "myhimg",
+      trig = 'myhimg',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -183,22 +183,22 @@ return {
       <>/div<>
       ]],
       {
-        t "<",
-        t ">",
-        t "<",
-        i(1, "path"),
-        t ">",
-        t "<",
-        t ">",
+        t '<',
+        t '>',
+        t '<',
+        i(1, 'path'),
+        t '>',
+        t '<',
+        t '>',
       }
     )
   ),
   s(
     {
-      trig = "myhimg",
-      dscr = "dscr",
+      trig = 'myhimg',
+      dscr = 'dscr',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -208,78 +208,78 @@ return {
     )
   ),
   s(
-    { trig = "mytodo", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'mytodo', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       - [<>] <>
       ]],
       {
-        c(1, { t "x", t " " }),
-        i(2, ""),
+        c(1, { t 'x', t ' ' }),
+        i(2, ''),
       }
     )
   ),
   s(
-    { trig = "mytodo", snippetType = "snippet" },
+    { trig = 'mytodo', snippetType = 'snippet' },
     fmta(
       [[
       - [<>] <>
       ]],
       {
-        c(1, { t "x", t " " }),
-        i(2, ""),
+        c(1, { t 'x', t ' ' }),
+        i(2, ''),
       }
     )
   ),
   s(
-    { trig = "mybd", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'mybd', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       **<>**
       ]],
       {
-        i(1, "textbold"),
+        i(1, 'textbold'),
       }
     )
   ),
   s(
-    { trig = "mybd", snippetType = "snippet" },
+    { trig = 'mybd', snippetType = 'snippet' },
     fmta(
       [[
       **<>**
       ]],
       {
-        i(1, "boldtext"),
+        i(1, 'boldtext'),
       }
     )
   ),
   s(
-    { trig = "myit", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'myit', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       *<>*
       ]],
       {
-        i(1, "textit"),
+        i(1, 'textit'),
       }
     )
   ),
   s(
-    { trig = "myit", snippetType = "snippet" },
+    { trig = 'myit', snippetType = 'snippet' },
     fmta(
       [[
       *<>*
       ]],
       {
-        i(1, "textit"),
+        i(1, 'textit'),
       }
     )
   ),
   s(
     {
-      trig = "mybq",
+      trig = 'mybq',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -287,22 +287,22 @@ return {
       <><><><><><><>
       ]],
       {
-        t "<",
+        t '<',
         i(1),
-        t ">",
+        t '>',
         i(2),
-        t "</",
+        t '</',
         rep(1),
-        t ">",
+        t '>',
       }
     )
   ),
   s(
     {
-      trig = "mybq",
-      dscr = "biaoqian",
+      trig = 'mybq',
+      dscr = 'biaoqian',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -313,9 +313,9 @@ return {
   ),
   s(
     {
-      trig = "mykbd",
+      trig = 'mykbd',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -323,20 +323,20 @@ return {
       <>kbd<><><>kbd<>
       ]],
       {
-        t "<",
-        t ">",
+        t '<',
+        t '>',
         i(1),
-        t "</",
-        t ">",
+        t '</',
+        t '>',
       }
     )
   ),
   s(
     {
-      trig = "mykbd",
-      dscr = "kbd html",
+      trig = 'mykbd',
+      dscr = 'kbd html',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -347,9 +347,9 @@ return {
   ),
   s(
     {
-      trig = "mymk",
+      trig = 'mymk',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -357,20 +357,20 @@ return {
       <>mark<><><>mark<>
       ]],
       {
-        t "<",
-        t ">",
+        t '<',
+        t '>',
         i(1),
-        t "</",
-        t ">",
+        t '</',
+        t '>',
       }
     )
   ),
   s(
     {
-      trig = "mymk",
-      dscr = "mark html",
+      trig = 'mymk',
+      dscr = 'mark html',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -381,9 +381,9 @@ return {
   ),
   s(
     {
-      trig = "mytb",
+      trig = 'mytb',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -391,16 +391,16 @@ return {
       :<>:
       ]],
       {
-        c(1, { t "bulb", t "memo", t "white_check_mark", t "100", t "warning", t "joy" }),
+        c(1, { t 'bulb', t 'memo', t 'white_check_mark', t '100', t 'warning', t 'joy' }),
       }
     )
   ),
   s(
     {
-      trig = "mytb",
-      dscr = "ziti tubiao",
+      trig = 'mytb',
+      dscr = 'ziti tubiao',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[

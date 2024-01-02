@@ -5,7 +5,7 @@
 -- Description:                             *
 --*******************************************
 
-local ls = require "luasnip"
+local ls = require 'luasnip'
 local s = ls.snippet
 local sn = ls.snippet_node
 local t = ls.text_node
@@ -13,9 +13,10 @@ local f = ls.function_node
 local i = ls.insert_node
 local d = ls.dynamic_node
 local c = ls.choice_node
-local fmta = require("luasnip.extras.fmt").fmta
-local rep = require("luasnip.extras").rep
-local line_begin = require("luasnip.extras.expand_conditions").line_begin
+local r = ls.restore_node
+local fmta = require('luasnip.extras.fmt').fmta
+local rep = require('luasnip.extras').rep
+local line_begin = require('luasnip.extras.expand_conditions').line_begin
 -- local tex = require "utils.latex"
 
 local get_visual = function(args, parent)
@@ -26,23 +27,81 @@ local get_visual = function(args, parent)
   end
 end
 
+table_node = function(args)
+  local tabs = {}
+  local count
+  table = args[1][1]:gsub('%s', ''):gsub('|', '')
+  count = table:len()
+  for j = 1, count do
+    local iNode
+    iNode = i(j)
+    tabs[2 * j - 1] = iNode
+    if j ~= count then
+      tabs[2 * j] = t ' & '
+    end
+  end
+  return sn(nil, tabs)
+end
+
+rec_table = function()
+  return sn(nil, {
+    c(1, {
+      t { '' },
+      sn(nil, { t { '\\\\', '' }, d(1, table_node, { ai[1] }), d(2, rec_table, { ai[1] }) }),
+    }),
+  })
+end
+-- item
+
+local rec_ls
+rec_ls = function()
+  return sn(
+    nil,
+    c(1, {
+      -- Order is important, sn(...) first would cause infinite loop of expansion.
+      t '',
+      sn(nil, { t { '', '\t\\item ' }, i(1), d(2, rec_ls, {}) }),
+    })
+  )
+end
+-- generating function
+local mat = function(args, snip)
+  local rows = tonumber(snip.captures[2])
+  local cols = tonumber(snip.captures[3])
+  local nodes = {}
+  local ins_indx = 1
+  for j = 1, rows do
+    table.insert(nodes, r(ins_indx, tostring(j) .. 'x1', i(1)))
+    ins_indx = ins_indx + 1
+    for k = 2, cols do
+      table.insert(nodes, t ' & ')
+      table.insert(nodes, r(ins_indx, tostring(j) .. 'x' .. tostring(k), i(1)))
+      ins_indx = ins_indx + 1
+    end
+    table.insert(nodes, t { ' \\\\', '' })
+  end
+  -- fix last node.
+  nodes[#nodes] = t ' \\\\'
+  return sn(nil, nodes)
+end
+
 return {
   s(
-    { trig = "mychoi", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'mychoi', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
               c(<>, { t "<>", t"<>", t "<>"}),
       ]],
       {
-        i(1, "id"),
-        i(2, "text1"),
-        i(3, "text2"),
-        i(4, "text3"),
+        i(1, 'id'),
+        i(2, 'text1'),
+        i(3, 'text2'),
+        i(4, 'text3'),
       }
     )
   ),
   s(
-    { trig = "mytp", snippetType = "autosnippet" },
+    { trig = 'mytp', snippetType = 'autosnippet' },
     fmta(
       [[
       \begin{tikzpicture}<>
@@ -50,20 +109,20 @@ return {
       \end{tikzpicture}
       ]],
       {
-        c(1, { t "[overlay,remember picture,>=stealth,nodes={align=left,inner ysep=1pt},<-]", t "" }),
+        c(1, { t '[overlay,remember picture,>=stealth,nodes={align=left,inner ysep=1pt},<-]', t '' }),
         i(0),
       }
     ),
     { condition = line_begin }
   ),
   s(
-    { trig = "mytm", snippetType = "autosnippet" },
+    { trig = 'mytm', snippetType = 'autosnippet' },
     fmta(
       [[
       \tikzmarknode{<>}{<>}
       ]],
       {
-        i(1, "markname"),
+        i(1, 'markname'),
         f(function(_, snip)
           return snip.env.TM_SELECTED_TEXT[1] or {}
         end, {}),
@@ -71,13 +130,13 @@ return {
     )
   ),
   s(
-    { trig = "myhlm", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'myhlm', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       \hlmath{<>}{<>}
       ]],
       {
-        i(1, "red"),
+        i(1, 'red'),
         f(function(_, snip)
           return snip.env.TM_SELECTED_TEXT[1] or {}
         end, {}),
@@ -85,17 +144,17 @@ return {
     )
   ),
   s(
-    { trig = "myld", snippetType = "autosnippet", dscr = "Left down annotate" },
+    { trig = 'myld', snippetType = 'autosnippet', dscr = 'Left down annotate' },
     fmta(
       [[
       \path (<>.south) ++ (0,-0.8em) node[anchor=north east,color=<>!67] (<>_node){<>};
       \draw [color=<>!57](<>.south) |- ([xshift=-0.3ex,color=<>]<>_node.south west);
       ]],
       {
-        i(1, "markname"),
-        i(2, "color"),
+        i(1, 'markname'),
+        i(2, 'color'),
         rep(1),
-        i(3, "text"),
+        i(3, 'text'),
         rep(2),
         rep(1),
         rep(2),
@@ -104,17 +163,17 @@ return {
     )
   ),
   s(
-    { trig = "mylu", snippetType = "autosnippet", dscr = "Left up annotate" },
+    { trig = 'mylu', snippetType = 'autosnippet', dscr = 'Left up annotate' },
     fmta(
       [[
       \path (<>.north) ++ (0,1em) node[anchor=south east,color=<>!67] (<>_node){<>};
       \draw [color=<>!57](<>.north) |- ([xshift=-0.3ex,color=<>]<>_node.south west);
       ]],
       {
-        i(1, "markname"),
-        i(2, "color"),
+        i(1, 'markname'),
+        i(2, 'color'),
         rep(1),
-        i(3, "text"),
+        i(3, 'text'),
         rep(2),
         rep(1),
         rep(2),
@@ -123,17 +182,17 @@ return {
     )
   ),
   s(
-    { trig = "myrd", snippetType = "autosnippet", dscr = "Right down annotate" },
+    { trig = 'myrd', snippetType = 'autosnippet', dscr = 'Right down annotate' },
     fmta(
       [[
       \path (<>.south) ++ (0,-0.8em) node[anchor=north west,color=<>!67] (<>_node){<>};
       \draw [color=<>!57](<>.south) |- ([xshift=-0.3ex,color=<>]<>_node.south east);
       ]],
       {
-        i(1, "markname"),
-        i(2, "color"),
+        i(1, 'markname'),
+        i(2, 'color'),
         rep(1),
-        i(3, "text"),
+        i(3, 'text'),
         rep(2),
         rep(1),
         rep(2),
@@ -142,13 +201,13 @@ return {
     )
   ),
   s(
-    { trig = "myhlt", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'myhlt', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       \hltext{<>}{<>}
       ]],
       {
-        i(1, "red"),
+        i(1, 'red'),
         f(function(_, snip)
           return snip.env.TM_SELECTED_TEXT[1] or {}
         end, {}),
@@ -156,7 +215,7 @@ return {
     )
   ),
   s(
-    { trig = "mymb", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'mymb', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       \mbox{<>}
@@ -169,13 +228,13 @@ return {
     )
   ),
   s(
-    { trig = "mytc", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'mytc', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       \textcolor{<>}{<>}
       ]],
       {
-        c(1, { t "mychinarose", t "Teal", t "DarkOliveGreen", t "DarkMagenta", t "DarkSeaGreen", t "SeaGreen" }),
+        c(1, { t 'mychinarose', t 'Teal', t 'DarkOliveGreen', t 'DarkMagenta', t 'DarkSeaGreen', t 'SeaGreen' }),
         f(function(_, snip)
           return snip.env.TM_SELECTED_TEXT[1] or {}
         end, {}),
@@ -184,10 +243,10 @@ return {
   ),
   s(
     {
-      trig = "mytc",
-      dscr = "textcolor",
+      trig = 'mytc',
+      dscr = 'textcolor',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -198,9 +257,9 @@ return {
   ),
   s(
     {
-      trig = "mybf",
+      trig = 'mybf',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -216,10 +275,10 @@ return {
   ),
   s(
     {
-      trig = "mybf",
-      dscr = "textbf",
+      trig = 'mybf',
+      dscr = 'textbf',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -229,7 +288,7 @@ return {
     )
   ),
   s(
-    { trig = "mylongtb", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'mylongtb', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       \begin{longtblr}[
@@ -255,18 +314,18 @@ return {
       \end{longtblr}
       ]],
       {
-        c(1, { t "标题", t "" }),
+        c(1, { t '标题', t '' }),
         rep(1),
-        c(2, { t "|X[l,1]|X[l,2]|X[l,2]|X[l,2]|", t "" }),
-        i(3, "column1"),
-        i(4, "column2"),
-        i(5, "column3"),
-        i(6, "column4"),
+        c(2, { t '|X[l,1]|X[l,2]|X[l,2]|X[l,2]|', t '' }),
+        i(3, 'column1'),
+        i(4, 'column2'),
+        i(5, 'column3'),
+        i(6, 'column4'),
       }
     )
   ),
   s(
-    { trig = "mydyh", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'mydyh', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       $\textgreater$<>
@@ -278,10 +337,10 @@ return {
   ),
   s(
     {
-      trig = "mydyh",
-      dscr = "dayuhao",
+      trig = 'mydyh',
+      dscr = 'dayuhao',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -291,7 +350,7 @@ return {
     )
   ),
   s(
-    { trig = "myxyh", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'myxyh', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       $\textless$<>
@@ -303,10 +362,10 @@ return {
   ),
   s(
     {
-      trig = "myxyh",
-      dscr = "xiaoyuhao",
+      trig = 'myxyh',
+      dscr = 'xiaoyuhao',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -316,7 +375,7 @@ return {
     )
   ),
   s(
-    { trig = "myflushr", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'myflushr', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       \begin{flushright}
@@ -324,39 +383,39 @@ return {
       \end{flushright}
       ]],
       {
-        i(1, ""),
+        i(1, ''),
       }
     )
   ),
   s(
-    { trig = "myjpd", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'myjpd', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       の<>
       ]],
       {
-        i(1, ""),
+        i(1, ''),
       }
     )
   ),
   s(
-    { trig = "mysec", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'mysec', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       \section{<>} \label{sec:<>}
       ]],
       {
-        i(1, ""),
-        i(2, ""),
+        i(1, ''),
+        i(2, ''),
       }
     )
   ),
   s(
     {
-      trig = "mysec",
-      dscr = "section",
+      trig = 'mysec',
+      dscr = 'section',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -366,18 +425,18 @@ return {
     )
   ),
   s(
-    { trig = "mysubs", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'mysubs', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       \subsection{<>}
       ]],
       {
-        i(1, ""),
+        i(1, ''),
       }
     )
   ),
   s(
-    { trig = "fmta", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'fmta', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
         s(
@@ -393,35 +452,35 @@ return {
         ),
       ]],
       {
-        i(1, "key"),
-        t "[[",
-        i(2, ""),
-        t "]]",
+        i(1, 'key'),
+        t '[[',
+        i(2, ''),
+        t ']]',
       }
     )
   ),
   s(
-    { trig = "myicf", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'myicf', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       \inputcodefile{<>}{code/<>/<>}{<>}{<>}{<>}
       ]],
       {
-        c(1, { t "shell", t "python", t "go", t "latex" }),
-        c(2, { t "shell", t "python", t "go", t "latex" }),
-        i(3, ""),
-        i(4, "title"),
-        c(5, { t "Shell", t "Python", t "Go", t "LaTex" }),
-        c(6, { t "001.jpeg", t "002.jpeg", t "003.png" }),
+        c(1, { t 'shell', t 'python', t 'go', t 'latex' }),
+        c(2, { t 'shell', t 'python', t 'go', t 'latex' }),
+        i(3, ''),
+        i(4, 'title'),
+        c(5, { t 'Shell', t 'Python', t 'Go', t 'LaTex' }),
+        c(6, { t '001.jpeg', t '002.jpeg', t '003.png' }),
       }
     )
   ),
   s(
     {
-      trig = "myicf",
-      dscr = "inputcodefile",
+      trig = 'myicf',
+      dscr = 'inputcodefile',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -431,18 +490,18 @@ return {
     )
   ),
   s(
-    { trig = "myinp", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'myinp', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       \input{documents/chapter_<>}
       ]],
       {
-        i(1, "1"),
+        i(1, '1'),
       }
     )
   ),
   s(
-    { trig = "myiml", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'myiml', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       $<>$
@@ -454,10 +513,10 @@ return {
   ),
   s(
     {
-      trig = "myiml",
-      dscr = "math line",
+      trig = 'myiml',
+      dscr = 'math line',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -467,108 +526,108 @@ return {
     )
   ),
   s(
-    { trig = "myfrac", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'myfrac', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       \frac{<>}{<>}
       ]],
       {
-        i(1, "fenzi"),
-        i(2, "fenmu"),
+        i(1, 'fenzi'),
+        i(2, 'fenmu'),
       }
     )
   ),
   s(
-    { trig = "noderec", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'noderec', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       \node (s<>) at (<>,<>)[rectangle, rounded corners, draw=blue!50, inner sep=2pt, fill=<>, font=\small]{<>};
       ]],
       {
-        i(1, "1"),
-        i(2, "x"),
-        i(3, "y"),
-        c(4, { t "Teal!50", t "Tan!50", t "MediumOrchid!50" }),
-        i(5, "text"),
+        i(1, '1'),
+        i(2, 'x'),
+        i(3, 'y'),
+        c(4, { t 'Teal!50', t 'Tan!50', t 'MediumOrchid!50' }),
+        i(5, 'text'),
       }
     )
   ),
   s(
-    { trig = "drawkh", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'drawkh', snippetType = 'autosnippet', priority = 2000 },
     c(1, {
       sn(nil, {
-        t "\\draw[decorate, decoration={calligraphic brace, raise=4pt, amplitude=3mm",
+        t '\\draw[decorate, decoration={calligraphic brace, raise=4pt, amplitude=3mm',
         i(1),
-        t "}, thick] (s1.north)--(s2.south);",
+        t '}, thick] (s1.north)--(s2.south);',
       }),
       sn(nil, {
-        t "\\draw[decorate, decoration={calligraphic brace, raise=4pt, amplitude=3mm, mirror",
+        t '\\draw[decorate, decoration={calligraphic brace, raise=4pt, amplitude=3mm, mirror',
         i(1),
-        t "}, thick] (s1.north)--(s2.south);",
+        t '}, thick] (s1.north)--(s2.south);',
       }),
     })
   ),
   s(
-    { trig = "drawpath", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'drawpath', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       \draw[purple, <>, thick] (s1.<>) to [in=-90, out=90] (s2.<>);
       ]],
       {
-        i(1, "->"),
-        c(2, { t "west", t "east", t "south", t "north" }),
-        c(3, { t "west", t "east", t "south", t "north" }),
+        i(1, '->'),
+        c(2, { t 'west', t 'east', t 'south', t 'north' }),
+        c(3, { t 'west', t 'east', t 'south', t 'north' }),
       }
     )
   ),
   s(
-    { trig = "nodecrec", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'nodecrec', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       \node (s<>) at (<>,<>)[rectangle, text width=12pt, text height=3pt, inner sep=2pt, draw=black, fill=<>]{};
       \node[right=0.5ex of s<>] {\textit{<>}};
       ]],
       {
-        i(1, "1"),
-        i(2, "x"),
-        i(3, "y"),
-        i(4, "Color"),
+        i(1, '1'),
+        i(2, 'x'),
+        i(3, 'y'),
+        i(4, 'Color'),
         rep(1),
         rep(4),
       }
     )
   ),
   s(
-    { trig = "myfac", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'myfac', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       \textcolor{<>}{\faIcon{<>}}\\
       ]],
       {
         c(1, {
-          t "Black",
-          t "Teal",
-          t "PaleVioletRed",
-          t "DarkGreen",
-          t "OliveDrab",
-          t "DeepPink",
-          t "MediumPurple",
-          t "DarkOrchid",
-          t "Brown",
-          t "Coral",
-          t "BurlyWood",
-          t "CadetBlue",
+          t 'Black',
+          t 'Teal',
+          t 'PaleVioletRed',
+          t 'DarkGreen',
+          t 'OliveDrab',
+          t 'DeepPink',
+          t 'MediumPurple',
+          t 'DarkOrchid',
+          t 'Brown',
+          t 'Coral',
+          t 'BurlyWood',
+          t 'CadetBlue',
         }),
-        i(2, "IconName"),
+        i(2, 'IconName'),
       }
     )
   ),
   s(
     {
-      trig = "myfac",
-      dscr = "faIcon Textcolor",
+      trig = 'myfac',
+      dscr = 'faIcon Textcolor',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -578,7 +637,7 @@ return {
     )
   ),
   s(
-    { trig = "myuse", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'myuse', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       \usepackage{<>}
@@ -589,7 +648,7 @@ return {
     )
   ),
   s(
-    { trig = "mybeg", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'mybeg', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       \begin{<>}
@@ -605,10 +664,10 @@ return {
   ),
   s(
     {
-      trig = "mybeg",
-      dscr = "Envirenment",
+      trig = 'mybeg',
+      dscr = 'Envirenment',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -618,22 +677,22 @@ return {
     )
   ),
   s(
-    { trig = "mynote", snippetType = "autosnippet", priority = 2000 },
+    { trig = 'mynote', snippetType = 'autosnippet', priority = 2000 },
     fmta(
       [[
       %  <>: <>
       ]],
       {
-        c(1, { t "NOTE", t "TODO", t "WARN", t "FIX", t "HACK", t "PERF" }),
+        c(1, { t 'NOTE', t 'TODO', t 'WARN', t 'FIX', t 'HACK', t 'PERF' }),
         i(2),
       }
     )
   ),
   s(
     {
-      trig = ";a",
+      trig = ';a',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -641,12 +700,12 @@ return {
       <>
       ]],
       {
-        t "\\alpha",
+        t '\\alpha',
       }
     )
   ),
   s(
-    { trig = ";a", dscr = "\alpha", regTrig = false, snippetType = "snippet" },
+    { trig = ';a', dscr = '\alpha', regTrig = false, snippetType = 'snippet' },
     fmta(
       [[
 
@@ -656,9 +715,9 @@ return {
   ),
   s(
     {
-      trig = "mydoc2",
+      trig = 'mydoc2',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -791,7 +850,6 @@ return {
       %\input{documents/chapter_14}
       %\input{documents/chapter_15}
 
-
       %\cite{texbook1986} %\nocite{*}
       %-------------------- 打印文献 start --------------------
       \printbibliography[title={\kaiti 参考文献}, sorting=nyt] % 打印参考文献
@@ -808,16 +866,16 @@ return {
       \end{document}
       ]],
       {
-        c(1, { t "report", t "article" }),
+        c(1, { t 'report', t 'article' }),
         i(2),
       }
     )
   ),
   s(
     {
-      trig = "mydefc",
+      trig = 'mydefc',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -825,18 +883,18 @@ return {
       \definecolor{<>}{<>}{<>}
       ]],
       {
-        i(1, "myname"),
-        c(2, { t "RGB", t "HTML", t "gray" }),
+        i(1, 'myname'),
+        c(2, { t 'RGB', t 'HTML', t 'gray' }),
         i(3),
       }
     )
   ),
   s(
     {
-      trig = "mydefc",
-      dscr = "dscr",
+      trig = 'mydefc',
+      dscr = 'dscr',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -846,9 +904,9 @@ return {
   ),
   s(
     {
-      trig = "myimgs",
+      trig = 'myimgs',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -856,16 +914,16 @@ return {
       <>
       ]],
       {
-        c(1, { t "001.jpeg", t "002.jpeg", t "003.png" }),
+        c(1, { t '001.jpeg', t '002.jpeg', t '003.png' }),
       }
     )
   ),
   s(
     {
-      trig = "myimgs",
-      dscr = "images",
+      trig = 'myimgs',
+      dscr = 'images',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -876,9 +934,9 @@ return {
   ),
   s(
     {
-      trig = "mylib",
+      trig = 'mylib',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -892,10 +950,10 @@ return {
   ),
   s(
     {
-      trig = "mylib",
-      dscr = "mylib",
+      trig = 'mylib',
+      dscr = 'mylib',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -906,9 +964,9 @@ return {
   ),
   s(
     {
-      trig = "mybox1",
+      trig = 'mybox1',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -922,10 +980,10 @@ return {
   ),
   s(
     {
-      trig = "mybox1",
-      dscr = "xmybox",
+      trig = 'mybox1',
+      dscr = 'xmybox',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -936,9 +994,9 @@ return {
   ),
   s(
     {
-      trig = "mybox2",
+      trig = 'mybox2',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -949,19 +1007,19 @@ return {
       \end{mybox2}
       ]],
       {
-        i(1, "titleName"),
-        i(2, "1"),
-        i(3, "1"),
+        i(1, 'titleName'),
+        i(2, '1'),
+        i(3, '1'),
         i(0),
       }
     )
   ),
   s(
     {
-      trig = "mybox2",
-      dscr = "2 columns box",
+      trig = 'mybox2',
+      dscr = '2 columns box',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -972,9 +1030,9 @@ return {
   ),
   s(
     {
-      trig = "myeqb",
+      trig = 'myeqb',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -992,10 +1050,10 @@ return {
   ),
   s(
     {
-      trig = "myeqb",
-      dscr = "def equation box",
+      trig = 'myeqb',
+      dscr = 'def equation box',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1006,9 +1064,9 @@ return {
   ),
   s(
     {
-      trig = "mytheo",
+      trig = 'mytheo',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1018,18 +1076,18 @@ return {
       \end{YetAnotherTheorem}
       ]],
       {
-        i(1, "title"),
-        i(2, "lablename:theo"),
+        i(1, 'title'),
+        i(2, 'lablename:theo'),
         i(3),
       }
     )
   ),
   s(
     {
-      trig = "mytheo",
-      dscr = "Theorem",
+      trig = 'mytheo',
+      dscr = 'Theorem',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1040,9 +1098,9 @@ return {
   ),
   s(
     {
-      trig = "mydef",
+      trig = 'mydef',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1052,18 +1110,18 @@ return {
       \end{Definition}
       ]],
       {
-        i(1, "title"),
-        i(2, "lablename:def"),
+        i(1, 'title'),
+        i(2, 'lablename:def'),
         i(3),
       }
     )
   ),
   s(
     {
-      trig = "mydef",
-      dscr = "Definition",
+      trig = 'mydef',
+      dscr = 'Definition',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1074,9 +1132,9 @@ return {
   ),
   s(
     {
-      trig = "mycor",
+      trig = 'mycor',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1086,17 +1144,17 @@ return {
       \end{Corollary}
       ]],
       {
-        i(1, "title"),
-        i(2, "lablename:cor"),
+        i(1, 'title'),
+        i(2, 'lablename:cor'),
         i(3),
       }
     )
   ),
   s(
     {
-      trig = "myref",
+      trig = 'myref',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1104,17 +1162,17 @@ return {
       \autoref{<>:<>}
       ]],
       {
-        c(1, { t "chap", t "sec", t "theo", t "def", t "cor" }),
-        i(2, "refname"),
+        c(1, { t 'chap', t 'sec', t 'theo', t 'def', t 'cor' }),
+        i(2, 'refname'),
       }
     )
   ),
   s(
     {
-      trig = "myref",
-      dscr = "ref",
+      trig = 'myref',
+      dscr = 'ref',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1125,9 +1183,9 @@ return {
   ),
   s(
     {
-      trig = "mylb",
+      trig = 'mylb',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1135,17 +1193,17 @@ return {
       \label{<>:<>}
       ]],
       {
-        c(1, { t "chap", t "sec", t "theo", t "def", t "cor" }),
-        i(2, "labelname"),
+        c(1, { t 'chap', t 'sec', t 'theo', t 'def', t 'cor' }),
+        i(2, 'labelname'),
       }
     )
   ),
   s(
     {
-      trig = "mylb",
-      dscr = "label",
+      trig = 'mylb',
+      dscr = 'label',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1156,9 +1214,9 @@ return {
   ),
   s(
     {
-      trig = "myrtb",
+      trig = 'myrtb',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1168,18 +1226,18 @@ return {
       \end{myrotatebox}
       ]],
       {
-        i(1, "title"),
-        i(2, "30"),
+        i(1, 'title'),
+        i(2, '30'),
         i(3),
       }
     )
   ),
   s(
     {
-      trig = "myrtb",
-      dscr = "rotatebox",
+      trig = 'myrtb',
+      dscr = 'rotatebox',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1190,9 +1248,9 @@ return {
   ),
   s(
     {
-      trig = "mytri",
+      trig = 'mytri',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1217,20 +1275,20 @@ return {
       \end{tcbraster}
       ]],
       {
-        i(1, "2"),
-        i(2, "imgname"),
-        i(3, "imgPath"),
-        i(4, "imgname"),
-        i(5, "imgPath"),
+        i(1, '2'),
+        i(2, 'imgname'),
+        i(3, 'imgPath'),
+        i(4, 'imgname'),
+        i(5, 'imgPath'),
       }
     )
   ),
   s(
     {
-      trig = "mytri",
-      dscr = "tcbraster img",
+      trig = 'mytri',
+      dscr = 'tcbraster img',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1241,9 +1299,9 @@ return {
   ),
   s(
     {
-      trig = "mylips",
+      trig = 'mylips',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1251,16 +1309,16 @@ return {
       \lipsum[<>]
       ]],
       {
-        i(1, "1-3"),
+        i(1, '1-3'),
       }
     )
   ),
   s(
     {
-      trig = "mylips",
-      dscr = "lipsum",
+      trig = 'mylips',
+      dscr = 'lipsum',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1271,9 +1329,9 @@ return {
   ),
   s(
     {
-      trig = "mymini",
+      trig = 'mymini',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1296,16 +1354,16 @@ return {
       %\hspace{0.8cm}
       ]],
       {
-        i(1, "imgPath"),
+        i(1, 'imgPath'),
       }
     )
   ),
   s(
     {
-      trig = "mymini",
-      dscr = "minipage",
+      trig = 'mymini',
+      dscr = 'minipage',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1316,9 +1374,9 @@ return {
   ),
   s(
     {
-      trig = "myrule",
+      trig = 'myrule',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1326,16 +1384,16 @@ return {
       \noindent\textcolor{<>}{\rule{\textwidth}{1pt}}
       ]],
       {
-        c(1, { t "black", t "gray", t "teal" }),
+        c(1, { t 'black', t 'gray', t 'teal' }),
       }
     )
   ),
   s(
     {
-      trig = "myrule",
-      dscr = "ruleline",
+      trig = 'myrule',
+      dscr = 'ruleline',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1346,9 +1404,9 @@ return {
   ),
   s(
     {
-      trig = "myimgi",
+      trig = 'myimgi',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1356,16 +1414,16 @@ return {
       \includegraphics[width=\textwidth]{images/<>}
       ]],
       {
-        i(1, "imgPath"),
+        i(1, 'imgPath'),
       }
     )
   ),
   s(
     {
-      trig = "myimgi",
-      dscr = "includegraphics",
+      trig = 'myimgi',
+      dscr = 'includegraphics',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1376,9 +1434,9 @@ return {
   ),
   s(
     {
-      trig = "myimgt",
+      trig = 'myimgt',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1393,16 +1451,16 @@ return {
           colback=red!20!black,]{images/<>}
       ]],
       {
-        i(1, "imgPath"),
+        i(1, 'imgPath'),
       }
     )
   ),
   s(
     {
-      trig = "myimgt",
-      dscr = "tcbincludegraphics",
+      trig = 'myimgt',
+      dscr = 'tcbincludegraphics',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1413,9 +1471,9 @@ return {
   ),
   s(
     {
-      trig = "myverse",
+      trig = 'myverse',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1435,7 +1493,6 @@ return {
             준비없이 비를 만난것처럼<> \\
           }
         \end{verse}
-
 
         \settowidth{\versewidth}{像毫无防备淋过了一场雨}
         \poemtitle{\kaiti\normalsize 与好的人}  %title
@@ -1459,10 +1516,10 @@ return {
   ),
   s(
     {
-      trig = "myverse",
-      dscr = "verse",
+      trig = 'myverse',
+      dscr = 'verse',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1473,9 +1530,9 @@ return {
   ),
   s(
     {
-      trig = "myenum",
+      trig = 'myenum',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1495,10 +1552,10 @@ return {
   ),
   s(
     {
-      trig = "myenum",
-      dscr = "enumrate",
+      trig = 'myenum',
+      dscr = 'enumrate',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1509,9 +1566,9 @@ return {
   ),
   s(
     {
-      trig = "mytblr",
+      trig = 'mytblr',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1533,22 +1590,22 @@ return {
       \end{mytblr}
       ]],
       {
-        i(1, "caption name"),
-        i(2, "column1"),
-        i(3, "column2"),
-        i(4, "column3"),
-        i(5, "text1"),
-        i(6, "text2"),
-        i(7, "text6"),
+        i(1, 'caption name'),
+        i(2, 'column1'),
+        i(3, 'column2'),
+        i(4, 'column3'),
+        i(5, 'text1'),
+        i(6, 'text2'),
+        i(7, 'text6'),
       }
     )
   ),
   s(
     {
-      trig = "mytblr",
-      dscr = "tabularray",
+      trig = 'mytblr',
+      dscr = 'tabularray',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1559,9 +1616,9 @@ return {
   ),
   s(
     {
-      trig = "tblr",
+      trig = 'tblr',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1587,22 +1644,22 @@ return {
       \end{center}
       ]],
       {
-        i(1, "caption name"),
-        i(2, "column1"),
-        i(3, "column2"),
-        i(4, "column3"),
-        i(5, "text1"),
-        i(6, "text2"),
-        i(7, "text6"),
+        i(1, 'caption name'),
+        i(2, 'column1'),
+        i(3, 'column2'),
+        i(4, 'column3'),
+        i(5, 'text1'),
+        i(6, 'text2'),
+        i(7, 'text6'),
       }
     )
   ),
   s(
     {
-      trig = "tblr",
-      dscr = "three-line table",
+      trig = 'tblr',
+      dscr = 'three-line table',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1613,9 +1670,9 @@ return {
   ),
   s(
     {
-      trig = "mycell",
+      trig = 'mycell',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1623,18 +1680,18 @@ return {
       cell{<>}{<>} = {fg = <>, bg = white, cmd = \textbf},
       ]],
       {
-        i(1, "row"),
-        i(2, "col"),
-        i(3, "Green"),
+        i(1, 'row'),
+        i(2, 'col'),
+        i(3, 'Green'),
       }
     )
   ),
   s(
     {
-      trig = "mycell",
-      dscr = "set cell",
+      trig = 'mycell',
+      dscr = 'set cell',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1645,9 +1702,9 @@ return {
   ),
   s(
     {
-      trig = "myhbc",
+      trig = 'myhbc',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1655,20 +1712,20 @@ return {
       cell{<>}{<>} = {c=<>, r=<>}{<>},
       ]],
       {
-        i(1, "row"),
-        i(2, "col"),
-        i(3, "rowN"),
-        i(4, "colN"),
-        c(5, { t "m", t "c" }),
+        i(1, 'row'),
+        i(2, 'col'),
+        i(3, 'rowN'),
+        i(4, 'colN'),
+        c(5, { t 'm', t 'c' }),
       }
     )
   ),
   s(
     {
-      trig = "myhbc",
-      dscr = "hebing cell",
+      trig = 'myhbc',
+      dscr = 'hebing cell',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1679,9 +1736,9 @@ return {
   ),
   s(
     {
-      trig = "myadf",
+      trig = 'myadf',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1689,16 +1746,16 @@ return {
       \input{documents/<>}
       ]],
       {
-        i(1, "addDocumentFile"),
+        i(1, 'addDocumentFile'),
       }
     )
   ),
   s(
     {
-      trig = "myadf",
-      dscr = "dscr",
+      trig = 'myadf',
+      dscr = 'dscr',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1709,9 +1766,9 @@ return {
   ),
   s(
     {
-      trig = "myfont",
+      trig = 'myfont',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1719,17 +1776,17 @@ return {
       <>{<>} % xsy | wysxk | tyzx | jxp
       ]],
       {
-        c(1, { t "\\xsy", t "\\wysxk", t "\\tyzx", t "\\jxp" }),
+        c(1, { t '\\xsy', t '\\wysxk', t '\\tyzx', t '\\jxp' }),
         i(2),
       }
     )
   ),
   s(
     {
-      trig = "myfont",
-      dscr = "xingshukaishu",
+      trig = 'myfont',
+      dscr = 'xingshukaishu',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1740,9 +1797,9 @@ return {
   ),
   s(
     {
-      trig = "myfl",
+      trig = 'myfl',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1758,21 +1815,21 @@ return {
       \end{equation}
       ]],
       {
-        i(1, "1"),
-        i(2, ""),
-        i(3, "zc1"),
-        i(4, "zc2"),
-        i(5, "fz1"),
-        i(6, "fz2"),
+        i(1, '1'),
+        i(2, ''),
+        i(3, 'zc1'),
+        i(4, 'zc2'),
+        i(5, 'fz1'),
+        i(6, 'fz2'),
       }
     )
   ),
   s(
     {
-      trig = "myfl",
-      dscr = "kuaijifenlu",
+      trig = 'myfl',
+      dscr = 'kuaijifenlu',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1783,9 +1840,9 @@ return {
   ),
   s(
     {
-      trig = "myald",
+      trig = 'myald',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1801,10 +1858,10 @@ return {
   ),
   s(
     {
-      trig = "myald",
-      dscr = "aligned Envirenment",
+      trig = 'myald',
+      dscr = 'aligned Envirenment',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1815,9 +1872,9 @@ return {
   ),
   s(
     {
-      trig = "myudm",
+      trig = 'myudm',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1831,10 +1888,10 @@ return {
   ),
   s(
     {
-      trig = "myudm",
-      dscr = "uldash",
+      trig = 'myudm',
+      dscr = 'uldash',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1845,9 +1902,9 @@ return {
   ),
   s(
     {
-      trig = "myulm",
+      trig = 'myulm',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1855,17 +1912,17 @@ return {
       <>{\mbox{<>}}
       ]],
       {
-        c(1, { t "\\ul", t "\\hl", t "\\st" }),
+        c(1, { t '\\ul', t '\\hl', t '\\st' }),
         i(2),
       }
     )
   ),
   s(
     {
-      trig = "myulm",
-      dscr = "underline hl st",
+      trig = 'myulm',
+      dscr = 'underline hl st',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1876,9 +1933,9 @@ return {
   ),
   s(
     {
-      trig = "myet",
+      trig = 'myet',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1899,10 +1956,10 @@ return {
   ),
   s(
     {
-      trig = "myet",
-      dscr = "entry",
+      trig = 'myet',
+      dscr = 'entry',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1913,9 +1970,9 @@ return {
   ),
   s(
     {
-      trig = "myddh",
+      trig = 'myddh',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1929,10 +1986,10 @@ return {
   ),
   s(
     {
-      trig = "myddh",
-      dscr = "dayuxiaoyuhao",
+      trig = 'myddh',
+      dscr = 'dayuxiaoyuhao',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1943,9 +2000,9 @@ return {
   ),
   s(
     {
-      trig = "myxdh",
+      trig = 'myxdh',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1959,10 +2016,10 @@ return {
   ),
   s(
     {
-      trig = "myxdh",
-      dscr = "xiaoyudengyuhao",
+      trig = 'myxdh',
+      dscr = 'xiaoyudengyuhao',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -1973,9 +2030,9 @@ return {
   ),
   s(
     {
-      trig = "myfxx",
+      trig = 'myfxx',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -1989,10 +2046,10 @@ return {
   ),
   s(
     {
-      trig = "myfxx",
-      dscr = "backslash",
+      trig = 'myfxx',
+      dscr = 'backslash',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -2003,9 +2060,9 @@ return {
   ),
   s(
     {
-      trig = "mysc",
+      trig = 'mysc',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -2013,20 +2070,20 @@ return {
       \SetCell<><><>2<>{c} <>
       ]],
       {
-        t "[",
-        c(1, { t "r", t "c" }),
-        t "=",
-        t "]",
+        t '[',
+        c(1, { t 'r', t 'c' }),
+        t '=',
+        t ']',
         i(0),
       }
     )
   ),
   s(
     {
-      trig = "mysc",
-      dscr = "setcell",
+      trig = 'mysc',
+      dscr = 'setcell',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -2037,9 +2094,9 @@ return {
   ),
   s(
     {
-      trig = "mycl",
+      trig = 'mycl',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -2047,17 +2104,17 @@ return {
       \cline{<>-<>}
       ]],
       {
-        i(1, "1"),
-        i(2, "3"),
+        i(1, '1'),
+        i(2, '3'),
       }
     )
   ),
   s(
     {
-      trig = "mycl",
-      dscr = "cline",
+      trig = 'mycl',
+      dscr = 'cline',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -2068,9 +2125,9 @@ return {
   ),
   s(
     {
-      trig = "mycir",
+      trig = 'mycir',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -2078,16 +2135,16 @@ return {
       \circled{<>}
       ]],
       {
-        i(1, "1"),
+        i(1, '1'),
       }
     )
   ),
   s(
     {
-      trig = "mycir",
-      dscr = "circled",
+      trig = 'mycir',
+      dscr = 'circled',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -2098,9 +2155,9 @@ return {
   ),
   s(
     {
-      trig = "mynt",
+      trig = 'mynt',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -2114,10 +2171,10 @@ return {
   ),
   s(
     {
-      trig = "mynt",
-      dscr = "dscr",
+      trig = 'mynt',
+      dscr = 'dscr',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -2128,9 +2185,9 @@ return {
   ),
   s(
     {
-      trig = "mykr",
+      trig = 'mykr',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -2144,10 +2201,10 @@ return {
   ),
   s(
     {
-      trig = "mykr",
-      dscr = "korea",
+      trig = 'mykr',
+      dscr = 'korea',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -2158,9 +2215,9 @@ return {
   ),
   s(
     {
-      trig = "myts",
+      trig = 'myts',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -2174,10 +2231,10 @@ return {
   ),
   s(
     {
-      trig = "myts",
-      dscr = "times",
+      trig = 'myts',
+      dscr = 'times',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -2188,9 +2245,9 @@ return {
   ),
   s(
     {
-      trig = "mymt",
+      trig = 'mymt',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -2205,10 +2262,10 @@ return {
   ),
   s(
     {
-      trig = "mymt",
-      dscr = "math",
+      trig = 'mymt',
+      dscr = 'math',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -2219,9 +2276,9 @@ return {
   ),
   s(
     {
-      trig = "myfs",
+      trig = 'myfs',
       regTrig = false,
-      snippetType = "autosnippet",
+      snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
@@ -2229,17 +2286,17 @@ return {
       <><>
       ]],
       {
-        t "\\",
-        c(1, { t "large", t "normalsize", t "small", t "footnotesize" }),
+        t '\\',
+        c(1, { t 'large', t 'normalsize', t 'small', t 'footnotesize' }),
       }
     )
   ),
   s(
     {
-      trig = "myfs",
-      dscr = "fontsize",
+      trig = 'myfs',
+      dscr = 'fontsize',
       regTrig = false,
-      snippetType = "snippet",
+      snippetType = 'snippet',
     },
     fmta(
       [[
@@ -2248,4 +2305,44 @@ return {
       {}
     )
   ),
+  s(
+    {
+      trig = '([bBpvV])mat(%d+)x(%d+)([ar])',
+      regTrig = true,
+      name = 'matrix',
+      dscr = 'matrix trigger lets go',
+      hidden = true,
+    },
+    fmta(
+      [[
+      \begin{<>}<>
+      <>
+      \end{<>}
+      ]],
+      {
+        f(function(_, snip)
+          return snip.captures[1] .. 'matrix' -- captures matrix type
+        end),
+        f(function(_, snip)
+          if snip.captures[4] == 'a' then
+            out = string.rep('c', tonumber(snip.captures[3]) - 1) -- array for augment
+            return '[' .. out .. '|c]'
+          end
+          return '' -- otherwise return nothing
+        end),
+        d(1, mat),
+        f(function(_, snip)
+          return snip.captures[1] .. 'matrix' -- i think i could probably use a repeat node but whatever
+        end),
+      }
+    )
+  ),
+  s('mylss', {
+    t '\\begin{tabular}{',
+    i(1, '0'),
+    t { '}', '' },
+    d(2, table_node, { 1 }, {}),
+    d(3, rec_table, { 1 }),
+    t { '', '\\end{tabular}' },
+  }),
 }

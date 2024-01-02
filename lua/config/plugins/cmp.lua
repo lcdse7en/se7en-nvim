@@ -420,7 +420,7 @@ return {
         { name = 'nvim_lua', priority = 5 },
         { name = 'path', priority = 4 },
         { name = 'calc', priority = 3 },
-        { name = 'rg', keyword_length = 3 },
+        { name = 'rg', keyword_length = 5 },
         { name = 'crates' },
         {
           name = 'look',

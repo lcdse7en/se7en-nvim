@@ -97,7 +97,13 @@ return {
     end, { desc = 'Telescope: Find themes' })
     map('n', '<leader>fn', '<cmd>Telescope notify<CR>', { desc = 'Telescope: show notifications' })
     map('n', '<leader>fh', 'Telescope yank_history<cr>', { desc = 'Telescope: search yank_history' })
-    map('n', '<leader>fp', '<cmd>lua require("plugins.telescope").project_files()<cr>', { desc = 'Project Files' })
+    map(
+      'n',
+      '<leader>fp',
+      -- '<cmd>lua require("config.plugins.telescope").project_files()<cr>',
+      '<cmd>lua project_files()<cr>',
+      { desc = 'Project Files' }
+    )
     map('n', '<leader>fv', function()
       local builtin = require 'telescope.builtin'
       builtin.treesitter()
