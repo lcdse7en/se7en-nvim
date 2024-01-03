@@ -22,7 +22,7 @@ require('lazy').setup(configs, {
   install = {
     colorscheme = { PREF.ui.colorscheme },
   },
-  checker = { enabled = true },
+  checker = { enabled = true }, -- automatically check for plugin updates
   concurrency = 5,
   change_detection = { notify = false },
   -- dev = {
