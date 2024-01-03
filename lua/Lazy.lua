@@ -26,13 +26,6 @@ require('lazy').setup(configs, {
   checker = { enabled = true }, -- automatically check for plugin updates
   concurrency = 5,
   change_detection = { notify = false },
-  -- dev = {
-  --   -- directory where you store your local plugin projects
-  --   path = '~/projects/code/personal',
-  --   ---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
-  --   patterns = {}, -- For example {"folke"}
-  --   fallback = false, -- Fallback to git when local plugin doesn't exist
-  -- },
   performance = {
     rtp = {
       disabled_plugins = {
