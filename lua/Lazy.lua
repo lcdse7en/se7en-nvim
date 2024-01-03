@@ -16,6 +16,7 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 require('lazy').setup(configs, {
+  lockfile = '~/.config/nvim/lazy-lock.json',
   defaults = {
     lazy = true,
   },
@@ -72,7 +73,8 @@ require('lazy').setup(configs, {
         loaded = '',
         not_loaded = '',
       },
-      border = PREF.ui.border,
+      -- border = PREF.ui.border,
+      border = 'single',
     },
   },
 })
