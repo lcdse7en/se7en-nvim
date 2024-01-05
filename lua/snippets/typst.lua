@@ -313,19 +313,18 @@ return {
     },
     fmta(
       [[
-      #text(fill: <>.lighten(<>%))[<>]
+      #text(fill: <>)[<>]
       ]],
       {
         c(1, {
           sn(nil, {
-            i(1, 'purple'),
+            i(1, 'purple.lighten(20%)'),
           }),
           sn(nil, {
-            i(1, 'yellow'),
+            i(1, 'indianred'),
           }),
         }),
-        i(2, '20'),
-        i(3),
+        i(2),
       }
     )
   ),
