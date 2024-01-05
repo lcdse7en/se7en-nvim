@@ -670,16 +670,62 @@ return {
     },
     fmta(
       [[
-        #box(inset: (x: 0.3em), outset: (y: 0.3em), fill: red, radius: 3pt, "<>")
+        #box(inset: (x: 0.3em), outset: (y: 0.3em), fill: <>, radius: 3pt, "<>")
       ]],
       {
-        i(1),
+        c(1, {
+          sn(nil, {
+            i(1, 'red'),
+          }),
+          sn(nil, {
+            i(1, 'gray.lighten(60%)'),
+          }),
+        }),
+        i(2, 'text'),
       }
     )
   ),
   s(
     {
       trig = 'mybox',
+      dscr = 'dscr',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
+  s(
+    {
+      trig = 'myfl',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #mitext(`
+        \begin{equation}
+        \begin{aligned}
+        借：& <> \\
+        贷：& <> \\
+        \end{aligned}
+        \end{equation}
+      `)
+      ]],
+      {
+        i(1),
+        i(2),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'myfl',
       dscr = 'dscr',
       regTrig = false,
       snippetType = 'snippet',
