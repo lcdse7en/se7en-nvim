@@ -630,6 +630,67 @@ return {
       {}
     )
   ),
+  s(
+    {
+      trig = 'mypk',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #pagebreak()
+      <>
+      ]],
+      {
+        i(0),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'mypk',
+      dscr = 'dscr',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
+  s(
+    {
+      trig = 'mybox',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+        #box(inset: (x: 0.3em), outset: (y: 0.3em), fill: red, radius: 3pt, "<>")
+      ]],
+      {
+        i(1),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'mybox',
+      dscr = 'dscr',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
   s('myls', {
     t '\\begin{tabular}{',
     i(1, '0'),
