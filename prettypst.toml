@@ -29,7 +29,6 @@ comma = "end-of-content" # "end-of-content" | "end-of-cell"  how to align commas
 blank-lines-before = 1 # blank lines before a heading
 blank-lines-after = 1 # blank lines after a heading
 
-
 [columns-commands]
 grid = "columns"     # format the "grid", "gridx", ... command with
 gridx = "columns"    # columns specified by the named argument "columns"
