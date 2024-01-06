@@ -677,3 +677,30 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'TextChanged', 'Insert
     end
   end,
 })
+
+---resize kitty window, no padding when neovim is present.
+local kitty_aug = vim.api.nvim_create_augroup('kitty_aug', { clear = true })
+local resized = false
+vim.api.nvim_create_autocmd({ 'UIEnter' }, {
+  group = kitty_aug,
+  pattern = '*',
+  callback = function()
+    if resized then
+      return
+    end
+    vim.schedule(function()
+      resized = true
+      vim.cmd ':silent !kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=0 margin=0'
+    end)
+  end,
+})
+vim.api.nvim_create_autocmd('UILeave', {
+  group = kitty_aug,
+  pattern = '*',
+  callback = function()
+    if not resized then
+      return
+    end
+    vim.cmd ':silent !kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=8 margin=0'
+  end,
+})

@@ -248,7 +248,8 @@ lspconfig.gopls.setup {
 
 lspconfig.rust_analyzer.setup {
   on_attach = on_attach,
-  capabilities = capabilities,
+  capabilities = vim.tbl_deep_extend('keep', { offsetEncoding = { 'utf-16', 'utf-8' } }, capabilities),
+  -- capabilities = capabilities,
   handlers = handlers,
   filetypes = { 'rust' },
   cmd = { 'rustup', 'run', 'stable', 'rust-analyzer' },
