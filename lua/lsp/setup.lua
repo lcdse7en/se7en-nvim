@@ -108,6 +108,7 @@ end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.offsetEncoding = { 'utf-16' }
 capabilities.experimental = { localDocs = true }
 
@@ -248,8 +249,8 @@ lspconfig.gopls.setup {
 
 lspconfig.rust_analyzer.setup {
   on_attach = on_attach,
-  capabilities = vim.tbl_deep_extend('keep', { offsetEncoding = { 'utf-16', 'utf-8' } }, capabilities),
-  -- capabilities = capabilities,
+  -- capabilities = vim.tbl_deep_extend('keep', { offsetEncoding = { 'utf-16', 'utf-8' } }, capabilities),
+  capabilities = capabilities,
   handlers = handlers,
   filetypes = { 'rust' },
   cmd = { 'rustup', 'run', 'stable', 'rust-analyzer' },
@@ -330,6 +331,7 @@ lspconfig.clangd.setup {
   filetypes = { 'cpp', 'c', 'h', 'hpp', 'cuda' },
   cmd = {
     'clangd',
+    '--offset-encoding=utf-16',
     '-j=12',
     '--enable-config',
     '--background-index',
