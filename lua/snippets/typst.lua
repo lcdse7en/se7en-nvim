@@ -736,6 +736,44 @@ return {
       {}
     )
   ),
+  s(
+    {
+      trig = 'myhl',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #highlight("<>", <>)
+      ]],
+      {
+        i(1, 'text'),
+        c(2, {
+          sn(nil, {
+            i(1, 'red'),
+          }),
+          sn(nil, {
+            i(1, 'yellow'),
+          }),
+        }),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'myhl',
+      dscr = 'dscr',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
   s('myls', {
     t '\\begin{tabular}{',
     i(1, '0'),
