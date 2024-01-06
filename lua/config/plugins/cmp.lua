@@ -407,7 +407,7 @@ return {
         {
           name = 'buffer',
           -- priority = 7,
-          -- keyword_length = 3,
+          keyword_length = 3,
           option = {
             get_bufnrs = function()
               return vim.api.nvim_list_bufs()
