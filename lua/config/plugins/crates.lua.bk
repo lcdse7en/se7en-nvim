@@ -1,0 +1,11 @@
+return {
+  'saecki/crates.nvim',
+  enabled = false,
+  event = { 'BufRead Cargo.toml' },
+  opts = {
+    popup = {
+      autofocus = true,
+      border = vim.cfg.ui__float_border,
+    },
+  },
+}
