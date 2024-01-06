@@ -74,7 +74,7 @@ local options = {
   -- Fold  listchars
   -- ============================================================
   list = true,                           --- enable or disable listchars
-  listchars = { tab = "· ", trail = " ", eol = " ", extends = "→", precedes = "←" },
+  listchars = { tab = "· ", trail = " ", eol = "↩", extends = "→", precedes = "←" },
   foldcolumn = '0',                      --- '0' is not bad
   foldlevel = 99,                        --- Using ufo provider need a large value, feel free to decrease the value
   foldlevelstart = 99,
@@ -108,7 +108,6 @@ for option_name, value in pairs(options) do
 		vim.notify('Option ' .. option_name .. ' is not supported', vim.log.levels.WARN)
 	end
 end
-
 
 for k, v in pairs(globals) do
   vim.g[k] = v
