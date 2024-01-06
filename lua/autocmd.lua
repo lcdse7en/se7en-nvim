@@ -377,24 +377,9 @@ vim.cmd [[
               call setline(6, "//********************************************")
               call setline(7, "")
               call setline(8, "")
-              call setline(9, '#import "@preview/rubby:0.9.2": get-ruby')
-              call setline(10, '#import "@preview/codelst:1.0.0": sourcecode')
-              call setline(11, '#import "@preview/tablex:0.0.5": tablex, rowspanx, colspanx')
-              call setline(12, "")
-              call setline(13, '#set text(font: ("Linux Libertine", "Noto Serif CJK SC"))')
-              call setline(14, '#show emph: e => {')
-              call setline(15, '    set text(font: "Cascadia Code")')
-              call setline(16, '    e')
-              call setline(17, '    }')
-              call setline(18, "#let ruby = get-ruby(")
-              call setline(19, '    size: 0.5em,')
-              call setline(20, '    dy: 0pt,')
-              call setline(21, '    pos: top,')
-              call setline(22, '    alignment: "center",')
-              call setline(23, '    delimiter: "|",')
-              call setline(24, '    auto-spacing: true,')
-              call setline(25, "    )")
-              call setline(26, "")
+              call setline(9, '#import "../template/isc_report.typ": *')
+              call setline(10, '#import "../template/cv.typ": *')
+              call setline(11, "")
             endif
           endfunc
         autocmd BufNewFile * normal G
@@ -514,6 +499,7 @@ vim.cmd [[
         autocmd BufNewFile * normal G
     augroup end
 ]]
+
 vim.cmd [[
     augroup title_go
         autocmd!
@@ -601,7 +587,7 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.bo.smartindent = true
     vim.bo.copyindent = true
     vim.opt.colorcolumn = '120'
-    vim.opt.wrap = false
+    vim.opt.wrap = true
   end,
 })
 
