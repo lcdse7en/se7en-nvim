@@ -380,6 +380,7 @@ vim.cmd [[
               call setline(9, '#import "../template/isc_report.typ": *')
               call setline(10, '#import "../template/cv.typ": *')
               call setline(11, "")
+              call setline(12, "")
             endif
           endfunc
         autocmd BufNewFile * normal G
