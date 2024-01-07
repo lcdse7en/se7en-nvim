@@ -913,6 +913,39 @@ return {
       {}
     )
   ),
+  s(
+    {
+      trig = 'mypar',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #par(
+        first-line-indent: 2em,
+        "<>",
+      )
+      ]],
+      {
+        i(1),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'mypar',
+      dscr = 'dscr',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
   s('myls', {
     t '\\begin{tabular}{',
     i(1, '0'),
