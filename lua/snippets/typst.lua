@@ -851,6 +851,9 @@ return {
           sn(nil, {
             i(1, 'yellow'),
           }),
+          sn(nil, {
+            i(1, 'gray.lighten(60%)'),
+          }),
         }),
       }
     )
@@ -880,14 +883,14 @@ return {
       [[
       #grid(
         columns: (50%, 50%),
-        gutter, 16pt,
+        gutter: 16pt,
         stack(
           spacing: 20pt,
           <>
         ), stack(
           spacing: 20pt
           <>
-        )
+        ),
       )
       ]],
       {
