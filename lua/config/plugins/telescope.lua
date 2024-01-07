@@ -172,6 +172,18 @@ return {
             return true
           end,
         },
+        git_files = {
+          hidden = true,
+          attach_mappings = function(prompt_bufnr)
+            action_set.select:enhance {
+              post = function()
+                vim.cmd ':normal! zx'
+                vim.cmd ':silent! loadview'
+              end,
+            }
+            return true
+          end,
+        },
       },
       defaults = {
         history = {
