@@ -30,7 +30,6 @@ local options = {
   signcolumn = "yes",                    --- Add extra sign column next to line number
   history = 10000,
   scrolloff = 12,                        --- Always keep space when scrolling to bottom/top edge
-  sidescrolloff = 12,
   laststatus = 3,                        --- global statusline
   expandtab = true,                      --- Use spaces instead of tabs
   smarttab = true,                       --- Makes tabbing smarter will realize you have 2 vs 4
