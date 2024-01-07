@@ -23,7 +23,7 @@ space-before = false # insert a space before the ':' in dictionary entries
 space-after = false # insert a space after the ':' in dictionary entries
 
 [columns]
-comma = "end-of-cell" # "end-of-content" | "end-of-cell"  how to align commas in tables
+comma = "end-of-content" # "end-of-content" | "end-of-cell"  how to align commas in tables
 
 [heading]
 blank-lines-before = 1 # blank lines before a heading
