@@ -745,7 +745,10 @@ return {
     },
     fmta(
       [[
-      #highlight("<>", <>)
+      #highlight(
+        "<>",
+        <>,
+      )
       ]],
       {
         i(1, 'text'),
