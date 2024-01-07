@@ -662,6 +662,68 @@ return {
   ),
   s(
     {
+      trig = 'myen',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+        + <>
+      ]],
+      {
+        i(0),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'myen',
+      dscr = 'dscr',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
+  s(
+    {
+      trig = 'mylin',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #line(length: <>%)
+      <>
+      ]],
+      {
+        t '100',
+        i(0),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'mylin',
+      dscr = 'dscr',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
+  s(
+    {
       trig = 'mybox',
       regTrig = false,
       snippetType = 'autosnippet',
