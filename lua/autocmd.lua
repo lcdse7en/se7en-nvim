@@ -706,9 +706,10 @@ vim.api.nvim_create_autocmd('UILeave', {
 })
 
 vim.cmd [[
-  augroup _fold_bug_solution "https://github.com/nvim-telescope/telescope.nvim/issues/559"
+  "https://github.com/nvim-telescope/telescope.nvim/issues/559"
+  augroup _fold_bug_solution
     autocmd!
-    autocmd BufRead * autocmd BufWinEnter * ++once normal! zx
+    autocmd BufRead,BufWinEnter * ++once normal! zx
   augroup end
 
   augroup remember_folds

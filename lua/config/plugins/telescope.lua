@@ -143,8 +143,36 @@ return {
         }
       end
     end
+    -- fix to get folds to work with telescope (see https://github.com/nvim-telescope/telescope.nvim/issues/559)
+    local action_set = require 'telescope.actions.set'
 
     telescope.setup {
+      pickers = {
+        find_files = {
+          hidden = true,
+          attach_mappings = function(prompt_bufnr)
+            action_set.select:enhance {
+              post = function()
+                vim.cmd ':normal! zx'
+                vim.cmd ':silent! loadview'
+              end,
+            }
+            return true
+          end,
+        },
+        oldfiles = {
+          hidden = true,
+          attach_mappings = function(prompt_bufnr)
+            action_set.select:enhance {
+              post = function()
+                vim.cmd ':normal! zx'
+                vim.cmd ':silent! loadview'
+              end,
+            }
+            return true
+          end,
+        },
+      },
       defaults = {
         history = {
           path = vim.fn.stdpath 'data' .. '/databases/telescope_history.sqlite3',
