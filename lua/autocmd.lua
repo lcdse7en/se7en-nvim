@@ -713,7 +713,8 @@ vim.cmd [[
 
   augroup remember_folds
     autocmd!
-    autocmd BufWinLeave * mkview
-    autocmd BufEnter * silent! loadview
+    " autocmd BufWinLeave ?* mkview
+    autocmd BufWinLeave,BufLeave,BufWritePost,BufHidden,QuitPre ?* nested silent! mkview
+    autocmd BufEnter,BufWinEnter ?* silent! loadview
   augroup end
 ]]
