@@ -692,6 +692,36 @@ return {
   ),
   s(
     {
+      trig = 'mylis',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      - <>
+      ]],
+      {
+        i(0),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'mylis',
+      dscr = 'dscr',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
+  s(
+    {
       trig = 'mylin',
       regTrig = false,
       snippetType = 'autosnippet',
@@ -703,7 +733,7 @@ return {
       <>
       ]],
       {
-        t '100',
+        i(1, '100'),
         i(0),
       }
     )
