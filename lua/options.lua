@@ -103,12 +103,12 @@ local globals = {
 }
 
 for option_name, value in pairs(options) do
-	local ok, _ = pcall(vim.api.nvim_get_option_info2, option_name, {})
-	if ok then
-		vim.opt[option_name] = value
-	else
-		vim.notify('Option ' .. option_name .. ' is not supported', vim.log.levels.WARN)
-	end
+  local ok, _ = pcall(vim.api.nvim_get_option_info2, option_name, {})
+  if ok then
+    vim.opt[option_name] = value
+  else
+    vim.notify('Option ' .. option_name .. ' is not supported', vim.log.levels.WARN)
+  end
 end
 
 for k, v in pairs(globals) do
