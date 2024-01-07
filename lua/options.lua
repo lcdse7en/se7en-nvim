@@ -78,6 +78,7 @@ local options = {
   foldcolumn = '0',                      --- '0' is not bad
   foldlevel = 99,                        --- Using ufo provider need a large value, feel free to decrease the value
   foldlevelstart = 99,
+  foldmethod = "expr",                   --- fold with nvim_treesitter | indent, syntax |
   foldenable = true,
 }
 
