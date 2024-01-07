@@ -869,6 +869,47 @@ return {
       {}
     )
   ),
+  s(
+    {
+      trig = 'mygri',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #grid(
+        columns: (50%, 50%),
+        gutter, 16pt,
+        stack(
+          spacing: 20pt,
+          <>
+        ), stack(
+          spacing: 20pt
+          <>
+        )
+      )
+      ]],
+      {
+        i(1),
+        i(2),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'mygri',
+      dscr = 'dscr',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
   s('myls', {
     t '\\begin{tabular}{',
     i(1, '0'),
