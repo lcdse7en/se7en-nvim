@@ -992,7 +992,7 @@ return {
           title-color: blue.lighten(30%),
           body-color: blue.lighten(95%),
           footer-color: blue.lighten(80%),
-        )
+        ),
       )<>
         <>
       <>
