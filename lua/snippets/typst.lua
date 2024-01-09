@@ -946,6 +946,36 @@ return {
       {}
     )
   ),
+  s(
+    {
+      trig = 'myjh',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      <>
+      ]],
+      {
+        i(0, ''),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'myjh',
+      dscr = 'dscr',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
   s('myls', {
     t '\\begin{tabular}{',
     i(1, '0'),
