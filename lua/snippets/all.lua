@@ -40,9 +40,9 @@ local utils = require 'Comment.utils'
 _G.luasnip = {}
 _G.luasnip.vars = {
   username = 'se7en',
-  email = '2353442022@qq.com@qq.com',
+  email = '2353442022@qq.com',
   github = 'https://github.com/lcdse7en',
-  real_name = 'Martin Kunz',
+  real_name = '양창등',
 }
 local get_cstring = function(ctype)
   -- use the `Comments.nvim` API to fetch the comment string for the region (eq. '--%s' or '--[[%s]]' for `lua`)
