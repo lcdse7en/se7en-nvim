@@ -976,6 +976,88 @@ return {
       {}
     )
   ),
+  s(
+    {
+      trig = 'mysb',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #showybox(
+        title: "<>",
+        frame: (
+          border-color: blue,
+          title-color: blue.lighten(30%),
+          body-color: blue.lighten(95%),
+          footer-color: blue.lighten(80%),
+        )
+      )<>
+        <>
+      <>
+      ]],
+      {
+        i(1),
+        t '[',
+        i(0),
+        t ']',
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'mysb',
+      dscr = 'dscr',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
+  s(
+    {
+      trig = 'myrec',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #rect(
+        width: 100%,
+        radius: 10%,
+        stroke: 0.5pt,
+        fill: yellow.lighten(60%),
+      )<>
+        <>
+      <>
+      ]],
+      {
+        t '[',
+        i(0),
+        t ']',
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'myrec',
+      dscr = 'dscr',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
   s('myls', {
     t '\\begin{tabular}{',
     i(1, '0'),
