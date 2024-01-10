@@ -892,13 +892,7 @@ return {
             logo: "",
             date: <><>,
             location: <><>,
-            description: mitext(`
-              <>begin{equation}
-              <>begin{aligned}
-                <>
-              <>end{aligned}
-              <>end{equation}
-            `),
+            description: <>,
             tags: (""),
           ),
         ),stack(
@@ -909,13 +903,7 @@ return {
             logo: "",
             date: <><>,
             location: <><>,
-            description: mitext(`
-              <>begin{equation}
-              <>begin{aligned}
-                <>
-              <>end{aligned}
-              <>end{equation}
-            `),
+            description: <>,
             tags: (""),
           ),
         )
@@ -931,11 +919,16 @@ return {
         t ']',
         t '[',
         t ']',
-        t '\\',
-        t '\\',
-        i(1),
-        t '\\',
-        t '\\',
+        c(1, {
+          sn(nil, {
+            t '$ ',
+            i(1),
+            t ' $',
+          }),
+          sn(nil, {
+            i(1, ''),
+          }),
+        }),
         t '[',
         t ']',
         t '[',
@@ -945,11 +938,16 @@ return {
         t ']',
         t '[',
         t ']',
-        t '\\',
-        t '\\',
-        i(3),
-        t '\\',
-        t '\\',
+        c(3, {
+          sn(nil, {
+            t '$ ',
+            i(1),
+            t ' $',
+          }),
+          sn(nil, {
+            i(1, ''),
+          }),
+        }),
       }
     )
   ),
