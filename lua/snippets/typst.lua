@@ -886,16 +886,70 @@ return {
         gutter: 16pt,
         stack(
           spacing: 20pt,
-          <>
-        ), stack(
-          spacing: 20pt
-          <>
-        ),
+          cvEntry(
+            title: <><>,
+            organisation: <><><>,
+            logo: "",
+            date: <><>,
+            location: <><>,
+            description: mitext(`
+              <>begin{equation}
+              <>begin{aligned}
+                <>
+              <>end{aligned}
+              <>end{equation}
+            `),
+            tags: (""),
+          ),
+        ),stack(
+          spacing: 20pt,
+          cvEntry(
+            title: <><>,
+            organisation: <><><>,
+            logo: "",
+            date: <><>,
+            location: <><>,
+            description: mitext(`
+              <>begin{equation}
+              <>begin{aligned}
+                <>
+              <>end{aligned}
+              <>end{equation}
+            `),
+            tags: (""),
+          ),
+        )
       )
       ]],
       {
-        i(1),
+        t '[',
+        t ']',
+        t '[',
         i(2),
+        t ']',
+        t '[',
+        t ']',
+        t '[',
+        t ']',
+        t '\\',
+        t '\\',
+        i(1),
+        t '\\',
+        t '\\',
+        t '[',
+        t ']',
+        t '[',
+        i(4),
+        t ']',
+        t '[',
+        t ']',
+        t '[',
+        t ']',
+        t '\\',
+        t '\\',
+        i(3),
+        t '\\',
+        t '\\',
       }
     )
   ),
