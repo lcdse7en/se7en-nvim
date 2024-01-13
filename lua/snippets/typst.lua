@@ -1110,12 +1110,28 @@ return {
       {}
     )
   ),
-  s('myls', {
-    t '\\begin{tabular}{',
-    i(1, '0'),
-    t { '}', '' },
-    d(2, table_node, { 1 }, {}),
-    d(3, rec_table, { 1 }),
-    t { '', '\\end{tabular}' },
-  }),
+  s(
+    {
+      trig = 'myls',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      <><><>
+      <>
+      <>
+      <>
+      ]],
+      {
+        t '\\begin{tabular}{',
+        i(1, '0'),
+        t { '}', '' },
+        d(2, table_node, { 1 }, {}),
+        d(3, rec_table, { 1 }),
+        t { '', '\\end{tabular}' },
+      }
+    )
+  ),
 }

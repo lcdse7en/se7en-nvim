@@ -158,6 +158,9 @@ return {
           u = { '<cmd>Telescope undo<CR>', 'Undo History' },
           z = { '<cmd> silent Telescope zoxide list<CR>', 'zoxide' },
         },
+        w = {
+          name = 'TypstProject',
+        },
         z = {
           name = 'edit configfile',
           c = { '<cmd>e ~/.zshrc<cr>', 'edit .zshrc' },

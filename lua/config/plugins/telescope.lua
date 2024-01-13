@@ -46,6 +46,25 @@ return {
         },
       })
     end
+    function TypstProject_accounting()
+      pickers.git_files(require('telescope.themes').get_dropdown {
+        color_devicons = true,
+        cwd = '~/TypstProject/Accounting/chapters/',
+        previewer = false,
+        prompt_title = 'Accounting',
+        sorting_strategy = 'ascending',
+        winblend = 4,
+        layout_config = {
+          horizontal = {
+            mirror = false,
+          },
+          vertical = {
+            mirror = false,
+          },
+          prompt_position = 'top',
+        },
+      })
+    end
 
     function project_files(opts)
       opts = opts or {} -- define here if you want to define something
@@ -64,6 +83,7 @@ return {
     map('n', '<leader>fd', '<cmd>Telescope diagnostics bufnr=0<cr>', { desc = 'telescope: Document Diagnostics' })
     map('n', '<leader>fD', pickers.diagnostics, { desc = 'Telescope: workspace diagnostics' })
     map('n', '<leader>ff', '<cmd>lua edit_neovim()<cr>', { desc = 'Nvim Dotfiles' })
+    map('n', '<leader>fwa', '<cmd>lua TypstProject_accounting()<cr>', { desc = 'Edit Accounting TypstProject' })
     map(
       'n',
       '<leader>fg',
