@@ -57,6 +57,9 @@ local function Run()
   elseif vim.bo.filetype == 'javascript' then
     fwin()
     vim.cmd('term node  ' .. filename)
+  elseif vim.bo.filetype == 'rust' then
+    fwin()
+    vim.cmd('term cargo run  ' .. filename)
   elseif vim.bo.filetype == 'html' then
     vim.cmd 'tabe'
     vim.cmd('term live-server --browser=' .. vim.g.browser)
