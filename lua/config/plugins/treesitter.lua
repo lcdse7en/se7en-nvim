@@ -2,7 +2,7 @@ return {
   'nvim-treesitter/nvim-treesitter',
   enabled = true,
   build = function()
-    require('nvim-treesitter.install').update({ with_sync = true })
+    require('nvim-treesitter.install').update { with_sync = true }
   end,
   lazy = true,
   event = { 'BufReadPre' },
@@ -12,11 +12,29 @@ return {
     vim.keymap.set('n', 'tsh', '<Cmd>TSHighlightCapturesUnderCursor<Cr>')
   end,
   config = function()
-    local configs = require('nvim-treesitter.configs')
-    configs.setup({
-      ensure_installed = 'all',
-      sync_install = false,
-      ignore_install = { 'phpdoc', 'comment' },
+    local configs = require 'nvim-treesitter.configs'
+    configs.setup {
+      -- ensure_installed = 'all',
+      ensure_installed = {
+        'lua',
+        -- 'tsx',
+        -- 'typescript',
+        -- 'javascript',
+        -- 'html',
+        -- 'css',
+        -- 'vue',
+        -- 'astro',
+        -- 'svelte',
+        -- 'gitcommit',
+        -- 'graphql',
+        -- 'json',
+        -- 'json5',
+        -- 'markdown',
+        -- 'prisma',
+        -- 'vim',
+      },
+      sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
+      ignore_install = { 'haskell', 'phpdoc', 'comment' },
       highlight = {
         enable = true,
         -- disable = {},
@@ -67,6 +85,6 @@ return {
           show_help = '?',
         },
       },
-    })
+    }
   end,
 }
