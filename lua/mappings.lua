@@ -73,6 +73,8 @@ map('v', '-', '<C-x>', { silent = true })
 -- Select all
 map('n', '<C-a>', 'gg<S-v>G', { silent = true })
 
+map('n', '<leader>i', '<cmd>lua require("lsp.functions").toggleInlayHints()<cr>', { silent = true })
+
 --  NOTE: hlslens
 map(
   'n',
