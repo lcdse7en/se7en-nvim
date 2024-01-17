@@ -14,6 +14,16 @@ return vim.tbl_map(set_prior, {
   'sam4llis/nvim-tundra',
   'LunarVim/darkplus.nvim',
   {
+    'craftzdog/solarized-osaka.nvim',
+    lazy = true,
+    priority = 1000,
+    opts = function()
+      return {
+        transparent = true,
+      }
+    end,
+  },
+  {
     -- 'Wansmer/serenity.nvim',
     -- dev = false,
     dir = '~/projects/code/personal/serenity.nvim',

@@ -83,6 +83,7 @@ return {
         ['neovim'] = 'https://github.com/neovim/neovim/releases/',
         ['bob'] = 'https://github.com/MordechiHadad/bob/releases/tag/', --  PERF: A version manager for Neovim
         ['ecosse3'] = 'https://github.com/ecosse3/nvim',
+        ['craftzdog'] = 'https://github.com/craftzdog/',
         ['christianchiarulli'] = 'https://github.com/ChristianChiarulli/nvim',
         ['folke'] = 'https://github.com/folke/dot/tree/master/nvim',
         ['willothy'] = 'https://github.com/willothy/nvim-config',
