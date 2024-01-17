@@ -9,15 +9,16 @@ return {
   },
   lazy = true,
   event = { 'BufReadPre' },
-  init = function()
-    vim.keymap.set('n', 'tsp', '<Cmd>TSPlaygroundToggle<Cr>')
-    vim.keymap.set('n', 'tsn', '<Cmd>TSNodeUnderCursor<Cr>')
-    vim.keymap.set('n', 'tsh', '<Cmd>TSHighlightCapturesUnderCursor<Cr>')
-  end,
+  -- init = function()
+  --   vim.keymap.set('n', 'tsp', '<Cmd>TSPlaygroundToggle<Cr>')
+  --   vim.keymap.set('n', 'tsn', '<Cmd>TSNodeUnderCursor<Cr>')
+  --   vim.keymap.set('n', 'tsh', '<Cmd>TSHighlightCapturesUnderCursor<Cr>')
+  -- end,
   config = function()
     local configs = require 'nvim-treesitter.configs'
     configs.setup {
       -- ensure_installed = 'all',
+
       ensure_installed = {
         'lua',
         'bash',
@@ -52,12 +53,14 @@ return {
         'prisma',
         'vim',
       },
-      sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
+
+      sync_install = true, -- install languages synchronously (only applied to `ensure_installed`)
       ignore_install = { 'haskell', 'phpdoc', 'comment' },
       highlight = {
         enable = true,
         -- disable = {},
-        additional_vim_regex_highlighting = false,
+        -- additional_vim_regex_highlighting = false,
+        additional_vim_regex_highlighting = { 'org' },
       },
 
       -- https://githubfast.com/nvim-treesitter/playground#query-linter
@@ -92,15 +95,18 @@ return {
       },
 
       incremental_selection = {
+        -- using `flash.nvim`
         enable = false,
         keymaps = {
-          init_selection = '<Cr>', -- set to `false` to disable one of the mappings
-          node_incremental = '<Cr>',
-          scope_incremental = 'grc',
-          node_decremental = '<S-Cr>',
+          -- set to `false` to disable one of the mappings
+          init_selection = '<CR>',
+          node_incremental = '<CR>',
+          node_decremental = '<BS>',
+          scope_incremental = false,
         },
       },
 
+      autotag = { enable = true }, -- windwp/nvim-ts-autotag
       -- TREESITTER PLUGINS
       autopairs = {
         enable = true,

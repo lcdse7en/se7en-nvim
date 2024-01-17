@@ -74,6 +74,7 @@ map('v', '-', '<C-x>', { silent = true })
 map('n', '<C-a>', 'gg<S-v>G', { silent = true })
 
 map('n', '<leader>i', '<cmd>lua require("lsp.functions").toggleInlayHints()<cr>', { silent = true })
+map('n', '<leader>rh', '<cmd>lua require("hsl").replaceHexWithHSL()<cr>', { silent = true })
 
 --  NOTE: hlslens
 map(

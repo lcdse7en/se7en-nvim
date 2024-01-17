@@ -7,9 +7,9 @@ return {
   },
   version = '*',
   config = function()
-    local bufferline = require('bufferline')
+    local bufferline = require 'bufferline'
 
-    bufferline.setup({
+    bufferline.setup {
       options = {
         close_command = function(n)
           require('mini.bufremove').delete(n, false)
@@ -18,7 +18,8 @@ return {
           require('mini.bufremove').delete(n, false)
         end,
         show_buffer_close_icons = false,
-        separator_style = { '|', '|' },
+        -- separator_style = { '|', '|' },
+        separator_style = { '', '' },
         always_show_bufferline = true,
         style_preset = bufferline.style_preset.no_italic,
         numbers = function(opts)
@@ -40,6 +41,6 @@ return {
           },
         },
       },
-    })
+    }
   end,
 }
