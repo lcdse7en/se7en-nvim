@@ -1198,6 +1198,36 @@ return {
   ),
   s(
     {
+      trig = 'myrd',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      calc.round(<>, digits: 2)
+      ]],
+      {
+        i(1),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'myrd',
+      dscr = 'calc.round',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
+  s(
+    {
       trig = 'myls',
       regTrig = false,
       snippetType = 'autosnippet',
