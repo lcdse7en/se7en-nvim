@@ -1112,6 +1112,92 @@ return {
   ),
   s(
     {
+      trig = 'mytabut',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #let <> = (
+        (<>: "<>", <>: <>, <>: <>),
+        (<>: "<>", <>: <>, <>: <>),
+        (<>: "<>", <>: <>, <>: <>),
+      )
+
+      #align(center)<>
+        #tabut(
+          <>.sorted(key: r =<> r.total).rev(),
+          (
+            (label: <>ID<>, align: center, func:r =<> r._index +1 ),
+            (label: <>Column1Title<>, align: right, func:r =<> r.<>),
+            (label: <>Column2Title<>, align: right, func:r =<> r.<>),
+            (label: <>Column3Title<>, align: right, func:r =<> r.<>),
+          ),
+          fill: (_, row) =<> if calc.odd(row) { luma(240) } else { luma(220) },
+          stroke : none,
+        )
+      <>
+      ]],
+      {
+        i(1),
+        i(2),
+        i(3),
+        i(4),
+        i(5),
+        i(6),
+        i(7),
+        rep(2),
+        i(8),
+        rep(4),
+        i(9),
+        rep(6),
+        i(10),
+        rep(2),
+        i(11),
+        rep(4),
+        i(12),
+        rep(6),
+        i(13),
+        t '[',
+        rep(1),
+        t '>',
+        t '[',
+        t ']',
+        t '>',
+        t '[',
+        t ']',
+        t '>',
+        rep(2),
+        t '[',
+        t ']',
+        t '>',
+        rep(4),
+        t '[',
+        t ']',
+        t '>',
+        rep(6),
+        t '>',
+        t ']',
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'mytabut',
+      dscr = 'dscr',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
+  s(
+    {
       trig = 'myls',
       regTrig = false,
       snippetType = 'autosnippet',
