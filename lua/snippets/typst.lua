@@ -173,8 +173,8 @@ return {
     fmta(
       [[
       #figure(
-          image("<>"),
-          caption: [<>],
+        image("<>"),
+        caption: [<>],
       )
       ]],
       {
@@ -852,7 +852,7 @@ return {
             i(1, 'yellow'),
           }),
           sn(nil, {
-            i(1, 'gray.lighten(60%)'),
+            i(1, 'gray.lighten(50%)'),
           }),
         }),
       }
