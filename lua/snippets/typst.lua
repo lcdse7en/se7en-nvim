@@ -313,7 +313,7 @@ return {
     },
     fmta(
       [[
-      #text(fill: <>)[<>]
+      #text(fill: <>, size: <>pt)[<>]
       ]],
       {
         c(1, {
@@ -324,7 +324,15 @@ return {
             i(1, 'indianred'),
           }),
         }),
-        i(2),
+        c(2, {
+          sn(nil, {
+            i(1, '10.5'),
+          }),
+          sn(nil, {
+            i(1, '11'),
+          }),
+        }),
+        i(3),
       }
     )
   ),
