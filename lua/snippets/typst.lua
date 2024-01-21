@@ -701,7 +701,7 @@ return {
       [[
       #list(
         indent: <>em,
-        body-indent: 1em,
+        body-indent: .6em,
         <><><>,
         <><><>,
       )
