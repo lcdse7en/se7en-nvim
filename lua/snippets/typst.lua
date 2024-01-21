@@ -976,11 +976,13 @@ return {
       [[
       #par(
         first-line-indent: 2em,
-        "<>",
+        <><><>,
       )
       ]],
       {
+        t '[',
         i(1),
+        t ']',
       }
     )
   ),
