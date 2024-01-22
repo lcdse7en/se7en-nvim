@@ -1257,6 +1257,38 @@ return {
   ),
   s(
     {
+      trig = 'myul',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #underline(stroke: 1.2pt + red, offset: 2pt,)<><><>
+      ]],
+      {
+        t '[',
+        i(1),
+        t ']',
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'myul',
+      dscr = 'dscr',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
+  s(
+    {
       trig = 'myls',
       regTrig = false,
       snippetType = 'autosnippet',
