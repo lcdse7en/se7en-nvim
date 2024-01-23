@@ -826,18 +826,30 @@ return {
     },
     fmta(
       [[
-      #mitext(`
+      <>mitext(`
         \begin{equation}
         \begin{aligned}
         借：& <> \\
+            & <> \\
         贷：& <> \\
+            & <> \\
         \end{aligned}
         \end{equation}
       `)
       ]],
       {
-        i(1),
+        c(1, {
+          sn(nil, {
+            i(1),
+          }),
+          sn(nil, {
+            i(1, '#'),
+          }),
+        }),
         i(2),
+        i(3),
+        i(4),
+        i(5),
       }
     )
   ),
@@ -909,9 +921,20 @@ return {
     fmta(
       [[
       #grid(
-        columns: (50%, 50%),
+        columns: (.1fr, 1fr, 1fr),
         gutter: 16pt,
         stack(
+          spacing: 20pt,
+          cvEntry(
+            title: <><>,
+            organisation: <><>,
+            logo: "",
+            date: <><>,
+            location: <><>,
+            description: "",
+            tags: (""),
+          ),
+        ),stack(
           spacing: 20pt,
           cvEntry(
             title: <><>,
@@ -934,47 +957,38 @@ return {
             tags: (""),
           ),
         )
+
       )
       ]],
       {
         t '[',
         t ']',
         t '[',
+        t ']',
+        t '[',
+        t ']',
+        t '[',
+        t ']',
+        t '[',
+        t ']',
+        t '[',
+        i(1),
+        t ']',
+        t '[',
+        t ']',
+        t '[',
+        t ']',
         i(2),
+        t '[',
+        t ']',
+        t '[',
+        i(3),
         t ']',
         t '[',
         t ']',
         t '[',
         t ']',
-        c(1, {
-          sn(nil, {
-            t '$ ',
-            i(1),
-            t ' $',
-          }),
-          sn(nil, {
-            i(1, ''),
-          }),
-        }),
-        t '[',
-        t ']',
-        t '[',
         i(4),
-        t ']',
-        t '[',
-        t ']',
-        t '[',
-        t ']',
-        c(3, {
-          sn(nil, {
-            t '$ ',
-            i(1),
-            t ' $',
-          }),
-          sn(nil, {
-            i(1, ''),
-          }),
-        }),
       }
     )
   ),
