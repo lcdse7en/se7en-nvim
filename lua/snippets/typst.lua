@@ -1289,6 +1289,84 @@ return {
   ),
   s(
     {
+      trig = 'myjf',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      <><> <>
+      ]],
+      {
+        c(1, {
+          sn(nil, {
+            i(1, '& '),
+          }),
+          sn(nil, {
+            i(1, '借：& '),
+          }),
+        }),
+        i(2),
+        t '\\\\',
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'myjf',
+      dscr = 'dscr',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
+  s(
+    {
+      trig = 'mydf',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      <><> <>
+      ]],
+      {
+        c(1, {
+          sn(nil, {
+            i(1, '& '),
+          }),
+          sn(nil, {
+            i(1, '贷：& '),
+          }),
+        }),
+        i(2),
+        t '\\\\',
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'mydf',
+      dscr = 'dscr',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
+  s(
+    {
       trig = 'myls',
       regTrig = false,
       snippetType = 'autosnippet',
