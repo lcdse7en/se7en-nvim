@@ -1403,4 +1403,43 @@ return {
       }
     )
   ),
+  s(
+    {
+      trig = 'mycas',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      <>
+        <> cases(
+             "<>",
+             "<>",
+           )
+      <>
+      ]],
+      {
+        t '$',
+        i(1),
+        i(2),
+        i(3),
+        t '$',
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'mycas',
+      dscr = 'dscr',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
 }
