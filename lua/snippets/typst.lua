@@ -1173,11 +1173,11 @@ return {
           <>.sorted(key: r =<> r.total).rev(),
           (
             (label: <>ID<>, align: center, func:r =<> r._index +1 ),
-            (label: <>Column1Title<>, align: right, func:r =<> r.<>),
-            (label: <>Column2Title<>, align: right, func:r =<> r.<>),
-            (label: <>Column3Title<>, align: right, func:r =<> r.<>),
+            (label: <>Column1Title<>, align: center, func:r =<> r.<>),
+            (label: <>Column2Title<>, align: center, func:r =<> r.<>),
+            (label: <>Column3Title<>, align: center, func:r =<> r.<>),
           ),
-          fill: (_, row) =<> if calc.odd(row) { luma(240) } else if row == 0 { rgb(146, 41, 57) } else { luma(220) },
+          fill: (_, row) =<> if calc.odd(row) { luma(240) } else if row == 0 { rgb(255, 218, 185) } else { luma(220) },
           stroke : none,
         )
       <>
