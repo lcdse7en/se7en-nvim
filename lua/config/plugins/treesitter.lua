@@ -52,6 +52,8 @@ return {
         'markdown',
         'prisma',
         'vim',
+        'csv',
+        'diff',
       },
 
       sync_install = true, -- install languages synchronously (only applied to `ensure_installed`)
