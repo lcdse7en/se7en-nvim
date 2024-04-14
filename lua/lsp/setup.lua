@@ -377,7 +377,9 @@ lspconfig.clangd.setup {
 }
 
 for _, server in ipairs {
+  'lua_ls',
   'bashls',
+  'cssls',
   'yamlls',
   'jsonls',
   'gopls',
@@ -388,7 +390,12 @@ for _, server in ipairs {
   'html',
   'prismals',
   'pyright',
+  'tailwindcss',
 } do
+  if server == 'lua_ls' then
+    require('neodev').setup {}
+  end
+
   lspconfig[server].setup {
     on_attach = on_attach,
     capabilities = capabilities,

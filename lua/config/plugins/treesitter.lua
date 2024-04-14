@@ -25,6 +25,7 @@ return {
         'c',
         'cpp',
         'cmake',
+        'typst',
         'http',
         'sql',
         'php',
