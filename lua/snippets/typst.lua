@@ -1494,7 +1494,7 @@ return {
         i(2, '2'),
         rep(2),
         c(3, { t 'top', t 'bottom' }),
-        c(4, { t 'fill: rgb(150, 90, 170)', t 'fill: rgb(0, 180, 255)' }),
+        c(4, { t 'fill: rgb(150, 90, 170))', t 'fill: rgb(0, 180, 255))' }),
         t '[',
         i(5),
         t ']',
@@ -1520,6 +1520,22 @@ return {
         i(2, '2'),
         rep(1),
         rep(2),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'mysj',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #h(2em)<>
+      ]],
+      {
+        i(0),
       }
     )
   ),
