@@ -1442,4 +1442,85 @@ return {
       {}
     )
   ),
+  s(
+    {
+      trig = 'mypp',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #pin(<>)<>
+      ]],
+      {
+        i(1, '1'),
+        i(0),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'mypl',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #pinit-line(stroke: 1.5pt + crimson, start-dy: -0.25em, end-dy: -0.25em, <>, <>)
+      ]],
+      {
+        i(1, '1'),
+        i(2, '2'),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'mypz',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #pinit-highlight-equation-from((<>, <>), <>, height: 2.5em, pos: <>), <><>
+        <>
+      <>
+      ]],
+      {
+        i(1, '1'),
+        i(2, '2'),
+        rep(2),
+        c(3, { t 'top', t 'bottom' }),
+        c(4, { t 'fill: rgb(150, 90, 170)', t 'fill: rgb(0, 180, 255)' }),
+        t '[',
+        i(5),
+        t ']',
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'myph',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #pin(<>)<>#pin(<>)
+
+      #pinit-highlight(<>, <>)
+      ]],
+      {
+        i(1, '1'),
+        i(3, 'Text'),
+        i(2, '2'),
+        rep(1),
+        rep(2),
+      }
+    )
+  ),
 }

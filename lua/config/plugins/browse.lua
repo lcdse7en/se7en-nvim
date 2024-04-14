@@ -47,6 +47,9 @@ return {
         ['typst-preview'] = 'https://githubfast.com/Enter-tainer/typst-preview/releases',
         ['tablex'] = 'https://githubfast.com/PgBiel/typst-tablex',
         ['cetz'] = 'https://github.com/johannes-wolf/cetz',
+
+        -- Pinit包基于图钉pin进行相对定位的能力，可以方便地实现箭头指示与解释说明的效果。
+        ['pinit'] = 'https://github.com/OrangeX4/typst-pinit',
       },
 
       --  NOTE: BiliBili
