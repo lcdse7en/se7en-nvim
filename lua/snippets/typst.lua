@@ -1278,7 +1278,7 @@ return {
     },
     fmta(
       [[
-      #underline(stroke: 1.2pt + red, offset: 2pt,)<><><>
+      #underline(stroke: 1.2pt + red, offset: 3pt,)<><><>
       ]],
       {
         t '[',
@@ -1485,7 +1485,7 @@ return {
     },
     fmta(
       [[
-      #pinit-highlight-equation-from((<>, <>), <>, height: 2.5em, pos: <>), <><>
+      #pinit-highlight-equation-from((<>, <>), <>, height: 2em, pos: <>, <><>
         <>
       <>
       ]],

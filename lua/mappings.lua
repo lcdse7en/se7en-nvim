@@ -122,6 +122,10 @@ map('n', '<A-7>', ':BufferLineGoToBuffer 7<CR>', { silent = true })
 map('n', '<A-8>', ':BufferLineGoToBuffer 8<CR>', { silent = true })
 map('n', '<A-9>', ':BufferLineGoToBuffer 9<CR>', { silent = true })
 
+-- color-picker
+map('n', '<C-c>', '<cmd>PickColor<cr>', { silent = true })
+map('i', '<C-c>', '<cmd>PickColorInsert<cr>', { silent = true })
+
 -- Open url at cursor in browser
 map('n', '<Leader>ou', function()
   local pos = vim.api.nvim_win_get_cursor(0)

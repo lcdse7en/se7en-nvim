@@ -10,9 +10,13 @@ return {
     'lua',
     'scc',
     'scss',
+    'typst',
+  },
+  dependencies = {
+    'ziontee113/color-picker.nvim',
   },
   config = function()
-    require('colorizer').setup({
+    require('colorizer').setup {
       -- filetypes = { 'vue', 'js', 'lua', 'scc', 'scss', 'ts' },
       filetypes = { '*' },
       user_default_options = {
@@ -42,6 +46,6 @@ return {
       },
       -- all the sub-options of filetypes apply to buftypes
       buftypes = {},
-    })
+    }
   end,
 }
