@@ -95,7 +95,8 @@ return {
         shfmt = {
           -- stdin = true,
           command = 'shfmt',
-          args = { '-i', '4', '-filename', '$FILENAME' },
+          -- args = { '-i', '4', '-filename', '$FILENAME' },
+          args = { '-i', '4', '-ci', '-bn' },
           -- inherit = true,
           -- prepend_args = { "-i", "4" },
         },
