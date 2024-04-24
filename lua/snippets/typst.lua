@@ -326,6 +326,9 @@ return {
         }),
         c(2, {
           sn(nil, {
+            i(1, 'black'),
+          }),
+          sn(nil, {
             i(1, 'purple.lighten(20%)'),
           }),
           sn(nil, {
@@ -334,10 +337,10 @@ return {
         }),
         c(3, {
           sn(nil, {
-            i(1, '10.5'),
+            i(1, '11'),
           }),
           sn(nil, {
-            i(1, '11'),
+            i(1, '10.5'),
           }),
         }),
         i(4),
@@ -1536,6 +1539,63 @@ return {
       ]],
       {
         i(0),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'mycls',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      <><>
+      ]],
+      {
+        i(1, ' '),
+        c(1, {
+          t 'm-light-brown',
+          t 'ovgu-red',
+          t 'ovgu-purple',
+          t 'ovgu-darkgray',
+          t 'ovgu-orange',
+          t 'seagreen',
+          t 'indianred',
+        }),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'myfai',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #fa-icon("<>", solid : true)
+      ]],
+      {
+        c(1, {
+          t 'chess-queen',
+          t 'spider',
+          t 'paw',
+          t 'feather',
+          t 'code-commit',
+          t 'file-code',
+          t 'bars',
+          t 'circle-dot',
+          t 'chart-simple',
+          t 'check',
+          t 'circle-check',
+          t 'square-check',
+          t 'xmark',
+          t 'link',
+          t 'signature',
+        }),
       }
     )
   ),

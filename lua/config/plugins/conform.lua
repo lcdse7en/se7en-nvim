@@ -19,6 +19,7 @@ return {
         c = { 'clang_format' },
         cpp = { 'clang_format' },
         sh = { 'shfmt' },
+        fish = { 'fish_indent' }, -- sudo pacman -S fish
         rust = { 'rustfmt' },
         tex = { 'latexindent' },
         -- typst = { 'prettypst' },
@@ -36,7 +37,8 @@ return {
         css = prettier,
         scss = prettier,
         html = prettier,
-        markdown = { { 'markdownlint', 'prettierd', 'prettier' } },
+        -- markdown = { { 'markdownlint', 'prettierd', 'prettier' } },
+        markdown = { 'injected' },
         json = { 'jq' },
         jsonc = { 'prettierd' },
         zig = { 'zigfmt' },

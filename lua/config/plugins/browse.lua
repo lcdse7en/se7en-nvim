@@ -52,6 +52,12 @@ return {
         ['pinit'] = 'https://github.com/OrangeX4/typst-pinit',
       },
 
+      --  NOTE: Colors table
+      ['colors'] = {
+        ['name'] = 'Colors Table',
+        ['ColorHexa'] = 'https://www.colorhexa.com/color-names',
+      },
+
       --  NOTE: BiliBili
       ['bili'] = {
         ['name'] = 'BiliBili',
