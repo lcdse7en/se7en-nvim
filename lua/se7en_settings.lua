@@ -27,8 +27,9 @@ PREF = {
     },
   },
   ui = {
-    colorscheme = 'solarized-osaka',
     -- colorscheme = 'everforest',
+    -- colorscheme = 'solarized-osaka',
+    colorscheme = 'catppuccin',
     -- colorscheme = 'darkplus',
     border = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
     italic_comment = true,

@@ -30,6 +30,12 @@ return vim.tbl_map(set_prior, {
     name = 'serenity',
   },
   { 'catppuccin/nvim', name = 'catppuccin' },
+  -- {
+  --   'Jint-lzxy/nvim',
+  --   lazy = false,
+  --   -- branch = 'refactor/syntax-highlighting',
+  --   name = 'catppuccin',
+  -- },
   { 'neanias/everforest-nvim', version = false },
   { 'ramojus/mellifluous.nvim', dependencies = { 'rktjmp/lush.nvim' } },
   { 'rose-pine/neovim', name = 'rose-pine' },

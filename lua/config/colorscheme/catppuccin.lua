@@ -1,26 +1,75 @@
-vim.g.catppuccin_flavour = 'mocha' -- latte, frappe, macchiato, mocha
-local mocha = require('catppuccin.palettes').get_palette('mocha')
+vim.g.catppuccin_flavour = 'frappe' -- latte, frappe, macchiato, mocha
 
-require('catppuccin').setup({
+require('catppuccin').setup {
+  color_overrides = {
+    all = {
+      text = '#ffffff',
+    },
+    latte = {
+      base = '#ff0000',
+      mantle = '#242424',
+      crust = '#474747',
+    },
+    frappe = {},
+    macchiato = {},
+    mocha = {},
+  },
+  highlight_overrides = {
+    all = function(colors)
+      return {
+        NvimTreeNormal = { fg = colors.none },
+        CmpBorder = { fg = '#3e4145' },
+      }
+    end,
+    latte = function(latte)
+      return {
+        Normal = { fg = latte.base },
+      }
+    end,
+    frappe = function(frappe)
+      return {
+        ['@comment'] = { fg = frappe.surface2, style = { 'italic' } },
+      }
+    end,
+    macchiato = function(macchiato)
+      return {
+        LineNr = { fg = macchiato.overlay1 },
+      }
+    end,
+    mocha = function(mocha)
+      return {
+        Comment = { fg = mocha.flamingo },
+      }
+    end,
+  },
+  flavour = 'frappe', -- latte, frappe, macchiato, mocha
+  background = { -- :h background
+    light = 'latte',
+    dark = 'mocha',
+  },
   dim_inactive = {
     enabled = true,
     shade = 'dark',
-    percentage = 0.15,
+    percentage = 0.15, -- percentage of the shade to apply to the inactive window
   },
   transparent_background = false,
+  show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
   term_colors = false,
+  no_italic = false, -- Force no italic
+  no_bold = false, -- Force no bold
+  no_underline = false, -- Force no underline
   compile = {
     enabled = true,
-    path = vim.fn.stdpath('cache') .. '/catppuccin',
+    path = vim.fn.stdpath 'cache' .. '/catppuccin',
   },
   styles = {
     comments = PREF.ui.italic_comment and { 'italic' } or {},
     conditionals = { 'italic' },
     loops = { 'italic' },
-    functions = { 'bold' },
+    functions = { 'italic' },
     keywords = { 'italic' },
     strings = {},
-    variables = {},
+    variables = { 'italic' },
     numbers = { 'bold' },
     booleans = { 'bold' },
     properties = {},
@@ -47,25 +96,13 @@ require('catppuccin').setup({
     coc_nvim = false,
     lsp_trouble = false,
     cmp = true,
+    nvimtree = true,
+    flash = true,
     lsp_saga = false,
     gitgutter = false,
     gitsigns = true,
     leap = false,
     telescope = true,
-    nvimtree = {
-      enabled = true,
-      show_root = true,
-      transparent_panel = false,
-    },
-    neotree = {
-      enabled = true,
-      show_root = true,
-      transparent_panel = false,
-    },
-    dap = {
-      enabled = false,
-      enable_ui = false,
-    },
     which_key = false,
     indent_blankline = {
       enabled = true,
@@ -91,13 +128,5 @@ require('catppuccin').setup({
     navic = false,
     overseer = false,
   },
-  color_overrides = {},
-  highlight_overrides = {
-    mocha = {
-      GitSignsAdd = { bg = mocha.base },
-      GitSignsChange = { bg = mocha.base },
-      GitSignsDelete = { bg = mocha.base },
-      CmpItemMenu = { fg = mocha.lavender },
-    },
-  },
-})
+  default_integrations = false,
+}
