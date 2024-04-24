@@ -65,6 +65,9 @@ mason_tool_installer.setup {
     'shfmt', -- shell formatter
     'black',
     'isort',
+    'ruff',
+    'shellcheck',
+    'markdownlint',
     'prettier', -- prettier formatter
     'prettierd', -- prettierd formatter
     'clang-format', -- c | cpp formatter
@@ -173,13 +176,20 @@ lspconfig.bashls.setup {
   capabilities = capabilities,
   handlers = handlers,
   on_attach = on_attach,
-  filetypes = { 'sh' },
+  filetypes = { 'sh', 'zsh' },
   cmd = { 'bash-language-server', 'start' },
   settings = {
     bashIde = {
       globPattern = '*@(.sh|.inc|.bash|.command)',
     },
   },
+}
+
+lspconfig.vimls.setup {
+  filetypes = { 'vim' },
+  handlers = handlers,
+  on_attach = on_attach,
+  settings = require('lsp.servers.vimls').settings,
 }
 
 lspconfig.pyright.setup {

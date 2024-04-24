@@ -1,6 +1,6 @@
 local M = {}
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.preselectSupport = true
@@ -11,9 +11,9 @@ capabilities.textDocument.completion.completionItem.commitCharactersSupport = tr
 capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
 capabilities.textDocument.completion.completionItem.resolveSupport = {
   properties = {
-    "documentation",
-    "detail",
-    "additionalTextEdits",
+    'documentation',
+    'detail',
+    'additionalTextEdits',
   },
 }
 capabilities.textDocument.codeAction = {
@@ -21,14 +21,14 @@ capabilities.textDocument.codeAction = {
   codeActionLiteralSupport = {
     codeActionKind = {
       valueSet = {
-        "",
-        "quickfix",
-        "refactor",
-        "refactor.extract",
-        "refactor.inline",
-        "refactor.rewrite",
-        "source",
-        "source.organizeImports",
+        '',
+        'quickfix',
+        'refactor',
+        'refactor.extract',
+        'refactor.inline',
+        'refactor.rewrite',
+        'source',
+        'source.organizeImports',
       },
     },
   },
@@ -50,13 +50,13 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, ...)
   end
 
-  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  require("lsp-inlayhints").on_attach(client, bufnr)
+  require('lsp-inlayhints').on_attach(client, bufnr)
 end
 
 local function filter(arr, fn)
-  if type(arr) ~= "table" then
+  if type(arr) ~= 'table' then
     return arr
   end
 
@@ -73,33 +73,33 @@ end
 local function filterReactDTS(value)
   -- Depending on typescript version either uri or targetUri is returned
   if value.uri then
-    return string.match(value.uri, "%.d.ts") == nil
+    return string.match(value.uri, '%.d.ts') == nil
   elseif value.targetUri then
-    return string.match(value.targetUri, "%.d.ts") == nil
+    return string.match(value.targetUri, '%.d.ts') == nil
   end
 end
 
 local handlers = {
-  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
-  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
-  ["textDocument/publishDiagnostics"] = vim.lsp.with(
+  ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' }),
+  ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' }),
+  ['textDocument/publishDiagnostics'] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics,
     { virtual_text = true }
   ),
-  ["textDocument/definition"] = function(err, result, method, ...)
-    if vim.tbl_islist(result) and #result > 1 then
+  ['textDocument/definition'] = function(err, result, method, ...)
+    if vim.isarray(result) and #result > 1 then
       local filtered_result = filter(result, filterReactDTS)
-      return vim.lsp.handlers["textDocument/definition"](err, filtered_result, method, ...)
+      return vim.lsp.handlers['textDocument/definition'](err, filtered_result, method, ...)
     end
 
-    vim.lsp.handlers["textDocument/definition"](err, result, method, ...)
+    vim.lsp.handlers['textDocument/definition'](err, result, method, ...)
   end,
 }
 
 local settings = {
   typescript = {
     inlayHints = {
-      includeInlayParameterNameHints = "all",
+      includeInlayParameterNameHints = 'all',
       includeInlayParameterNameHintsWhenArgumentMatchesName = false,
       includeInlayFunctionParameterTypeHints = true,
       includeInlayVariableTypeHints = false,
@@ -113,7 +113,7 @@ local settings = {
   },
   javascript = {
     inlayHints = {
-      includeInlayParameterNameHints = "all",
+      includeInlayParameterNameHints = 'all',
       includeInlayParameterNameHintsWhenArgumentMatchesName = false,
       includeInlayFunctionParameterTypeHints = true,
       includeInlayVariableTypeHints = false,

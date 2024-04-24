@@ -51,10 +51,12 @@ local options = {
   linebreak = true,
   completeopt = "menu,menuone,noselect", --- Better autocompletion
   undofile = true,                       --- Sets undo to file
-  undodir = os.getenv "HOME" .. "/.cache/nvim/undodir",
+  -- undodir = os.getenv "HOME" .. "/.cache/nvim/undodir",
+  undodir = vim.fn.expand('~') .. '/.local/share/nvim/undo',
+  showbreak = '↪',
   timeoutlen = 350,                      --- Faster completion (cannot be lower than 200 because then commenting doesn't work)
   ttimeoutlen = 10,
-  redrawtime = 1500,
+  redrawtime = 3000,
   updatetime = 50,                       --- Faster completion
   viminfo = "'1000",                     --- Increase the size of file history
   confirm = false,                       --- Confirm to save changes before exiting modified buffer
@@ -64,9 +66,13 @@ local options = {
   conceallevel = 0,                      --- Show `` in markdown files
   spell = false,
   guifont = "FiraCode Nerd Font Regular",
+  shada = "!,'100,<50,s10,h,:1000,/1000",
+  wildmode = 'longest:full,full',
+  autowrite = true,
   spelllang = 'en_us,ru_ru',
   whichwrap = vim.opt.whichwrap:append('<,>,[,],h,l'),
-  shortmess = vim.opt.shortmess:append('c'),
+  -- shortmess = vim.opt.shortmess:append('c'),
+  shortmess = 'filnxtToOFWIcC',
   iskeyword = vim.opt.iskeyword:append('-'),
   langmap = langmap,
   -- ============================================================
@@ -98,7 +104,7 @@ local globals = {
   git_worktrees = nil,                   --- enable git integration for detached worktrees (specify a table where each entry is of the form { toplevel = vim.env.HOME, gitdir=vim.env.HOME .. "/.dotfiles" })
   resession_enabled = true,
   transparent_background = true,
-  inlay_hints_enabled = true,            ---  NOTE: enable or disable LSP inlay hints on startup (Neovim v0.10+ only)
+  -- inlay_hints_enabled = true,            ---  NOTE: enable or disable LSP inlay hints on startup (Neovim v0.10+ only)
 }
 
 for option_name, value in pairs(options) do
@@ -114,6 +120,36 @@ for k, v in pairs(globals) do
   vim.g[k] = v
 end
 
+vim.g.markdown_recommended_style = 0
+vim.wo.foldtext = 'v:lua.vim.treesitter.foldtext()'
+
+-- taken from Lazyvim LazyVim/lua/lazyvim/plugins/extras/util/dot.lua
+vim.filetype.add({
+    extension = { rasi = 'rasi', rofi = 'rasi', wofi = 'rasi' },
+    filename = {
+        ['.env'] = 'dotenv',
+        ['vifmrc'] = 'vim',
+    },
+    pattern = {
+        ['.*twig'] = 'twig.html',
+        ['.*/waybar/config'] = 'jsonc',
+        ['.*/mako/config'] = 'dosini',
+        ['.*/kitty/*.conf'] = 'bash',
+        ['.*/hypr/.*%.conf'] = 'hyprlang',
+        ['%.env%.[%w_.-]+'] = 'dotenv',
+    },
+})
+
 -- Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
 vim.cmd([[let &t_Ce = "\e[4:0m"]])
+
+if vim.fn.has('nvim-0.8') == 1 then
+    vim.opt.backup = true
+    vim.opt.cmdheight = 0
+    vim.opt.backupdir = vim.fn.stdpath('state') .. '/backup'
+end
+
+if vim.fn.has('nvim-0.10') == 1 then
+    vim.opt.smoothscroll = true
+end

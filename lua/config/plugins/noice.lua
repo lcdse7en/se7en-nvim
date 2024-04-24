@@ -3,6 +3,7 @@ return {
   enable = true,
   dependencies = {
     'MunifTanjim/nui.nvim',
+    'rcarriga/nvim-notify',
   },
   event = 'VeryLazy',
   keys = {
@@ -17,28 +18,28 @@ return {
     {
       '<leader>nl',
       function()
-        require('noice').cmd('last')
+        require('noice').cmd 'last'
       end,
       desc = 'Noice Last Message',
     },
     {
       '<leader>nh',
       function()
-        require('noice').cmd('history')
+        require('noice').cmd 'history'
       end,
       desc = 'Noice History',
     },
     {
       '<leader>na',
       function()
-        require('noice').cmd('all')
+        require('noice').cmd 'all'
       end,
       desc = 'Noice All',
     },
     {
       '<leader>nd',
       function()
-        require('noice').cmd('dismiss')
+        require('noice').cmd 'dismiss'
       end,
       desc = 'Dismiss All',
     },
@@ -68,7 +69,7 @@ return {
     },
   },
   config = function()
-    require('noice').setup({
+    require('noice').setup {
       messages = { enabled = false },
       lsp = {
         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -78,7 +79,12 @@ return {
           ['cmp.entry.get_documentation'] = true,
         },
         progress = {
-          enabled = false,
+          -- enabled = false,
+          bottom_search = true, -- use a classic bottom cmdline for search
+          command_palette = true, -- position the cmdline and popupmenu together
+          long_message_to_split = true, -- long messages will be sent to a split
+          inc_rename = true, -- enables an input dialog for inc-rename.nvim
+          lsp_doc_border = true, -- add a border to hover docs and signature help
         },
         hover = {
           enabled = false,
@@ -92,6 +98,6 @@ return {
         inc_rename = false, -- enables an input dialog for inc-rename.nvim
         lsp_doc_border = false, -- add a border to hover docs and signature help
       },
-    })
+    }
   end,
 }

@@ -7,10 +7,12 @@ return {
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-cmdline',
     'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-nvim-lua',
     'hrsh7th/cmp-nvim-lsp-document-symbol',
     'lukas-reineke/cmp-under-comparator',
     'lukas-reineke/cmp-rg',
     'saadparwaiz1/cmp_luasnip',
+    'windwp/nvim-autopairs',
     { 'L3MON4D3/LuaSnip', version = 'v2.*', build = 'make install_jsregexp' },
     'rafamadriz/friendly-snippets',
     'petertriho/cmp-git',
@@ -236,10 +238,12 @@ return {
       end,
     }
 
+    local cmp_buffer = require 'cmp_buffer'
     cmp.setup {
       snippet = {
         expand = function(args)
-          luasnip.lsp_expand(args.body)
+          -- luasnip.lsp_expand(args.body)
+          vim.snippet.expand(args.body)
         end,
       },
       mapping = cmp.mapping.preset.insert {
@@ -247,8 +251,8 @@ return {
         ['<Down>'] = cmp.mapping.select_next_item(),
         ['<C-p>'] = cmp.mapping.select_prev_item(),
         ['<C-n>'] = cmp.mapping.select_next_item(),
-        ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-2), { 'i', 'c' }),
-        ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(2), { 'i', 'c' }),
+        ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+        ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
         ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
         ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
         ['<C-e>'] = cmp.mapping {
@@ -394,7 +398,7 @@ return {
       sources = {
         {
           name = 'nvim_lsp',
-          priority = 10,
+          priority = 1000,
           -- Limits LSP results to specific types based on line context (FIelds, Methods, Variables)
           entry_filter = limit_lsp_types,
         },
@@ -436,17 +440,26 @@ return {
       sorting = {
         priority_weight = 2,
         comparators = {
+          -- Sort by distance of the word from the cursor
+          -- https://github.com/hrsh7th/cmp-buffer#locality-bonus-comparator-distance-based-sorting
+          function(...)
+            return cmp_buffer:compare_locality(...)
+          end,
           deprioritize_snippet,
           -- copilot_cmp_comparators.prioritize or function() end,
-          cmp.config.compare.exact,
-          cmp.config.compare.locality,
-          cmp.config.compare.score,
-          cmp.config.compare.recently_used,
           cmp.config.compare.offset,
+          cmp.config.compare.exact,
+          cmp.config.compare.score,
+          require('cmp-under-comparator').under,
+          cmp.config.compare.recently_used,
+          cmp.config.compare.locality,
+          cmp.config.compare.kind,
           cmp.config.compare.sort_text,
+          cmp.config.compare.length,
           cmp.config.compare.order,
         },
       },
+      view = { entries = { name = 'custom', selection_order = 'near_cursor' } },
       confirm_opts = {
         behavior = cmp.ConfirmBehavior.Replace,
         select = false,

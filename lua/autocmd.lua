@@ -71,6 +71,19 @@ vim.api.nvim_create_autocmd('BufEnter', {
   end,
 })
 
+vim.api.nvim_create_autocmd('LspAttach', {
+  desc = 'Enable inlay hints',
+  callback = function(event)
+    local id = vim.tbl_get(event, 'data', 'client_id')
+    local client = id and vim.lsp.get_client_by_id(id)
+    if client == nil or not client.supports_method 'textDocument/inlayHint' then
+      return
+    end
+
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(0))
+  end,
+})
+
 --  NOTE: Automaically reload the file if it is changed outsize of Nvim
 local group = vim.api.nvim_create_augroup('auto_read', { clear = true })
 vim.api.nvim_create_autocmd({ 'FileChangedShellPost' }, {
@@ -91,9 +104,42 @@ vim.api.nvim_create_autocmd({ 'FocusGained', 'CursorHold', 'TermClose', 'TermLea
 })
 
 --  NOTE:  Don't auto commenting new lines
+-- vim.api.nvim_create_autocmd({ 'BufEnter' }, {
+--   command = [[set formatoptions-=cro]],
+-- })
 vim.api.nvim_create_autocmd({ 'BufEnter' }, {
-  command = [[set formatoptions-=cro]],
+  callback = function()
+    vim.opt.formatoptions:remove { 'c', 'r', 'o' }
+  end,
+  desc = 'Do not auto comment on new line',
 })
+
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+  pattern = { 'gitcommit' },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.spell = true
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+    vim.opt_local.linebreak = true
+    vim.b.editorconfig = false
+  end,
+  desc = 'Set gitcommit config',
+})
+
+vim.api.nvim_create_autocmd({ 'BufEnter' }, {
+  pattern = {
+    'docker-compose.yml',
+    'docker-compose.yaml',
+    'compose.yml',
+    'compose.yaml',
+        -- stylua: ignore
+        'compose.*.yaml',
+    'compose.*.yml',
+  },
+  command = 'set filetype=yaml.docker-compose',
+})
+
 --  NOTE: auto close some filetypes with <q>
 local close_with_q = vim.api.nvim_create_augroup('close_with_q', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
@@ -616,6 +662,7 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
     vim.wo.spell = false
     vim.wo.conceallevel = 0
   end,
+  desc = 'Fix conceallevel for json an help files',
 })
 
 vim.api.nvim_create_autocmd('FileType', {

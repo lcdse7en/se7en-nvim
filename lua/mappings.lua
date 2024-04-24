@@ -29,10 +29,6 @@ map('n', 'H', '^', { silent = true })
 map('n', 'L', '$', { silent = true })
 map('x', '<', '<gv', { desc = 'One indent left and reselect' })
 map('x', '>', '>gv|', { desc = 'One indent right and reselect' })
-map('v', 'sa', cb('modules.surround', 'add_visual'))
-map('n', 'sa', cb('modules.surround', 'add'))
-map('n', 'sr', cb('modules.surround', 'remove'))
-map('n', 'sc', cb('modules.surround', 'replace'))
 
 -- Better window movement
 map('n', '<C-h>', '<C-w>h', { silent = true })
@@ -168,3 +164,9 @@ vim.api.nvim_set_keymap('i', '<Return>', '<cmd>lua _G.dynamic_node_external_upda
 
 vim.api.nvim_set_keymap('i', '<C-e>', '<cmd>lua _G.dynamic_node_external_update(2)<Cr>', { noremap = true })
 vim.api.nvim_set_keymap('s', '<C-e>', '<cmd>lua _G.dynamic_node_external_update(2)<Cr>', { noremap = true })
+
+map('n', '<leader><leader>', '<cmd>e #<cr>', { desc = 'Switch to previous buffer' })
+
+--- Copy-paste
+map('n', '<leader>Y', 'gg"+yG', { desc = 'Copy whole file' })
+map('n', '<leader>d', '"_d', { desc = 'Delete without yank' })

@@ -38,7 +38,7 @@ return {
         scss = prettier,
         html = prettier,
         -- markdown = { { 'markdownlint', 'prettierd', 'prettier' } },
-        markdown = { 'injected' },
+        markdown = { 'injected' }, -- npx markdown-inject
         json = { 'jq' },
         jsonc = { 'prettierd' },
         zig = { 'zigfmt' },

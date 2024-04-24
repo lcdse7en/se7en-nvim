@@ -1,6 +1,7 @@
 return {
   'akinsho/bufferline.nvim',
   event = 'VeryLazy',
+  enabled = false,
   dependencies = {
     'nvim-tree/nvim-web-devicons',
     'echasnovski/mini.bufremove',
