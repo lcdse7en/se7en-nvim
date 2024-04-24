@@ -1,47 +1,38 @@
+-- File: ~/.config/nvim/lua/plugins/bufferline.lua
+-- Last Change: Sat, Jan 2024/01/13 - 21:08:16
+
 return {
   'akinsho/bufferline.nvim',
+  version = '*',
+  dependencies = 'nvim-tree/nvim-web-devicons',
   event = 'VeryLazy',
   enabled = false,
-  dependencies = {
-    'nvim-tree/nvim-web-devicons',
-    'echasnovski/mini.bufremove',
-  },
-  version = '*',
-  config = function()
-    local bufferline = require 'bufferline'
-
-    bufferline.setup {
-      options = {
-        close_command = function(n)
-          require('mini.bufremove').delete(n, false)
-        end,
-        right_mouse_command = function(n)
-          require('mini.bufremove').delete(n, false)
-        end,
-        show_buffer_close_icons = false,
-        -- separator_style = { '|', '|' },
-        separator_style = { '', '' },
-        always_show_bufferline = true,
-        style_preset = bufferline.style_preset.no_italic,
-        numbers = function(opts)
-          return string.format('%s', opts.ordinal)
-        end,
-        custom_filter = function(buf_number)
-          -- filter out filetypes you don't want to see
-          if vim.bo[buf_number].filetype ~= 'qf' then
-            return true
-          end
-        end,
-        offsets = {
-          {
-            filetype = 'NeoTree',
-            text = 'File Explorer',
-            highlight = 'Directory',
-            text_align = 'center',
-            separator = true,
-          },
+  opts = {
+    options = {
+      close_command = 'bdelete! %d',
+      right_mouse_command = 'bdelete! %d',
+      left_mouse_command = 'buffer %d',
+      middle_mouse_command = nil,
+      numbers = 'ordinal',
+      show_buffer_icons = true,
+      show_buffer_close_icons = true,
+      separator_style = 'thin',
+      always_show_bufferline = true,
+      buffer_close_icon = '',
+      modified_icon = '●',
+      close_icon = '',
+      left_trunc_marker = '',
+      right_trunc_marker = '',
+      truncate_names = true,
+      color_icons = true,
+      offsets = {
+        {
+          filetype = { 'Neotree', 'NvimTree' },
+          text = 'File Explorer',
+          highlight = 'Directory',
+          separator = true,
         },
       },
-    }
-  end,
+    },
+  },
 }

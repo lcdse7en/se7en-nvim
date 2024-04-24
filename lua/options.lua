@@ -125,19 +125,19 @@ vim.wo.foldtext = 'v:lua.vim.treesitter.foldtext()'
 
 -- taken from Lazyvim LazyVim/lua/lazyvim/plugins/extras/util/dot.lua
 vim.filetype.add({
-    extension = { rasi = 'rasi', rofi = 'rasi', wofi = 'rasi' },
-    filename = {
-        ['.env'] = 'dotenv',
-        ['vifmrc'] = 'vim',
-    },
-    pattern = {
-        ['.*twig'] = 'twig.html',
-        ['.*/waybar/config'] = 'jsonc',
-        ['.*/mako/config'] = 'dosini',
-        ['.*/kitty/*.conf'] = 'bash',
-        ['.*/hypr/.*%.conf'] = 'hyprlang',
-        ['%.env%.[%w_.-]+'] = 'dotenv',
-    },
+  extension = { rasi = 'rasi', rofi = 'rasi', wofi = 'rasi' },
+  filename = {
+    ['.env'] = 'dotenv',
+    ['vifmrc'] = 'vim',
+  },
+  pattern = {
+    ['.*twig'] = 'twig.html',
+    ['.*/waybar/config'] = 'jsonc',
+    ['.*/mako/config'] = 'dosini',
+    ['.*/kitty/*.conf'] = 'bash',
+    ['.*/hypr/.*%.conf'] = 'hyprlang',
+    ['%.env%.[%w_.-]+'] = 'dotenv',
+  },
 })
 
 -- Undercurl
@@ -145,11 +145,11 @@ vim.cmd([[let &t_Cs = "\e[4:3m"]])
 vim.cmd([[let &t_Ce = "\e[4:0m"]])
 
 if vim.fn.has('nvim-0.8') == 1 then
-    vim.opt.backup = true
-    vim.opt.cmdheight = 0
-    vim.opt.backupdir = vim.fn.stdpath('state') .. '/backup'
+  vim.opt.backup = true
+  vim.opt.cmdheight = 0
+  vim.opt.backupdir = vim.fn.stdpath('state') .. '/backup'
 end
 
 if vim.fn.has('nvim-0.10') == 1 then
-    vim.opt.smoothscroll = true
+  vim.opt.smoothscroll = true
 end
