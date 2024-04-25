@@ -759,11 +759,17 @@ return {
     },
     fmta(
       [[
-      #line(length: <>%)
+      #line(
+        length: 100%,
+        <>
+      )
       <>
       ]],
       {
-        i(1, '100'),
+        c(1, {
+          t 'stroke: 2pt + gradient.linear(..color.map.rainbow),',
+          t 'stroke: (paint: blue, thickness: 1pt, dash: "dashed"),',
+        }),
         i(0),
       }
     )
@@ -1596,6 +1602,22 @@ return {
           t 'link',
           t 'signature',
         }),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'myqfw',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #d(<>)
+      ]],
+      {
+        i(1, 'number'),
       }
     )
   ),
