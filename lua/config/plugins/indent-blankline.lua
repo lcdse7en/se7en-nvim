@@ -26,9 +26,10 @@ return {
     require('ibl').setup {
       debounce = 200,
       indent = {
-        -- char = '│',
-        char = '▏',
-        tab_char = nil,
+        char = '│',
+        -- char = '▏',
+        -- tab_char = nil,
+        tab_char = '│',
         highlight = 'IblIndent',
         smart_indent_cap = true,
         priority = 1,
@@ -38,7 +39,7 @@ return {
         remove_blankline_trail = true,
       },
       scope = {
-        enabled = true,
+        enabled = false,
         char = '▏',
         -- char = '│',
         show_start = true,
@@ -66,11 +67,11 @@ return {
     }
 
     local gid = vim.api.nvim_create_augroup('indent_blankline', { clear = true })
-    vim.api.nvim_create_autocmd('InsertEnter', {
-      pattern = '*',
-      group = gid,
-      command = 'IBLDisable',
-    })
+    -- vim.api.nvim_create_autocmd('InsertEnter', {
+    --   pattern = '*',
+    --   group = gid,
+    --   command = 'IBLDisable',
+    -- })
 
     vim.api.nvim_create_autocmd('InsertLeave', {
       pattern = '*',
