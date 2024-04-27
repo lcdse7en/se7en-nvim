@@ -5,6 +5,15 @@ local function set_prior(c)
 end
 
 return vim.tbl_map(set_prior, {
+  {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    init = function()
+      vim.g.catppuccin_flavour = 'mocha'
+    end,
+    lazy = false,
+    priority = 1000,
+  },
   'Mofiqul/vscode.nvim',
   'dasupradyumna/midnight.nvim',
   'folke/tokyonight.nvim',
@@ -29,7 +38,6 @@ return vim.tbl_map(set_prior, {
     dir = '~/projects/code/personal/serenity.nvim',
     name = 'serenity',
   },
-  { 'catppuccin/nvim', name = 'catppuccin' },
   -- {
   --   'Jint-lzxy/nvim',
   --   lazy = false,

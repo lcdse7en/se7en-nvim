@@ -29,8 +29,8 @@ PREF = {
   ui = {
     -- colorscheme = 'everforest',
     -- colorscheme = 'solarized-osaka',
-    colorscheme = 'catppuccin',
-    -- colorscheme = 'darkplus',
+    -- colorscheme = 'catppuccin',
+    colorscheme = 'tokyonight',
     border = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
     italic_comment = true,
   },

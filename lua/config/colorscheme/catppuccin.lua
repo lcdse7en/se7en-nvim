@@ -1,4 +1,4 @@
-vim.g.catppuccin_flavour = 'frappe' -- latte, frappe, macchiato, mocha
+vim.g.catppuccin_flavour = 'mocha' -- latte, frappe, macchiato, mocha
 
 require('catppuccin').setup {
   color_overrides = {
@@ -64,12 +64,12 @@ require('catppuccin').setup {
   },
   styles = {
     comments = PREF.ui.italic_comment and { 'italic' } or {},
-    conditionals = { 'italic' },
+    conditionals = { 'bold' },
     loops = { 'italic' },
     functions = { 'italic' },
     keywords = { 'italic' },
     strings = {},
-    variables = { 'italic' },
+    variables = { 'bold' },
     numbers = { 'bold' },
     booleans = { 'bold' },
     properties = {},

@@ -40,6 +40,12 @@ return {
         ['hypr-config'] = 'https://github.com/prasanthrangan/hyprdots',
       },
 
+      --  NOTE: wezterm
+      ['wezterm'] = {
+        ['name'] = 'Wezterm_config',
+        ['KevinSilvester'] = 'https://github.com/KevinSilvester/wezterm-config?tab=readme-ov-file',
+      },
+
       --  NOTE: Typst
       ['typst'] = {
         ['name'] = 'Typst-packages',
