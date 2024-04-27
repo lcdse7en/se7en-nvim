@@ -7,16 +7,16 @@ end
 return vim.tbl_map(set_prior, {
   {
     'catppuccin/nvim',
-    name = 'catppuccin',
-    init = function()
-      vim.g.catppuccin_flavour = 'mocha'
-    end,
-    lazy = false,
+    -- name = 'catppuccin',
+    -- init = function()
+    --   vim.g.catppuccin_flavour = 'mocha'
+    -- end,
+    -- lazy = false,
     priority = 1000,
   },
   'Mofiqul/vscode.nvim',
   'dasupradyumna/midnight.nvim',
-  'folke/tokyonight.nvim',
+  { 'folke/tokyonight.nvim', lazy = true, priority = 1000 },
   'loctvl842/monokai-pro.nvim',
   'rebelot/kanagawa.nvim',
   'sainnhe/gruvbox-material',

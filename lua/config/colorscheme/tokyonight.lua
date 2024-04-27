@@ -2,7 +2,7 @@ local c = require('tokyonight.colors').setup()
 
 require('tokyonight').setup {
   style = 'night',
-  transparent = false, -- Enable this to disable setting the background color
+  transparent = true, -- Enable this to disable setting the background color
   terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
   styles = {
     -- Style to be applied to different syntax groups

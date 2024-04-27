@@ -10,24 +10,58 @@ return {
       'markdown',
       'snippets',
       'text',
+      'gitcommit',
       'gitconfig',
       'alpha',
+      'lazy',
       'dashboard',
       'sh',
       'TelescopePrompt',
+      'TelescopeResults',
+      'man',
       'Float',
+      'lspinfo',
+      'checkhealth',
     }
     require('ibl').setup {
+      debounce = 200,
       indent = {
-        char = '│',
+        -- char = '│',
+        char = '▏',
+        tab_char = nil,
+        highlight = 'IblIndent',
+        smart_indent_cap = true,
+        priority = 1,
+      },
+      whitespace = {
+        highlight = 'IblWhitespace',
+        remove_blankline_trail = true,
       },
       scope = {
-        show_start = false,
-        show_end = false,
+        enabled = true,
+        char = '▏',
+        -- char = '│',
+        show_start = true,
+        show_end = true,
+        show_exact_scope = true,
+        injected_languages = true,
+        highlight = 'IblScope',
+        priority = 1024,
+        include = {
+          node_type = { lua = { 'return_statement', 'table_constructor' } },
+        },
+        exclude = {
+          language = {},
+          node_type = {
+            ['*'] = { 'source_file', 'program' },
+            lua = { 'chunk' },
+            python = { 'module' },
+          },
+        },
       },
       exclude = {
         filetypes = exclude_ft,
-        buftypes = { 'terminal' },
+        buftypes = { 'terminal', 'nofile', 'quickfix', 'prompt' },
       },
     }
 
