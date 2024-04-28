@@ -2,6 +2,7 @@ vim.g.catppuccin_flavour = 'mocha' -- latte, frappe, macchiato, mocha
 
 require('catppuccin').setup {
   flavour = 'mocha', -- latte, frappe, macchiato, mocha
+  transparent_background = true,
   color_overrides = {
     all = {
       text = '#ffffff',
@@ -48,11 +49,10 @@ require('catppuccin').setup {
     dark = 'mocha',
   },
   dim_inactive = {
-    enabled = true,
+    enabled = false,
     shade = 'dark',
     percentage = 0.15, -- percentage of the shade to apply to the inactive window
   },
-  transparent_background = false,
   show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
   term_colors = false,
   no_italic = false, -- Force no italic
