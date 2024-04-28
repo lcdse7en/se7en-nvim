@@ -652,7 +652,7 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.bo.smartindent = true
     vim.bo.copyindent = true
     vim.opt.colorcolumn = '120'
-    vim.opt.wrap = true
+    vim.wo.wrap = true
   end,
 })
 

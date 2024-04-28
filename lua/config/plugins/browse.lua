@@ -134,7 +134,7 @@ return {
         ['name'] = 'Korea movie tv and music',
         ['wiki'] = 'https://namu.wiki/w/',
         ['korea movie(weibo)'] = 'https://m.weibo.cn/u/1965284462',
-        ['hanju'] = 'https://www.ijujitv.cc/show/1-----------2023.html',
+        ['hanju'] = 'https://v.ijujitv.cc/show/1-----------2024.html',
         -- ["hanju"] = "http://kkhanju.top/",
         ['kpop'] = 'https://www.kpopn.com/category/news',
       },
