@@ -1,6 +1,7 @@
 vim.g.catppuccin_flavour = 'mocha' -- latte, frappe, macchiato, mocha
 
 require('catppuccin').setup {
+  flavour = 'mocha', -- latte, frappe, macchiato, mocha
   color_overrides = {
     all = {
       text = '#ffffff',
@@ -17,7 +18,7 @@ require('catppuccin').setup {
   highlight_overrides = {
     all = function(colors)
       return {
-        NvimTreeNormal = { fg = colors.none },
+        NvimTreeNormal = { bg = colors.none, fg = colors.none },
         CmpBorder = { fg = '#3e4145' },
       }
     end,
@@ -42,7 +43,6 @@ require('catppuccin').setup {
       }
     end,
   },
-  flavour = 'frappe', -- latte, frappe, macchiato, mocha
   background = { -- :h background
     light = 'latte',
     dark = 'mocha',
@@ -77,6 +77,7 @@ require('catppuccin').setup {
     operators = {},
   },
   integrations = {
+    nvimtree = true,
     treesitter = true,
     native_lsp = {
       enabled = true,
@@ -96,7 +97,6 @@ require('catppuccin').setup {
     coc_nvim = false,
     lsp_trouble = false,
     cmp = true,
-    nvimtree = true,
     flash = true,
     lsp_saga = false,
     gitgutter = false,

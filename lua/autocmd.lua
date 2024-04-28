@@ -605,6 +605,24 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.opt.wrap = false
   end,
 })
+--  NOTE: fish
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('fish', { clear = true }),
+  pattern = {
+    'fish',
+  },
+  callback = function()
+    vim.bo.shiftwidth = 4
+    vim.bo.softtabstop = 4
+    vim.bo.autoindent = true
+    vim.bo.cindent = true
+    vim.bo.expandtab = true
+    vim.bo.smartindent = true
+    vim.bo.copyindent = true
+    vim.opt.colorcolumn = '100'
+    vim.opt.wrap = false
+  end,
+})
 --  NOTE: latex
 vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('tex', { clear = true }),
@@ -767,7 +785,7 @@ vim.cmd [[
   augroup end
 ]]
 
-vim.api.nvim_create_autocmd('VimEnter', {
+vim.api.nvim_create_autocmd({ 'VimEnter', 'FocusGained', 'FocusLost', 'WinLeave' }, {
   callback = function()
     vim.cmd 'hi! Normal guibg=NONE ctermbg=NONE'
     vim.cmd 'hi! NonText guibg=NONE ctermbg=NONE'

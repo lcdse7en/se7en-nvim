@@ -1,12 +1,12 @@
 return {
   'akinsho/bufferline.nvim',
   event = 'VeryLazy',
-  enabled = true,
+  enabled = false,
   dependencies = {
     'nvim-tree/nvim-web-devicons',
     'echasnovski/mini.bufremove',
   },
-  version = '*',
+  version = 'v4.*',
   config = function()
     local bufferline = require 'bufferline'
 

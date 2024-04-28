@@ -945,4 +945,28 @@ return {
       }
     )
   ),
+  s(
+    {
+      trig = 'myip',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+        local <> = { "<>", "<>" }
+
+        for _, k in ipairs(<>) do
+          <>
+        end
+      ]],
+      {
+        i(1, 'tables'),
+        i(2, 'var1'),
+        i(3, 'var2'),
+        rep(1),
+        i(0),
+      }
+    )
+  ),
 }
