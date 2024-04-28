@@ -11,6 +11,7 @@ return {
     'scc',
     'scss',
     'typst',
+    'toml',
   },
   dependencies = {
     'ziontee113/color-picker.nvim',
