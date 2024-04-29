@@ -1,4 +1,6 @@
 local icons = {
+  mac = ' ',
+  arch = '󰣇 ',
   abc = '  ',
   array = '  ',
   arrowReturn = '  ',

@@ -19,6 +19,7 @@ return {
       -- simple and direct urls
 
       ['mygh'] = 'https://github.com/lcdse7en',
+      ['nerdfonts'] = 'https://www.nerdfonts.com/cheat-sheet',
 
       --  NOTE: localhost
       ['localhost'] = {
