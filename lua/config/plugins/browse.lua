@@ -44,6 +44,7 @@ return {
       ['wezterm'] = {
         ['name'] = 'Wezterm_config',
         ['KevinSilvester'] = 'https://github.com/KevinSilvester/wezterm-config?tab=readme-ov-file',
+        ['QianSong1'] = 'https://github.com/QianSong1/wezterm-config',
       },
 
       --  NOTE: Typst

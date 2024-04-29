@@ -6,7 +6,8 @@ return {
     'nvim-tree/nvim-web-devicons',
     'echasnovski/mini.bufremove',
   },
-  version = 'v4.*',
+  -- version = 'v4.*',
+  version = '*',
   config = function()
     local bufferline = require 'bufferline'
 
