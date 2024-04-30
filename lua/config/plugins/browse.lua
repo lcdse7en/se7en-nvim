@@ -20,6 +20,7 @@ return {
 
       ['mygh'] = 'https://github.com/lcdse7en',
       ['nerdfonts'] = 'https://www.nerdfonts.com/cheat-sheet',
+      ['wallpaper'] = 'https://alphacoders.com/k%E2%80%93pop-4k-wallpapers',
 
       --  NOTE: localhost
       ['localhost'] = {

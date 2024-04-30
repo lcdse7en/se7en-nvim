@@ -13,8 +13,41 @@ return {
     'lukas-reineke/cmp-rg',
     'saadparwaiz1/cmp_luasnip',
     'windwp/nvim-autopairs',
-    { 'L3MON4D3/LuaSnip', version = 'v2.*', build = 'make install_jsregexp' },
-    'rafamadriz/friendly-snippets',
+    {
+      'L3MON4D3/LuaSnip',
+      version = 'v2.*',
+      build = 'make install_jsregexp',
+      dependencies = {
+        {
+          'rafamadriz/friendly-snippets',
+          config = function()
+            require('luasnip.loaders.from_vscode').lazy_load()
+          end,
+        },
+        {
+          'nvim-cmp',
+          dependencies = {
+            'saadparwaiz1/cmp_luasnip',
+          },
+        },
+      },
+      opts = {
+        history = true,
+        delete_check_events = 'TextChanged',
+      },
+      -- stylua: ignore
+      keys = {
+        {
+          "<tab>",
+          function()
+            return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
+          end,
+          expr = true, silent = true, mode = "i",
+        },
+        { "<tab>", function() require("luasnip").jump(1) end, mode = "s" },
+        { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
+      },
+    },
     'petertriho/cmp-git',
     {
       'zbirenbaum/copilot-cmp',
@@ -70,10 +103,10 @@ return {
         '~/.config/nvim/lua/snippets/',
       },
     }
-    require('luasnip.loaders.from_vscode').lazy_load()
-    require('luasnip.loaders.from_snipmate').lazy_load {
-      paths = { './snips/' },
-    }
+    -- require('luasnip.loaders.from_vscode').lazy_load()
+    -- require('luasnip.loaders.from_snipmate').lazy_load {
+    --   paths = { './snips/' },
+    -- }
 
     local auto_expand = require('luasnip').expand_auto
     require('luasnip').expand_auto = function(...)
@@ -247,77 +280,59 @@ return {
         end,
       },
       mapping = cmp.mapping.preset.insert {
+        ['<CR>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
         ['<Up>'] = cmp.mapping.select_prev_item(),
         ['<Down>'] = cmp.mapping.select_next_item(),
         ['<C-p>'] = cmp.mapping.select_prev_item(),
         ['<C-n>'] = cmp.mapping.select_next_item(),
-        ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-        ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+        ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+        ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
         ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-        ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-        ['<C-e>'] = cmp.mapping {
+        ['<C-CR>'] = cmp.mapping {
           i = cmp.mapping.abort(),
           c = cmp.mapping.close(),
         },
-        ['<CR>'] = cmp.mapping.confirm {
-          -- this is the important line for Copilot
-          behavior = cmp.ConfirmBehavior.Replace,
-          select = false,
-        },
+        -- ['<CR>'] = cmp.mapping.confirm {
+        --   -- this is the important line for Copilot
+        --   behavior = cmp.ConfirmBehavior.Replace,
+        --   select = false,
+        -- },
         ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            cmp.select_next_item()
-          -- elseif copilot.is_visible() then
-          --   copilot.accept()
-          elseif cmp.visible() and has_words_before() then
-            cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
-          elseif luasnip.expandable() then
-            luasnip.expand()
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          elseif check_backspace() then
-            fallback()
+            -- cmp.select_next_item()
+            local entry = cmp.get_selected_entry()
+            if not entry then
+              cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
+            else
+              if has_words_before() then
+                cmp.confirm {
+                  behavior = cmp.ConfirmBehavior.Replace,
+                  select = false,
+                }
+              else
+                cmp.confirm {
+                  behavior = cmp.ConfirmBehavior.Insert,
+                  select = false,
+                }
+              end
+            end
+          elseif vim.snippet and vim.snippet.active { direction = 1 } then
+            vim.schedule(function()
+              vim.snippet.jump(1)
+            end)
           else
             fallback()
           end
-        end, {
-          'i',
-          's',
-        }),
+        end, { 'i', 's' }),
         ['<S-Tab>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
+          if vim.snippet and vim.snippet.active { direction = -1 } then
+            vim.schedule(function()
+              vim.snippet.jump(-1)
+            end)
           else
             fallback()
           end
-        end, {
-          'i',
-          's',
-        }),
-        ['<C-j>'] = cmp.mapping(function(fallback)
-          if luasnip.expandable() then
-            luasnip.expand()
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          else
-            fallback()
-          end
-        end, {
-          'i',
-          's',
-        }),
-        ['<C-k>'] = cmp.mapping(function(fallback)
-          if luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            fallback()
-          end
-        end, {
-          'i',
-          's',
-        }),
+        end, { 'i', 's' }),
       },
 
       formatting = {
@@ -402,12 +417,14 @@ return {
           -- Limits LSP results to specific types based on line context (FIelds, Methods, Variables)
           entry_filter = limit_lsp_types,
         },
+        { name = 'luasnip', priority = 900, max_item_count = 5 },
+        { name = 'path', priority = 750 },
+        { name = 'rg', keyword_length = 600 },
         { name = 'npm', priority = 9 },
         -- { name = "codeium", priority = 9 },
         -- { name = "copilot", priority = 9 },
         { name = 'git', priority = 7 },
         -- { name = "cmp_tabnine", priority = 7, max_num_results = 3 },
-        { name = 'luasnip', priority = 7, max_item_count = 5 },
         {
           name = 'buffer',
           -- priority = 7,
@@ -420,15 +437,13 @@ return {
           -- option = buffer_option,
           -- max_item_count = 10,
         },
-        { name = 'Color', priority = 6 },
-        { name = 'nvim_lua', priority = 5 },
-        { name = 'path', priority = 4 },
-        { name = 'calc', priority = 3 },
-        { name = 'rg', keyword_length = 5 },
+        { name = 'Color', priority = 200 },
+        { name = 'nvim_lua', priority = 400 },
+        { name = 'calc', priority = 300 },
         { name = 'crates' },
         {
           name = 'look',
-          priority = 2,
+          priority = 100,
           keyword_length = 3,
           option = {
             convert_case = true,

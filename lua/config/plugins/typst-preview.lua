@@ -7,7 +7,7 @@
 
 return {
   'chomosuke/typst-preview.nvim',
-  enabled = true,
+  enabled = false,
   ft = 'typst',
   version = '0.1.*',
   build = function()

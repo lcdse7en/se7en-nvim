@@ -35,7 +35,7 @@ mason_lsp.setup {
     'vimls',
     'pyright',
     'intelephense',
-    'eslint',
+    -- 'eslint',
     'graphql',
     'lua_ls',
     'emmet_ls',
@@ -66,7 +66,7 @@ mason_tool_installer.setup {
     'black',
     'isort',
     'ruff',
-    'shellcheck',
+    -- 'shellcheck',
     'markdownlint',
     'prettier', -- prettier formatter
     'prettierd', -- prettierd formatter
