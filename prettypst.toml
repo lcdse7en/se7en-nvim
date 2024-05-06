@@ -6,9 +6,9 @@ final-newline = true
 
 [preserve-newline]
 # preserve single newlines in markup
-content = true
+content = false
 # preserve single newline in equations
-math = true
+math = false
 
 [block]
 # "seperate" | "compact"  '[' and ']' on the same or seperate lines as the content
@@ -23,7 +23,7 @@ space-before = false # insert a space before the ':' in dictionary entries
 space-after = false # insert a space after the ':' in dictionary entries
 
 [columns]
-comma = "end-of-content" # "end-of-content" | "end-of-cell"  how to align commas in tables
+comma = "end-of-cell" # "end-of-content" | "end-of-cell"  how to align commas in tables
 
 [heading]
 blank-lines-before = 1 # blank lines before a heading

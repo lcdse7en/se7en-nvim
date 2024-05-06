@@ -313,7 +313,7 @@ return {
     },
     fmta(
       [[
-      <>text(fill: <>, size: <>pt)[<>]
+      <>text(fill: black, size: 12pt, font: <>, "<>")
       ]],
       {
         c(1, {
@@ -326,24 +326,13 @@ return {
         }),
         c(2, {
           sn(nil, {
-            i(1, 'black'),
+            i(1, '""'),
           }),
           sn(nil, {
-            i(1, 'purple.lighten(20%)'),
-          }),
-          sn(nil, {
-            i(1, 'indianred'),
+            i(1, '"STXinwei"'),
           }),
         }),
-        c(3, {
-          sn(nil, {
-            i(1, '11'),
-          }),
-          sn(nil, {
-            i(1, '10.5'),
-          }),
-        }),
-        i(4),
+        i(3),
       }
     )
   ),

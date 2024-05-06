@@ -268,6 +268,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   pattern = { '*.typ' },
   -- command = 'silent! :!prettypst --use-configuration %',
   command = 'silent! :!prettypst --file-location=~/.config/nvim/prettypst.toml %',
+  -- command = 'silent! :!typstfmt %',
 })
 
 --  NOTE: LuaSnipChoiceListSelecttions
