@@ -170,3 +170,5 @@ map('n', '<leader><leader>', '<cmd>e #<cr>', { desc = 'Switch to previous buffer
 --- Copy-paste
 map('n', '<leader>Y', 'gg"+yG', { desc = 'Copy whole file' })
 map('n', '<leader>d', '"_d', { desc = 'Delete without yank' })
+
+map('n', '<Tab>', '<cmd>lua require("mini.files").open()<CR>', {silent = true})
