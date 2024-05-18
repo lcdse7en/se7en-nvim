@@ -1610,4 +1610,54 @@ return {
       }
     )
   ),
+  s(
+    {
+      trig = 'mysp',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #sp.title_box(
+        "<>",
+        authors: "lcdse7en¹",
+        institutes: "¹",
+        keywords: "",
+        image: rect(height: 6em, width: 100%)<>#set align(center+horizon);#image("../images/<>", width: 100%)<>,
+      )
+
+      #columns(2, <>
+        #sp.column_box(heading: "")<>There is nothing here yet<>
+        #sp.column_box()<>
+
+        <>
+
+        #colbreak()
+
+        #sp.column_box(heading: "General Relativity", stretch_to_next: true)<>
+
+        <>
+      <>)
+
+      #sp.bottom_box()<>This is a box at the bottom<>
+      ]],
+      {
+        i(1, 'title'),
+        t '[',
+        i(2, '1.png'),
+        t ']',
+        t '[',
+        t '[',
+        t ']',
+        t '[',
+        t ']',
+        t '[',
+        t ']',
+        t ']',
+        t '[',
+        t ']',
+      }
+    )
+  ),
 }
