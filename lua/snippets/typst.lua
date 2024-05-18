@@ -1640,6 +1640,8 @@ return {
         <>
       <>)
 
+      // #sp._common_box(heading: [only heading])
+
       #sp.bottom_box()<>This is a box at the bottom<>
       ]],
       {
