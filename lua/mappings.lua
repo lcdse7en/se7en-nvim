@@ -3,6 +3,7 @@
 -- ============================================================================
 local map = vim.keymap.set
 local del = vim.keymap.del
+local silent = { silent = true }
 local u = require 'utils'
 local cb = u.lazy_rhs_cb
 
@@ -21,6 +22,13 @@ map('n', '<C-s>', '<cmd>:w<cr><esc>', { silent = true })
 map('n', 'W', ':w<cr>', { silent = true, desc = 'Save' })
 
 map('n', '<leader>q', '<cmd>q<cr>', { silent = true, desc = 'close' })
+map('n', 'Q', '<Nop>', silent)
+
+map('n', '<Leader>ss', '<C-w>v', silent)
+map('n', '<Leader>sv', '<C-w>s', silent)
+
+map('n', 'n', 'nzz')
+map('n', 'N', 'Nzz')
 
 -- Delete a word backwards
 map('n', 'dw', 'vb_d', { silent = true })
@@ -171,4 +179,4 @@ map('n', '<leader><leader>', '<cmd>e #<cr>', { desc = 'Switch to previous buffer
 map('n', '<leader>Y', 'gg"+yG', { desc = 'Copy whole file' })
 map('n', '<leader>d', '"_d', { desc = 'Delete without yank' })
 
-map('n', '<Tab>', '<cmd>lua require("mini.files").open()<CR>', {silent = true})
+map('n', '<Tab>', '<cmd>lua require("mini.files").open()<CR>', { silent = true })
