@@ -1749,4 +1749,27 @@ return {
       }
     )
   ),
+  s(
+    {
+      trig = 'myfi',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #figure(
+        image("<>", width: 2cm)
+        caption: [<>]
+      ) <><><>
+      ]],
+      {
+        i(1),
+        i(2),
+        t '<',
+        i(3),
+        t '>',
+      }
+    )
+  ),
 }
