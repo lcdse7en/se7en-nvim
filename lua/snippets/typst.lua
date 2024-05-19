@@ -1662,4 +1662,82 @@ return {
       }
     )
   ),
+  s(
+    {
+      trig = 'mylt',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #let <> = <>
+      ]],
+      {
+        i(1),
+        i(0),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'myft',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #let count = <>
+      #let id = range(1, count+1)
+
+      #let <> = (
+        "",
+        "",
+        "",
+      )
+      #let <> = (
+        "",
+        "",
+        "",
+      )
+      #let <> = (
+        "",
+        "",
+        "",
+      )
+
+      #let array = (id.zip(<>, <>, <>))
+
+      #figure(
+        table(
+          stroke: 1pt + black,
+          columns: <>,
+          align: center+ horizon,
+          table.header[<>][<>][<>][<>],
+          ..for x in array {(
+            ..for y in x {(
+              [#y],
+            )}
+          )}
+        ),
+        caption: [],
+      )
+      ]],
+      {
+        i(1, '7'),
+        i(2, 'array_a'),
+        i(3, 'array_b'),
+        i(4, 'array_c'),
+        rep(2),
+        rep(3),
+        rep(4),
+        i(5, '4'),
+        i(6),
+        i(7),
+        i(8),
+        i(9),
+      }
+    )
+  ),
 }
