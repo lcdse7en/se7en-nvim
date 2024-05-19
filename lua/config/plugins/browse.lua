@@ -22,6 +22,7 @@ return {
       ['nerdfonts'] = 'https://www.nerdfonts.com/cheat-sheet',
       ['wallpaper'] = 'https://alphacoders.com/k%E2%80%93pop-4k-wallpapers',
       ['Ruixi-rebirth-nixos-config'] = 'https://github.com/Ruixi-rebirth?tab=repositories',
+      ['tjdevries'] = 'https://github.com/tjdevries',
 
       --  NOTE: localhost
       ['localhost'] = {
