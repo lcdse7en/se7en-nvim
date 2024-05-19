@@ -1714,7 +1714,7 @@ return {
           stroke: 1pt + black,
           columns: <>,
           align: center+ horizon,
-          table.header[<>][<>][<>][<>],
+          <>
           ..for x in array {(
             ..for y in x {(
               [#y],
@@ -1733,10 +1733,19 @@ return {
         rep(3),
         rep(4),
         i(5, '4'),
-        i(6),
-        i(7),
-        i(8),
-        i(9),
+        f(
+          -- order is 2,1, not 1,2!!
+          function(args, snip)
+            local num = tonumber(args[1][1])
+
+            local kuohao = ''
+            for i = 1, num do
+              kuohao = kuohao .. '[]'
+            end
+            return 'table.header' .. kuohao .. ','
+          end,
+          { 5 }
+        ),
       }
     )
   ),
