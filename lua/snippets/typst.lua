@@ -1772,4 +1772,55 @@ return {
       }
     )
   ),
+  s(
+    {
+      trig = 'myacr',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #acr("<>")<>
+      ]],
+      {
+        i(1),
+        i(0),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'myfn',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #footnote[<>]<>
+      ]],
+      {
+        i(1),
+        i(0),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'mysup',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #super("<>")<>
+      ]],
+      {
+        i(1, '1'),
+        i(0),
+      }
+    )
+  ),
 }
