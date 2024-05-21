@@ -1635,7 +1635,7 @@ return {
 
         #colbreak()
 
-        #sp.column_box(heading: "General Relativity", stretch_to_next: true)<>
+        #sp.column_box(heading: "General Relativity", stretch_to_next: false)<>
 
         <>
       <>)
@@ -1819,6 +1819,59 @@ return {
       ]],
       {
         i(1, '1'),
+        i(0),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'mystr',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      stroke: (x: none),<>
+      ]],
+      {
+        i(0),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'myali',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      align: (x, _) <>
+        if x == 0 { center } else { left },
+      <>
+      ]],
+      {
+        t '=>',
+        i(0),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'myrows',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      table.cell(rowspan: <>, align: center+horizon)[<>]<>
+      ]],
+      {
+        i(1, '2'),
+        i(2),
         i(0),
       }
     )
