@@ -1876,4 +1876,29 @@ return {
       }
     )
   ),
+  s(
+    {
+      trig = 'myfs',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #figure(
+        sourcecode()[
+          ```<>
+          <>
+          ```
+        ],
+        caption: "<>"
+      )
+      ]],
+      {
+        i(1, typst),
+        i(3),
+        i(2),
+      }
+    )
+  ),
 }
