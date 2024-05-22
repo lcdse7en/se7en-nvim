@@ -1867,4 +1867,28 @@ return {
       }
     )
   ),
+  s(
+    {
+      trig = 'myfb',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #figure(
+        caption: "<>",
+      )[
+        ```<>
+        <>
+        ```
+      ]
+      ]],
+      {
+        i(1),
+        i(2),
+        i(3),
+      }
+    )
+  ),
 }
