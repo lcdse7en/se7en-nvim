@@ -262,13 +262,19 @@ vim.api.nvim_create_autocmd('BufEnter', {
   pattern = { '*.md' },
   command = 'silent! TableModeEnable',
 })
---  NOTE: typst format
+--  NOTE: tcpst format
+-- vim.api.nvim_create_autocmd('BufWritePost', {
+--   group = vim.api.nvim_create_augroup('typstformat', { clear = true }),
+--   pattern = { '*.typ' },
+--   -- command = 'silent! :!prettypst --use-configuration %',
+--   command = 'silent! :!prettypst --file-location=~/.config/nvim/prettypst.toml %',
+--   -- command = 'silent! :!typstfmt %',
+-- })
 vim.api.nvim_create_autocmd('BufWritePost', {
   group = vim.api.nvim_create_augroup('typstformat', { clear = true }),
   pattern = { '*.typ' },
   -- command = 'silent! :!prettypst --use-configuration %',
-  command = 'silent! :!prettypst --file-location=~/.config/nvim/prettypst.toml %',
-  -- command = 'silent! :!typstfmt %',
+  command = 'silent! :!typstyle -i %',
 })
 
 --  NOTE: LuaSnipChoiceListSelecttions

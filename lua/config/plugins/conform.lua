@@ -22,7 +22,8 @@ return {
         fish = { 'fish_indent' }, -- sudo pacman -S fish
         rust = { 'rustfmt' },
         tex = { 'latexindent' },
-        typst = { 'prettypst' },
+        typst = { 'typstyle' },
+        -- typst = { 'prettypst' },
         -- typst = { 'typstfmt' },
         python = function(bufnr)
           if require('conform').get_formatter_info('yapf', bufnr).available then
