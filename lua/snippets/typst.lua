@@ -165,40 +165,6 @@ return {
   ),
   s(
     {
-      trig = 'myfig',
-      regTrig = false,
-      snippetType = 'autosnippet',
-      priority = 2000,
-    },
-    fmta(
-      [[
-      #figure(
-        image("<>"),
-        caption: [<>],
-      )
-      ]],
-      {
-        i(1, 'img_path'),
-        i(2, 'capInfo'),
-      }
-    )
-  ),
-  s(
-    {
-      trig = 'myfig',
-      dscr = 'dscr',
-      regTrig = false,
-      snippetType = 'snippet',
-    },
-    fmta(
-      [[
-
-      ]],
-      {}
-    )
-  ),
-  s(
-    {
       trig = 'myrb',
       regTrig = false,
       snippetType = 'autosnippet',
@@ -1759,7 +1725,7 @@ return {
     fmta(
       [[
       #figure(
-        image("<>", width: 2cm)
+        image("<>", width: 2cm),
         caption: [<>]
       ) <><><>
       ]],
@@ -1878,7 +1844,7 @@ return {
   ),
   s(
     {
-      trig = 'myfs',
+      trig = 'myfc',
       regTrig = false,
       snippetType = 'autosnippet',
       priority = 2000,
