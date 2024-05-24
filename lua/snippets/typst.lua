@@ -1891,4 +1891,23 @@ return {
       }
     )
   ),
+  s(
+    {
+      trig = 'mycd',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #code(```<>
+        <>
+      ```);#blank_par
+      ]],
+      {
+        i(1, 'typst'),
+        i(2),
+      }
+    )
+  ),
 }
