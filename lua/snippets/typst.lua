@@ -1677,7 +1677,7 @@ return {
             (align(center)[#k,])
           }),
           ..for i in arr.flatten() {
-            ([#i],)
+            ([#i,])
           },
         ),
       )
@@ -1695,7 +1695,7 @@ return {
             end
             return kuohao
           end,
-          { 1 }
+          { 2 }
         ),
         i(2, '3'),
         f(
