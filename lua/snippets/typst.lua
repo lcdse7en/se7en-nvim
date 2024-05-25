@@ -1654,51 +1654,50 @@ return {
     },
     fmta(
       [[
-      #let count = <>
-      #let id = range(1, count+1)
-
-      #let <> = (
-        "",
-        "",
-        "",
+      #let mydic = json("json/<>.json")
+      #let v1 = mydic.values().at(0)
+      #let arr = v1.zip(
+        <>
       )
-      #let <> = (
-        "",
-        "",
-        "",
-      )
-      #let <> = (
-        "",
-        "",
-        "",
-      )
-
-      #let array = (id.zip(<>, <>, <>))
 
       #figure(
+        caption: "",
         table(
-          stroke: 1pt + black,
           columns: <>,
-          align: center+ horizon,
-          <>
-          ..for x in array {(
-            ..for y in x {(
-              [#y],
-            )}
-          )}
+          align: (<>),
+          stroke: (_, y) <> (
+            top: if y <> 1 {
+              1pt
+            } else {
+              0pt
+            },
+            bottom: 1pt,
+          ),
+          table.header(..for k in mydic.keys() {
+            (align(center)[#k,])
+          }),
+          ..for i in arr.flatten() {
+            ([#i],)
+          },
         ),
-        caption: [],
       )
       ]],
       {
-        i(1, '7'),
-        i(2, 'array_a'),
-        i(3, 'array_b'),
-        i(4, 'array_c'),
-        rep(2),
-        rep(3),
-        rep(4),
-        i(5, '4'),
+        i(1, '1'),
+        f(
+          -- order is 2,1, not 1,2!!
+          function(args, snip)
+            local num = tonumber(args[1][1])
+
+            local kuohao = ''
+            for i = 1, num - 1 do
+              kuohao = kuohao .. 'mydic.values().at(' .. i .. '),'
+            end
+            return kuohao
+          end,
+          { 1 }
+        ),
+        i(2, '3'),
         f(
           -- order is 2,1, not 1,2!!
           function(args, snip)
@@ -1706,15 +1705,87 @@ return {
 
             local kuohao = ''
             for i = 1, num do
-              kuohao = kuohao .. '[]'
+              kuohao = kuohao .. 'center, '
             end
-            return 'table.header' .. kuohao .. ','
+            return kuohao
           end,
-          { 5 }
+          { 2 }
         ),
+        t '=>',
+        t '<=',
       }
     )
   ),
+  -- s(
+  --   {
+  --     trig = 'myft',
+  --     regTrig = false,
+  --     snippetType = 'autosnippet',
+  --     priority = 2000,
+  --   },
+  --   fmta(
+  --     [[
+  --     #let count = <>
+  --     #let id = range(1, count+1)
+  --
+  --     #let <> = (
+  --       "",
+  --       "",
+  --       "",
+  --     )
+  --     #let <> = (
+  --       "",
+  --       "",
+  --       "",
+  --     )
+  --     #let <> = (
+  --       "",
+  --       "",
+  --       "",
+  --     )
+  --
+  --     #let array = (id.zip(<>, <>, <>))
+  --
+  --     #figure(
+  --       table(
+  --         stroke: 1pt + black,
+  --         columns: <>,
+  --         align: center+ horizon,
+  --         <>
+  --         ..for x in array {(
+  --           ..for y in x {(
+  --             [#y],
+  --           )}
+  --         )}
+  --       ),
+  --       caption: [],
+  --     )
+  --     ]],
+  --     {
+  --       i(1, '7'),
+  --       i(2, 'array_a'),
+  --       i(3, 'array_b'),
+  --       i(4, 'array_c'),
+  --       rep(2),
+  --       rep(3),
+  --       rep(4),
+  --       i(5, '4'),
+  --       f(
+  --         -- order is 2,1, not 1,2!!
+  --         function(args, snip)
+  --           local num = tonumber(args[1][1])
+  --
+  --           local kuohao = ''
+  --           for i = 1, num do
+  --             kuohao = kuohao .. '[]'
+  --           end
+  --           return 'table.header' .. kuohao .. ','
+  --         end,
+  --         { 5 }
+  --       ),
+  --     }
+  --   )
+  -- ),
   s(
     {
       trig = 'myfi',
