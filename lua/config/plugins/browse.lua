@@ -37,6 +37,9 @@ return {
         ['extension'] = 'https://chrome.zzzmh.cn/#/extension',
       },
 
+      --  NOTE: typst ebook
+      ['typst-ebook'] = 'https://github.com/typst-doc-cn/tutorial',
+
       --  NOTE: hyprland
       ['hypr'] = {
         ['name'] = 'Hyprland',
