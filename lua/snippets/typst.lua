@@ -1999,4 +1999,22 @@ return {
       }
     )
   ),
+  s(
+    {
+      trig = 'myfkh',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      <><><>
+      ]],
+      {
+        t '「',
+        i(1),
+        t '」',
+      }
+    )
+  ),
 }
