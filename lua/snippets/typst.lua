@@ -2023,4 +2023,38 @@ return {
       }
     )
   ),
+  s(
+    {
+      trig = 'mypt',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #pro-tip[
+        <>
+      ]
+      ]],
+      {
+        i(1),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'mytm',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #term("<>")
+      ]],
+      {
+        i(1, 'code mode'),
+      }
+    )
+  ),
 }
