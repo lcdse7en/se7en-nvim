@@ -2057,4 +2057,27 @@ return {
       }
     )
   ),
+  s(
+    {
+      trig = 'myfe',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #figure(
+        caption: "<>",
+        kind: math.equation,
+        $
+          <>
+        $,
+      )
+      ]],
+      {
+        i(1),
+        i(2),
+      }
+    )
+  ),
 }
