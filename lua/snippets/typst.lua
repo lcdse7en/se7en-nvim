@@ -1971,11 +1971,17 @@ return {
     },
     fmta(
       [[
-      #code(```<>
+      #code(
+        lang: "<>",
+        numbering: false,
+        line-offset: -2pt,
+        ```<>
         <>
-      ```);#blank_par
+        ```,
+      );#blank_par
       ]],
       {
+        rep(1),
         i(1, 'typst'),
         i(2),
       }
