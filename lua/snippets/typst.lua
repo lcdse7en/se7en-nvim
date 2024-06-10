@@ -523,7 +523,7 @@ return {
   ),
   s(
     {
-      trig = 'mycb',
+      trig = 'mycc',
       regTrig = false,
       snippetType = 'autosnippet',
       priority = 2000,
@@ -2077,6 +2077,72 @@ return {
       {
         i(1),
         i(2),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'mycb',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #colorbox(title: "<>", color: hei-orange)[
+        <>
+      ]
+      ]],
+      {
+        i(1, 'title'),
+        i(2),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'mymf(%d)',
+      regTrig = true,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #matrix-fmt(
+        caption: "<>",
+        alignment: center + horizon,
+        <>
+        <>
+        <>
+      )
+      ]],
+      {
+        i(1),
+        -- i(2),
+        f(function(_, snip)
+          local num = tonumber(snip.captures[1])
+          local kuohao = ''
+          for i = 1, num do
+            kuohao = kuohao .. '"", '
+          end
+          return '(' .. kuohao .. ')' .. ','
+        end),
+        f(function(_, snip)
+          local num = tonumber(snip.captures[1])
+          local kuohao = ''
+          for i = 1, num do
+            kuohao = kuohao .. '"", '
+          end
+          return '(' .. kuohao .. ')' .. ','
+        end),
+        f(function(_, snip)
+          local num = tonumber(snip.captures[1])
+          local kuohao = ''
+          for i = 1, num do
+            kuohao = kuohao .. '"", '
+          end
+          return '(' .. kuohao .. ')' .. ','
+        end),
       }
     )
   ),
