@@ -108,6 +108,9 @@ return {
     --   paths = { './snips/' },
     -- }
 
+    vim.cmd [[command! LuaSnipEdit :lua require("luasnip.loaders").edit_snippet_files()]]
+    vim.keymap.set('n', '<Leader><CR>', '<cmd>LuaSnipEdit<cr>', { silent = true, noremap = true })
+
     local auto_expand = require('luasnip').expand_auto
     require('luasnip').expand_auto = function(...)
       vim.o.undolevels = vim.o.undolevels
