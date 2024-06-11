@@ -1647,7 +1647,7 @@ return {
   ),
   s(
     {
-      trig = 'myft',
+      trig = 'myft(%d)',
       regTrig = false,
       snippetType = 'autosnippet',
       priority = 2000,
@@ -1674,118 +1674,59 @@ return {
             bottom: 1pt,
           ),
           table.header(..for k in mydic.keys() {
-            (align(center)[#k,])
+            (align(center)[#k],)
           }),
           ..for i in arr.flatten() {
-            ([#i,])
+            ([#i],)
           },
         ),
       )
       ]],
       {
         i(1, '1'),
-        f(
-          -- order is 2,1, not 1,2!!
-          function(args, snip)
-            local num = tonumber(args[1][1])
+        d(2, function(_, snip)
+          local cols = snip.captures[1]
+          local nodes = {}
+          local ts = 1
 
-            local kuohao = ''
-            for i = 1, num - 1 do
-              kuohao = kuohao .. 'mydic.values().at(' .. i .. '),'
-            end
-            return kuohao
-          end,
-          { 2 }
-        ),
-        i(2, '3'),
-        f(
-          -- order is 2,1, not 1,2!!
-          function(args, snip)
-            local num = tonumber(args[1][1])
+          for _ = 1, cols - 1, 1 do
+            table.insert(nodes, t 'mydic.values().at(')
+            table.insert(nodes, t { tostring(ts) })
+            table.insert(nodes, t '),')
+            table.insert(nodes, t { '', '\t' })
+            -- table.insert(nodes, t { 'mydic.values().at(', ts, '),', '\t' })
+            ts = ts + 1
+            -- table.remove(nodes, #nodes)
+            -- table.insert(nodes, t '),')
+            -- table.insert(nodes, t { '', '\t' })
+          end
+          table.remove(nodes, #nodes)
+          return sn(1, nodes)
+        end),
+        f(function(_, snip)
+          local cols = snip.captures[1]
+          return tostring(cols)
+        end),
+        d(3, function(_, snip)
+          local cols = snip.captures[1]
+          local nodes = {}
+          local ts = 1
 
-            local kuohao = ''
-            for i = 1, num do
-              kuohao = kuohao .. 'center, '
-            end
-            return kuohao
-          end,
-          { 2 }
-        ),
+          for _ = 1, cols, 1 do
+            table.insert(nodes, t 'center')
+            table.insert(nodes, t ',')
+            table.insert(nodes, t ' ')
+            ts = ts + 1
+          end
+          table.remove(nodes, #nodes)
+          table.remove(nodes, #nodes)
+          return sn(1, nodes)
+        end),
         t '=>',
         t '<=',
       }
     )
   ),
-  -- s(
-  --   {
-  --     trig = 'myft',
-  --     regTrig = false,
-  --     snippetType = 'autosnippet',
-  --     priority = 2000,
-  --   },
-  --   fmta(
-  --     [[
-  --     #let count = <>
-  --     #let id = range(1, count+1)
-  --
-  --     #let <> = (
-  --       "",
-  --       "",
-  --       "",
-  --     )
-  --     #let <> = (
-  --       "",
-  --       "",
-  --       "",
-  --     )
-  --     #let <> = (
-  --       "",
-  --       "",
-  --       "",
-  --     )
-  --
-  --     #let array = (id.zip(<>, <>, <>))
-  --
-  --     #figure(
-  --       table(
-  --         stroke: 1pt + black,
-  --         columns: <>,
-  --         align: center+ horizon,
-  --         <>
-  --         ..for x in array {(
-  --           ..for y in x {(
-  --             [#y],
-  --           )}
-  --         )}
-  --       ),
-  --       caption: [],
-  --     )
-  --     ]],
-  --     {
-  --       i(1, '7'),
-  --       i(2, 'array_a'),
-  --       i(3, 'array_b'),
-  --       i(4, 'array_c'),
-  --       rep(2),
-  --       rep(3),
-  --       rep(4),
-  --       i(5, '4'),
-  --       f(
-  --         -- order is 2,1, not 1,2!!
-  --         function(args, snip)
-  --           local num = tonumber(args[1][1])
-  --
-  --           local kuohao = ''
-  --           for i = 1, num do
-  --             kuohao = kuohao .. '[]'
-  --           end
-  --           return 'table.header' .. kuohao .. ','
-  --         end,
-  --         { 5 }
-  --       ),
-  --     }
-  --   )
-  -- ),
   s(
     {
       trig = 'myfi',
