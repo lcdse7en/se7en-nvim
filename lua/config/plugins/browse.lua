@@ -40,6 +40,9 @@ return {
       --  NOTE: typst ebook
       ['typst-ebook'] = 'https://github.com/typst-doc-cn/tutorial',
 
+      --  NOTE: scoop
+      ['scoop'] = 'http://scoop.sh',
+
       --  NOTE: hyprland
       ['hypr'] = {
         ['name'] = 'Hyprland',
