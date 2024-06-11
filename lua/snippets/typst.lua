@@ -1648,6 +1648,20 @@ return {
   s(
     {
       trig = 'myft(%d)',
+      dscr = 'figure table',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
+  s(
+    {
+      trig = 'myft(%d)',
       regTrig = false,
       snippetType = 'autosnippet',
       priority = 2000,
@@ -2038,6 +2052,20 @@ return {
         i(1, 'title'),
         i(2),
       }
+    )
+  ),
+  s(
+    {
+      trig = 'mymf(%d)(%d)',
+      dscr = 'figure table',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
     )
   ),
   s(
