@@ -2101,7 +2101,7 @@ return {
   ),
   s(
     {
-      trig = 'mymf(%d)',
+      trig = 'mymf(%d)(%d)',
       regTrig = true,
       snippetType = 'autosnippet',
       priority = 2000,
@@ -2112,36 +2112,33 @@ return {
         caption: "<>",
         alignment: center + horizon,
         <>
-        <>
-        <>
       )
       ]],
       {
         i(1),
-        -- i(2),
-        f(function(_, snip)
-          local num = tonumber(snip.captures[1])
-          local kuohao = ''
-          for i = 1, num do
-            kuohao = kuohao .. '"", '
+        d(2, function(_, snip)
+          local rows, cols = snip.captures[1], snip.captures[2]
+          local nodes = {}
+          local ts = 1
+          for _ = 1, rows, 1 do
+            table.insert(nodes, t '(')
+            -- table.insert(nodes, t { '', '\t' })
+            for _ = 1, cols, 1 do
+              table.insert(nodes, t '"')
+              table.insert(nodes, i(ts))
+              table.insert(nodes, t '"')
+              table.insert(nodes, t ',')
+              table.insert(nodes, t ' ')
+              ts = ts + 1
+            end
+            table.remove(nodes, #nodes)
+            table.remove(nodes, #nodes)
+            table.insert(nodes, t '),')
+            table.insert(nodes, t { '', '\t' })
           end
-          return '(' .. kuohao .. ')' .. ','
-        end),
-        f(function(_, snip)
-          local num = tonumber(snip.captures[1])
-          local kuohao = ''
-          for i = 1, num do
-            kuohao = kuohao .. '"", '
-          end
-          return '(' .. kuohao .. ')' .. ','
-        end),
-        f(function(_, snip)
-          local num = tonumber(snip.captures[1])
-          local kuohao = ''
-          for i = 1, num do
-            kuohao = kuohao .. '"", '
-          end
-          return '(' .. kuohao .. ')' .. ','
+          table.remove(nodes, #nodes)
+          -- table.insert(nodes, t { '', ')' })
+          return sn(1, nodes)
         end),
       }
     )
