@@ -180,3 +180,9 @@ map('n', '<leader>Y', 'gg"+yG', { desc = 'Copy whole file' })
 map('n', '<leader>d', '"_d', { desc = 'Delete without yank' })
 
 map('n', '<Tab>', '<cmd>lua require("mini.files").open()<CR>', { silent = true })
+
+vim.api.nvim_set_keymap('i', '<C-t>', '<cmd>lua _G.dynamic_node_external_update(1)<Cr>', { noremap = true })
+vim.api.nvim_set_keymap('s', '<C-t>', '<cmd>lua _G.dynamic_node_external_update(1)<Cr>', { noremap = true })
+
+vim.api.nvim_set_keymap('i', '<C-g>', '<cmd>lua _G.dynamic_node_external_update(2)<Cr>', { noremap = true })
+vim.api.nvim_set_keymap('s', '<C-g>', '<cmd>lua _G.dynamic_node_external_update(2)<Cr>', { noremap = true })
