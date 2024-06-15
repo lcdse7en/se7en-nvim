@@ -793,6 +793,13 @@ vim.cmd [[
   augroup end
 ]]
 
+vim.cmd [[
+  augroup _set_typst
+    autocmd!
+    autocmd BufNewFile,BufRead *.typ setfiletype typst
+  augroup end
+]]
+
 vim.api.nvim_create_autocmd({ 'VimEnter', 'FocusGained', 'FocusLost', 'WinLeave' }, {
   callback = function()
     vim.cmd 'hi! Normal guibg=NONE ctermbg=NONE'
