@@ -35,6 +35,7 @@ map('n', 'dw', 'vb_d', { silent = true })
 
 map('n', 'H', '^', { silent = true })
 map('n', 'L', '$', { silent = true })
+map('x', 'L', '$', { silent = true })
 map('x', '<', '<gv', { desc = 'One indent left and reselect' })
 map('x', '>', '>gv|', { desc = 'One indent right and reselect' })
 

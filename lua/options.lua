@@ -45,6 +45,13 @@ local options = {
   errorbells = false,                    --- Disables sound effect for errors
   fileencodings = "ucs-bom,utf-8,utf-16,default,big5,latin1",--- The encoding written to file
   grepprg = "rg --hidden --vimgrep --smart-case --",
+  matchpairs = {
+          '(:)',
+          '[:]',
+          '{:}',
+          '<:>',
+  },
+  matchtime = 30,
   backup = false,
   swapfile = false,
   wrap = false,

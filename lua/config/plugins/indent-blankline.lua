@@ -78,6 +78,8 @@ return {
     --   command = 'IBLDisable',
     -- })
 
+    vim.keymap.set('n', '<leader>I', '<cmd> IBLToggle <CR>')
+
     vim.api.nvim_create_autocmd('InsertLeave', {
       pattern = '*',
       group = gid,

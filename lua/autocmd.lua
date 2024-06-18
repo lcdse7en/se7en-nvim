@@ -71,18 +71,18 @@ vim.api.nvim_create_autocmd('BufEnter', {
   end,
 })
 
-vim.api.nvim_create_autocmd('LspAttach', {
-  desc = 'Enable inlay hints',
-  callback = function(event)
-    local id = vim.tbl_get(event, 'data', 'client_id')
-    local client = id and vim.lsp.get_client_by_id(id)
-    if client == nil or not client.supports_method 'textDocument/inlayHint' then
-      return
-    end
-
-    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(0))
-  end,
-})
+-- vim.api.nvim_create_autocmd('LspAttach', {
+--   desc = 'Enable inlay hints',
+--   callback = function(event)
+--     local id = vim.tbl_get(event, 'data', 'client_id')
+--     local client = id and vim.lsp.get_client_by_id(id)
+--     if client == nil or not client.supports_method 'textDocument/inlayHint' then
+--       return
+--     end
+--
+--     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(0))
+--   end,
+-- })
 
 --  NOTE: Automaically reload the file if it is changed outsize of Nvim
 local group = vim.api.nvim_create_augroup('auto_read', { clear = true })
@@ -806,3 +806,11 @@ vim.api.nvim_create_autocmd({ 'VimEnter', 'FocusGained', 'FocusLost', 'WinLeave'
     vim.cmd 'hi! NonText guibg=NONE ctermbg=NONE'
   end,
 })
+
+vim.cmd [[
+  augroup InsertDisable
+    au!
+    au InsertEnter * lua vim.b.miniindentscope_disable = true
+    au InsertLeave * lua vim.b.miniindentscope_disable = false
+  augroup END
+]]

@@ -142,30 +142,30 @@ return {
       },
     }
 
-    vim.api.nvim_set_keymap(
-      'i',
-      '<c-h>',
-      'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<c-h>"',
-      { expr = true, silent = true }
-    )
-    vim.api.nvim_set_keymap(
-      's',
-      '<c-h>',
-      'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<c-h>"',
-      { expr = true, silent = true }
-    )
-    vim.api.nvim_set_keymap(
-      'i',
-      '<c-l>',
-      'luasnip#choice_active() ? "<Plug>luasnip-prev-choice" : "<c-l>"',
-      { expr = true, silent = true }
-    )
-    vim.api.nvim_set_keymap(
-      's',
-      '<c-l>',
-      'luasnip#choice_active() ? "<Plug>luasnip-prev-choice" : "<c-l>"',
-      { expr = true, silent = true }
-    )
+    -- vim.api.nvim_set_keymap(
+    --   'i',
+    --   '<c-h>',
+    --   'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<c-h>"',
+    --   { expr = true, silent = true }
+    -- )
+    -- vim.api.nvim_set_keymap(
+    --   's',
+    --   '<c-h>',
+    --   'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<c-h>"',
+    --   { expr = true, silent = true }
+    -- )
+    -- vim.api.nvim_set_keymap(
+    --   'i',
+    --   '<c-l>',
+    --   'luasnip#choice_active() ? "<Plug>luasnip-prev-choice" : "<c-l>"',
+    --   { expr = true, silent = true }
+    -- )
+    -- vim.api.nvim_set_keymap(
+    --   's',
+    --   '<c-l>',
+    --   'luasnip#choice_active() ? "<Plug>luasnip-prev-choice" : "<c-l>"',
+    --   { expr = true, silent = true }
+    -- )
 
     -- ╭──────────────────────────────────────────────────────────╮
     -- │ Utils                                                    │
@@ -212,12 +212,17 @@ return {
       return true
     end
 
+    -- local has_words_before = function()
+    --   if vim.api.nvim_buf_get_option(0, 'buftype') == 'prompt' then
+    --     return false
+    --   end
+    --   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    --   return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match '^%s*$' == nil
+    -- end
     local has_words_before = function()
-      if vim.api.nvim_buf_get_option(0, 'buftype') == 'prompt' then
-        return false
-      end
+      unpack = unpack or table.unpack
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-      return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match '^%s*$' == nil
+      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
     end
 
     --- Get completion context, i.e., auto-import/target module location.
@@ -284,55 +289,76 @@ return {
         end,
       },
       mapping = cmp.mapping.preset.insert {
-        ['<CR>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+        -- ['<CR>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
         ['<Up>'] = cmp.mapping.select_prev_item(),
         ['<Down>'] = cmp.mapping.select_next_item(),
-        ['<C-p>'] = cmp.mapping.select_prev_item(),
-        ['<C-n>'] = cmp.mapping.select_next_item(),
-        ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-        ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+        ['<C-k>'] = cmp.mapping.select_prev_item(),
+        ['<C-j>'] = cmp.mapping.select_next_item(),
+        ['<C-up>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+        ['<C-down>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
         ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+        ['<Esc>'] = cmp.mapping { i = cmp.mapping.close(), c = cmp.mapping.close() },
         ['<C-CR>'] = cmp.mapping {
           i = cmp.mapping.abort(),
           c = cmp.mapping.close(),
         },
-        -- ['<CR>'] = cmp.mapping.confirm {
-        --   -- this is the important line for Copilot
-        --   behavior = cmp.ConfirmBehavior.Replace,
-        --   select = false,
-        -- },
+        ['<CR>'] = cmp.mapping.confirm {
+          -- this is the important line for Copilot
+          behavior = cmp.ConfirmBehavior.Replace,
+          select = false,
+        },
+        --   ['<Tab>'] = cmp.mapping(function(fallback)
+        --     if cmp.visible() then
+        --       -- cmp.select_next_item()
+        --       local entry = cmp.get_selected_entry()
+        --       if not entry then
+        --         cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
+        --       else
+        --         if has_words_before() then
+        --           cmp.confirm {
+        --             behavior = cmp.ConfirmBehavior.Replace,
+        --             select = false,
+        --           }
+        --         else
+        --           cmp.confirm {
+        --             behavior = cmp.ConfirmBehavior.Insert,
+        --             select = false,
+        --           }
+        --         end
+        --       end
+        --     elseif vim.snippet and vim.snippet.active { direction = 1 } then
+        --       vim.schedule(function()
+        --         vim.snippet.jump(1)
+        --       end)
+        --     else
+        --       fallback()
+        --     end
+        --   end, { 'i', 's' }),
+        --   ['<S-Tab>'] = cmp.mapping(function(fallback)
+        --     if vim.snippet and vim.snippet.active { direction = -1 } then
+        --       vim.schedule(function()
+        --         vim.snippet.jump(-1)
+        --       end)
+        --     else
+        --       fallback()
+        --     end
+        --   end, { 'i', 's' }),
         ['<Tab>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            -- cmp.select_next_item()
-            local entry = cmp.get_selected_entry()
-            if not entry then
-              cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
-            else
-              if has_words_before() then
-                cmp.confirm {
-                  behavior = cmp.ConfirmBehavior.Replace,
-                  select = false,
-                }
-              else
-                cmp.confirm {
-                  behavior = cmp.ConfirmBehavior.Insert,
-                  select = false,
-                }
-              end
-            end
-          elseif vim.snippet and vim.snippet.active { direction = 1 } then
-            vim.schedule(function()
-              vim.snippet.jump(1)
-            end)
+          if luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          elseif cmp.visible() then
+            cmp.select_next_item()
+          elseif has_words_before() then
+            cmp.complete()
           else
             fallback()
           end
         end, { 'i', 's' }),
         ['<S-Tab>'] = cmp.mapping(function(fallback)
-          if vim.snippet and vim.snippet.active { direction = -1 } then
-            vim.schedule(function()
-              vim.snippet.jump(-1)
-            end)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
           else
             fallback()
           end

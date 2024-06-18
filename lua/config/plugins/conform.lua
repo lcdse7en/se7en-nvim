@@ -60,7 +60,7 @@ return {
       end,
 
       formatters = {
-        -- lua
+        -- NOTE: lua
         stylua = {
           command = 'stylua',
           args = { '--search-parent-directories', '--stdin-filepath', '$FILENAME', '-' },
@@ -82,7 +82,8 @@ return {
             'stylua.toml',
           },
         },
-        -- python
+
+        -- NOTE: python
         yapf = {
           command = 'yapf',
           args = {
@@ -95,19 +96,19 @@ return {
             return { '--quiet', '--lines', string.format('%d-%d', ctx.range.start[1], ctx.range['end'][1]) }
           end,
         },
-        -- shell
+        -- NOTE: shell
         shfmt = {
           -- stdin = true,
           command = 'shfmt',
           -- args = { '-i', '4', '-filename', '$FILENAME' },
-          args = { '-i', '4', '-ci', '-bn' },
+          args = { '-i', '4', '-filename', '$FILENAME', '-ci', '-bn' },
           -- inherit = true,
           -- prepend_args = { "-i", "4" },
         },
         rustfmt = {
           prepend_args = { '--edition', '2021' },
         },
-        -- C | C++
+        -- NOTE: C | C++
         clang_format = {
           command = 'clang-format',
           args = { '-assume-filename', '$FILENAME' },
@@ -164,6 +165,19 @@ return {
       command = 'rustfmt',
       args = { '--emit=stdout', '--edition=2021' },
     }
+
+    vim.api.nvim_create_user_command('Format', function(args)
+      local range = nil
+      if args.count ~= -1 then
+        local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+        range = {
+          start = { args.line1, 0 },
+          ['end'] = { args.line2, end_line:len() },
+        }
+      end
+
+      conform.format { async = true, lsp_fallback = true, range = range }
+    end, { range = true })
 
     local function create_command(name, opts)
       if not opts then

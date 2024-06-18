@@ -12,6 +12,7 @@ local t = ls.text_node
 local f = ls.function_node
 local i = ls.insert_node
 local d = ls.dynamic_node
+local fmt = require('luasnip.extras.fmt').fmt
 local fmta = require('luasnip.extras.fmt').fmta
 local rep = require('luasnip.extras').rep
 local line_begin = require('luasnip.extras.expand_conditions').line_begin
@@ -20,6 +21,8 @@ local util = require 'luasnip.util.util'
 local node_util = require 'luasnip.nodes.util'
 local ai = require 'luasnip.nodes.absolute_indexer'
 local m = require('luasnip.extras').match
+local events = require 'luasnip.util.events'
+local typst = require 'lang.typst'
 
 local get_visual = function(args, parent)
   if #parent.snippet.env.SELECT_RAW > 0 then
@@ -27,44 +30,6 @@ local get_visual = function(args, parent)
   else -- If SELECT_RAW is empty, return a blank insert node
     return sn(nil, i(1))
   end
-end
-
-table_node = function(args)
-  local tabs = {}
-  local count
-  table = args[1][1]:gsub('%s', ''):gsub('|', '')
-  count = table:len()
-  for j = 1, count do
-    local iNode
-    iNode = i(j)
-    tabs[2 * j - 1] = iNode
-    if j ~= count then
-      tabs[2 * j] = t ' & '
-    end
-  end
-  return sn(nil, tabs)
-end
-
-rec_table = function()
-  return sn(nil, {
-    c(1, {
-      t { '' },
-      sn(nil, { t { '\\\\', '' }, d(1, table_node, { ai[1] }), d(2, rec_table, { ai[1] }) }),
-    }),
-  })
-end
--- item
-
-local rec_ls
-rec_ls = function()
-  return sn(
-    nil,
-    c(1, {
-      -- Order is important, sn(...) first would cause infinite loop of expansion.
-      t '',
-      sn(nil, { t { '', '\t\\item ' }, i(1), d(2, rec_ls, {}) }),
-    })
-  )
 end
 
 return {
@@ -83,7 +48,8 @@ return {
         i(1, 'package'),
         i(2, '*'),
       }
-    )
+    ),
+    { condition = typst.in_text }
   ),
   s(
     {
@@ -2111,5 +2077,687 @@ return {
         end),
       }
     )
+  ),
+  s(
+    { trig = '([%a%)%]%}])(%d)', regTrig = true, wordTrig = false, snippetType = 'autosnippet' },
+    fmta('<>_<>', {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+      f(function(_, snip)
+        return snip.captures[2]
+      end),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = '([%a%)%]%}])_(%d)(%d)', regTrig = true, wordTrig = false, snippetType = 'autosnippet' },
+    fmta('<>_(<><>)', {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+      f(function(_, snip)
+        return snip.captures[2]
+      end),
+      f(function(_, snip)
+        return snip.captures[3]
+      end),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = '([%a%)%]%}])(%a)%2', regTrig = true, wordTrig = false, snippetType = 'autosnippet', priority = 100 },
+    fmta('<>_<>', {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+      f(function(_, snip)
+        return snip.captures[2]
+      end),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = '([%a%)%]%}])_(%a)(%a)%3', regTrig = true, wordTrig = false, snippetType = 'autosnippet', priority = 2000 },
+    fmta('<>_( <><> )', {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+      f(function(_, snip)
+        return snip.captures[2]
+      end),
+      f(function(_, snip)
+        return snip.captures[3]
+      end),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = '(%d+)/', regTrig = true, wordTrig = false, snippetType = 'autosnippet', priority = 100 },
+    fmta('frac( <> , <> )', {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+      i(1),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = '(%a)/', regTrig = true, wordTrig = false, snippetType = 'autosnippet', priority = 100 },
+    fmta('frac( <> , <> )', {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+      i(1),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = '%((.+)%)/', regTrig = true, wordTrig = false, snippetType = 'autosnippet' },
+    fmta('frac( <> , <> )', {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+      i(1),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = '(%a+)/', regTrig = true, wordTrig = false, snippetType = 'autosnippet', priority = 2000 },
+    fmta('frac( <> , <> )', {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+      i(1),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = '(%a+%{%a+%})/', regTrig = true, wordTrig = false, snippetType = 'autosnippet', priority = 3000 },
+    fmta('frac( <> , <> )', {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+      i(1),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s({ trig = 'mk', snippetType = 'autosnippet' }, fmta([[ $<>$<>]], { i(1), i(2) }), { condition = typst.in_text }),
+
+  s(
+    { trig = 'dm', snippetType = 'autosnippet' },
+    fmta(
+      [[
+            $
+            <>
+            $
+            ]],
+      { i(1) }
+    ),
+    { condition = typst.in_text }
+  ),
+
+  s(
+    { trig = 'sr', snippetType = 'autosnippet', regTrig = true, wordTrig = false },
+    fmta([[<>^(2)]], {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+
+  s(
+    { trig = 'cb', snippetType = 'autosnippet', regTrig = true, wordTrig = false },
+    fmta([[<>^(3)]], {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+
+  s(
+    { trig = '([%w%)])kk', snippetType = 'autosnippet', regTrig = true, wordTrig = false },
+    fmta([[<>^(<>)]], {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+      i(1),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+
+  s(
+    { trig = '([%w%)])jj', snippetType = 'autosnippet', regTrig = true, wordTrig = false },
+    fmta([[<>_(<>)]], {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+      i(1),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+
+  s({ trig = 'sq', snippetType = 'autosnippet' }, fmta([[sqrt(<>)]], { i(1) }), { condition = typst.in_mathzone }),
+
+  s(
+    { trig = 'rt', snippetType = 'autosnippet' },
+    fmta([[root( <> , <> )]], { i(1), i(2) }),
+    { condition = typst.in_mathzone }
+  ),
+
+  s(
+    { trig = '//', snippetType = 'autosnippet', priority = 3000 },
+    fmta([[frac( <> , <> )]], { i(1), i(2) }),
+    { condition = typst.in_mathzone }
+  ),
+
+  s({ trig = 'oo', snippetType = 'autosnippet' }, { t 'infinity' }, { condition = typst.in_mathzone }),
+
+  s(
+    { trig = 'sum', snippetType = 'autosnippet' },
+    c(1, {
+      sn(nil, { t 'sum_(', i(1), t ') ' }),
+      sn(nil, { t 'sum_(', i(1), t ')^(', i(2), t ') ' }),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+
+  s(
+    { trig = 'pd', snippetType = 'autosnippet' },
+    c(1, {
+      sn(nil, { t 'prod(', i(1), t ') ' }),
+      sn(nil, { t 'prod{', i(1), t ')^(', i(2), t ') ' }),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+
+  s(
+    { trig = 'lim', snippetType = 'autosnippet' },
+    fmta([[lim_(<> arrow.r <>)]], { i(1, 'n'), i(2, 'infinity') }),
+    { condition = typst.in_mathzone }
+  ),
+
+  s(
+    { trig = 'bot', snippetType = 'autosnippet' },
+    fmta('bigotimes_(<>)^(<>)', { i(1), i(2) }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = 'bcap', regTrig = true, wordTrig = false, snippetType = 'autosnippet', priority = 2000 },
+    fmta('bigcap_(<>)^(<>)', {
+      i(1),
+      i(2),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+
+  s(
+    { trig = 'bcup', regTrig = true, wordTrig = false, snippetType = 'autosnippet', priority = 2000 },
+    fmta('bigcup_(<>)^(<>)', {
+      i(1),
+      i(2),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = 'bscap', regTrig = true, wordTrig = false, snippetType = 'autosnippet', priority = 2000 },
+    fmta('bigsqcap_(<>)^(<>)', {
+      i(1),
+      i(2),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = 'bscup', regTrig = true, wordTrig = false, snippetType = 'autosnippet', priority = 2000 },
+    fmta('bigsqcup_(<>)^(<>)', {
+      i(1),
+      i(2),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = 'int', regTrig = true, wordTrig = false, snippetType = 'autosnippet' },
+    fmta('integral_(<>)^(<>) <> dif <>', {
+      i(1),
+      i(2),
+      i(3),
+      i(4),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+
+  s(
+    { trig = 'cint', regTrig = true, wordTrig = false, snippetType = 'autosnippet', priority = 2000 },
+    fmta('integral.cont_(<>) <> dif <>', {
+      i(1),
+      i(2),
+      i(3),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+
+  s(
+    { trig = 'sint', regTrig = true, wordTrig = false, snippetType = 'autosnippet', priority = 2000 },
+    fmta('integral.surf_(<>) <> dif <>', {
+      i(1),
+      i(2),
+      i(3),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+
+  s(
+    { trig = '2int', regTrig = true, wordTrig = false, snippetType = 'autosnippet', priority = 2000 },
+    fmta('integral_(<>)^(<>) integral_(<>)^(<>) <>  dif <> dif <>', {
+      i(1),
+      i(2),
+      i(3),
+      i(4),
+      i(5),
+      i(6),
+      i(7),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+
+  s(
+    { trig = 'iint', regTrig = true, wordTrig = false, snippetType = 'autosnippet', priority = 2000 },
+    fmta('integral.double_(<>) <> dif <>', {
+      i(1),
+      i(2),
+      i(3),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+
+  s(
+    { trig = 'td', snippetType = 'autosnippet', priority = 2000 },
+    fmta('tilde(<>)', {
+      i(1),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = 'bar', snippetType = 'autosnippet' },
+    fmta('overline(<>)', {
+      i(1),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = '(%a)bar', wordTrig = false, regTrig = true, snippetType = 'autosnippet' },
+    fmta('overline(<>)', {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = '(%a)bb', wordTrig = false, regTrig = true, snippetType = 'autosnippet', priority = 3000 },
+    fmta('bold(<>)', {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = 'bb', wordTrig = false, regTrig = true, snippetType = 'autosnippet', priority = 3000 },
+    fmta('bold(<>)', {
+      i(1),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = '(%a)dot', wordTrig = false, regTrig = true, snippetType = 'autosnippet' },
+    fmta('dot(<>)', {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = '(%a)db', wordTrig = false, regTrig = true, snippetType = 'autosnippet' },
+    fmta('bold(dot(<>)<>)_<>', {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+      i(2),
+      i(3),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = 'db', wordTrig = false, regTrig = true, snippetType = 'autosnippet' },
+    fmta('bold(dot(<>)<>)_<>', {
+      i(1),
+      i(2),
+      i(3),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = '(%a)ddb', wordTrig = false, regTrig = true, snippetType = 'autosnippet', priority = 5000 },
+    fmta('bold(ddot(<>)<>)_<>', {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+      i(2),
+      i(3),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = 'ddb', wordTrig = false, regTrig = true, snippetType = 'autosnippet' },
+    fmta('bold(ddot(<>)<>)_<>', {
+      i(1),
+      i(2),
+      i(3),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = 'dot', snippetType = 'autosnippet' },
+    fmta('dot(<>)', {
+      i(1),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = '(%a)dd', wordTrig = false, regTrig = true, snippetType = 'autosnippet', priority = 4000 },
+    fmta('ddot(<>)', {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = 'dd', snippetType = 'autosnippet', priority = 400 },
+    fmta('ddot(<>)', {
+      i(1),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = 'hat', snippetType = 'autosnippet' },
+    fmta('hat(<>)', {
+      i(1),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = '(%a)hat', wordTrig = false, regTrig = true, snippetType = 'autosnippet' },
+    fmta('hat(<>)', {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = 'to', snippetType = 'autosnippet' },
+    fmta('arrow(<>)', {
+      i(1),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = 'mid', snippetType = 'autosnippet' },
+    fmta('mod(<>)', {
+      i(1),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = '([%w])inv', snippetType = 'autosnippet', regTrig = true, wordTrig = false },
+    fmta([[<>^(-1)]], {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+
+  s(
+    { trig = '([%w])conj', snippetType = 'autosnippet', regTrig = true, wordTrig = false },
+    fmta([[<>^(*)]], {
+      f(function(_, snip)
+        return snip.captures[1]
+      end),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+
+  s(
+    { trig = 'div', snippetType = 'autosnippet' },
+    c(1, {
+      sn(nil, { t '(dif ', i(1), t ' )/(dif ', i(2), t ' )' }),
+      sn(nil, { t '(dif^2 ', i(1), t ' )/(dif ', i(2), t '^2)' }),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+
+  s(
+    { trig = 'piv', snippetType = 'autosnippet' },
+    c(1, {
+      sn(nil, { t '(diff ', i(1), t ' )/(diff ', i(2), t ' )' }),
+      sn(nil, { t '(diff^2 ', i(1), t ' )/(diff ', i(2), t '^2)' }),
+      sn(nil, { t '(diff^2 ', i(1), t ' )/(', t 'diff ', i(2), t ' diff ', i(3), t ' )' }),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+
+  s(
+    { trig = 'mat', snippetType = 'autosnippet' },
+    fmta(
+      [[
+            mat(
+            <>
+            )
+            <>
+        ]],
+      { i(1), i(2) }
+    ),
+    { condition = typst.in_mathzone }
+  ),
+  s({ trig = ';n', wordTrig = false, snippetType = 'autosnippet' }, {
+    t 'nabla',
+  }, { condition = typst.in_mathzone }),
+  s({ trig = 'v.', wordTrig = false, snippetType = 'autosnippet' }, {
+    t 'dots.v',
+  }, { condition = typst.in_mathzone }),
+
+  s({ trig = 'h.', wordTrig = false, snippetType = 'autosnippet' }, {
+    t 'dots.h',
+  }, { condition = typst.in_mathzone }),
+
+  s({ trig = 'nin', wordTrig = false, snippetType = 'autosnippet' }, {
+    t 'in.not',
+  }, { condition = typst.in_mathzone }),
+
+  s({ trig = 'aa', wordTrig = false, snippetType = 'autosnippet' }, {
+    t 'forall',
+  }, { condition = typst.in_mathzone }),
+
+  s({ trig = 'ee', wordTrig = false, snippetType = 'autosnippet' }, {
+    t 'exists',
+  }, { condition = typst.in_mathzone }),
+
+  s({ trig = '==', wordTrig = false, snippetType = 'autosnippet' }, {
+    t '&=',
+  }, { condition = typst.in_mathzone }),
+
+  s({ trig = 'mto', wordTrig = false, snippetType = 'autosnippet', priority = 1001 }, {
+    t 'arrow.r.bar',
+  }, { condition = typst.in_mathzone }),
+
+  s({ trig = '+-', wordTrig = false, snippetType = 'autosnippet' }, {
+    t 'pm',
+  }, { condition = typst.in_mathzone }),
+
+  s({ trig = 'xx', wordTrig = false, snippetType = 'autosnippet' }, {
+    t 'times',
+  }, { condition = typst.in_mathzone }),
+
+  s({ trig = 'up', wordTrig = false, snippetType = 'autosnippet' }, {
+    t 'arrow.t',
+  }, { condition = typst.in_mathzone }),
+
+  s({ trig = 'eqv', wordTrig = false, snippetType = 'autosnippet' }, {
+    t 'equiv',
+  }, { condition = typst.in_mathzone }),
+
+  s({ trig = 'ot', wordTrig = false, snippetType = 'autosnippet' }, {
+    t 'otimes',
+  }, { condition = typst.in_mathzone }),
+
+  s({ trig = 'op', wordTrig = false, snippetType = 'autosnippet' }, {
+    t 'oplus',
+  }, { condition = typst.in_mathzone }),
+
+  s({ trig = 'emp', snippetType = 'autosnippet', priority = 2000 }, {
+    t 'emptyset',
+  }, { condition = typst.in_mathzone }),
+  s(
+    { trig = 'ket', snippetType = 'autosnippet' },
+    fmta('ket(<>)', {
+      i(1),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = 'bra', snippetType = 'autosnippet' },
+    fmta('bra(<>)', {
+      i(1),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s(
+    { trig = 'bk', snippetType = 'autosnippet' },
+    fmta('braket(<>,<>)', {
+      i(1),
+      i(2),
+    }),
+    { condition = typst.in_mathzone }
+  ),
+  s({ trig = 'cd', snippetType = 'autosnippet', priority = 2000 }, {
+    t 'dot',
+  }, { condition = typst.in_mathzone }),
+
+  s({ trig = ',,', wordTrig = false, snippetType = 'autosnippet' }, {
+    t '","',
+  }, { condition = typst.in_mathzone }),
+  s(
+    { trig = 'begin', hidden = true },
+    fmta(
+      [[
+        #import "template.typ":*
+        #show: template.with(
+            title: [<>],
+            accent: orange
+        )
+
+        <>
+        ]],
+      { i(1), i(2) }
+    ),
+    { condition = typst.in_text }
+  ),
+
+  s(
+    { trig = 'box.def' },
+    fmta(
+      [[
+        #definition("<>")[
+           <>
+        ]
+        ]],
+      {
+        i(1, '定义'),
+        i(2),
+      }
+    ),
+    { condition = typst.in_text }
+  ),
+
+  s(
+    { trig = 'box.eg' },
+    fmta(
+      [[
+        #example("<>")[
+           <>
+        ]
+        ]],
+      {
+        i(1, '示例'),
+        i(2),
+      }
+    ),
+    { condition = typst.in_text }
+  ),
+
+  s(
+    { trig = 'box.danger' },
+    fmta(
+      [[
+        #attention("<>")[
+           <>
+        ]
+        ]],
+      {
+        i(1, '注意'),
+        i(2),
+      }
+    ),
+    { condition = typst.in_text }
+  ),
+
+  s(
+    { trig = 'box.thm' },
+    fmta(
+      [[
+        #theorem("<>")[
+           <>
+        ]
+        ]],
+      {
+        i(1, '定理'),
+        i(2),
+      }
+    ),
+    { condition = typst.in_text }
+  ),
+
+  s(
+    { trig = 'box.prop' },
+    fmta(
+      [[
+        #proposition("<>")[
+           <>
+        ]
+        ]],
+      {
+        i(1, '命题'),
+        i(2),
+      }
+    ),
+    { condition = typst.in_text }
+  ),
+
+  s(
+    { trig = 'text', snippetType = 'autosnippet', wordTrig = false },
+    fmta('<>text(<>,<>pt)[<>]<>', {
+      i(1, '#'),
+      i(2, 'red'),
+      i(3, '12'),
+      i(4),
+      i(5),
+    }),
+    { condition = typst.in_text }
   ),
 }
