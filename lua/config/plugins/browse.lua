@@ -43,7 +43,7 @@ return {
       --  NOTE: scoop
       ['scoop'] = 'http://scoop.sh',
 
-      --  NOTE: icons png svg jpg
+      --  NOTE: icons png svg jpg gif
       ['icons'] = 'https://icons8.com/icons/set/arch-linux',
 
       --  NOTE: hyprland
