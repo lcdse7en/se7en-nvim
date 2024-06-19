@@ -292,10 +292,10 @@ return {
         -- ['<CR>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
         ['<Up>'] = cmp.mapping.select_prev_item(),
         ['<Down>'] = cmp.mapping.select_next_item(),
-        ['<C-k>'] = cmp.mapping.select_prev_item(),
-        ['<C-j>'] = cmp.mapping.select_next_item(),
-        ['<C-up>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-        ['<C-down>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+        ['<C-p>'] = cmp.mapping.select_prev_item(),
+        ['<C-n>'] = cmp.mapping.select_next_item(),
+        ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+        ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
         ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
         ['<Esc>'] = cmp.mapping { i = cmp.mapping.close(), c = cmp.mapping.close() },
         ['<C-CR>'] = cmp.mapping {
@@ -307,53 +307,24 @@ return {
           behavior = cmp.ConfirmBehavior.Replace,
           select = false,
         },
-        --   ['<Tab>'] = cmp.mapping(function(fallback)
-        --     if cmp.visible() then
-        --       -- cmp.select_next_item()
-        --       local entry = cmp.get_selected_entry()
-        --       if not entry then
-        --         cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
-        --       else
-        --         if has_words_before() then
-        --           cmp.confirm {
-        --             behavior = cmp.ConfirmBehavior.Replace,
-        --             select = false,
-        --           }
-        --         else
-        --           cmp.confirm {
-        --             behavior = cmp.ConfirmBehavior.Insert,
-        --             select = false,
-        --           }
-        --         end
-        --       end
-        --     elseif vim.snippet and vim.snippet.active { direction = 1 } then
-        --       vim.schedule(function()
-        --         vim.snippet.jump(1)
-        --       end)
-        --     else
-        --       fallback()
-        --     end
-        --   end, { 'i', 's' }),
-        --   ['<S-Tab>'] = cmp.mapping(function(fallback)
-        --     if vim.snippet and vim.snippet.active { direction = -1 } then
-        --       vim.schedule(function()
-        --         vim.snippet.jump(-1)
-        --       end)
-        --     else
-        --       fallback()
-        --     end
-        --   end, { 'i', 's' }),
         ['<Tab>'] = cmp.mapping(function(fallback)
-          if luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          elseif cmp.visible() then
+          if cmp.visible() then
             cmp.select_next_item()
-          elseif has_words_before() then
-            cmp.complete()
+          elseif cmp.visible() and has_words_before() then
+            cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
+          elseif luasnip.expandable() then
+            luasnip.expand()
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          elseif check_backspace() then
+            fallback()
           else
             fallback()
           end
-        end, { 'i', 's' }),
+        end, {
+          'i',
+          's',
+        }),
         ['<S-Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
@@ -362,7 +333,56 @@ return {
           else
             fallback()
           end
-        end, { 'i', 's' }),
+        end, {
+          'i',
+          's',
+        }),
+        ['<C-l>'] = cmp.mapping(function(fallback)
+          if luasnip.expandable() then
+            luasnip.expand()
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          else
+            fallback()
+          end
+        end, {
+          'i',
+          's',
+        }),
+        ['<C-h>'] = cmp.mapping(function(fallback)
+          if luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end, {
+          'i',
+          's',
+        }),
+        ['<C-k>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.choice_active() then
+            luasnip.change_choice(-1)
+          else
+            cmp.complete()
+          end
+        end, {
+          'i',
+          's',
+        }),
+        ['<C-j>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif luasnip.choice_active() then
+            luasnip.change_choice(1)
+          else
+            cmp.complete()
+          end
+        end, {
+          'i',
+          's',
+        }),
       },
 
       formatting = {

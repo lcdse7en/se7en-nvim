@@ -245,7 +245,7 @@ return {
     },
     fmta(
       [[
-      <>text(fill: black, size: 12pt, font: <>, "<>")
+      <>text(font: "<>")[<>]
       ]],
       {
         c(1, {
@@ -258,10 +258,13 @@ return {
         }),
         c(2, {
           sn(nil, {
-            i(1, '""'),
+            i(1, 'Helvetica'),
           }),
           sn(nil, {
-            i(1, '"STXinwei"'),
+            i(1, 'FZShuSong-Z01S'),
+          }),
+          sn(nil, {
+            i(1, 'Iropke Batang'),
           }),
         }),
         i(3),
@@ -1551,7 +1554,7 @@ return {
     },
     fmta(
       [[
-      #sp.title_box(
+      #title-box(
         "<>",
         authors: "lcdse7en¹",
         institutes: "¹",
@@ -1560,21 +1563,22 @@ return {
       )
 
       #columns(2, <>
-        #sp.column_box(heading: "")<>There is nothing here yet<>
-        #sp.column_box()<>
+        #column-box(heading: "")<>There is nothing here yet<>
+        #column-box()<>
 
         <>
 
         #colbreak()
+        #v(-9.6pt)
 
-        #sp.column_box(heading: "General Relativity", stretch_to_next: false)<>
+        #column-box(heading: "General Relativity", stretch_to_next: false)<>
 
         <>
       <>)
 
-      // #sp._common_box(heading: [only heading])
+      // #_common_box(heading: [only heading])
 
-      #sp.bottom_box()<>This is a box at the bottom<>
+      #bottom-box()<>This is a box at the bottom<>
       ]],
       {
         i(1, 'title'),
@@ -1892,7 +1896,7 @@ return {
     },
     fmta(
       [[
-      #code(
+      #mycode(
         lang: "<>",
         numbering: false,
         line-offset: -2pt,
@@ -2759,5 +2763,21 @@ return {
       i(5),
     }),
     { condition = typst.in_text }
+  ),
+  s(
+    {
+      trig = 'myff',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      "<>"
+      ]],
+      {
+        c(1, { t 'Helvetica', t 'FZShuSong-Z01S', t 'Iropke Batang' }),
+      }
+    )
   ),
 }

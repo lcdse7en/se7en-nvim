@@ -199,18 +199,18 @@ lspconfig.pyright.setup {
   settings = require('lsp.servers.pyright').settings,
 }
 
-lspconfig.typst_lsp.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  single_file_support = true,
-  cmd = { 'typst-lsp' },
-  filetypes = { 'typ', 'typst' },
-  settings = {
-    -- exportPdf = "onType",
-    -- exportPdf = "onSave",
-    exportPdf = 'never',
-  },
-}
+-- lspconfig.typst_lsp.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+--   single_file_support = true,
+--   cmd = { 'typst-lsp' },
+--   filetypes = { 'typ', 'typst' },
+--   settings = {
+--     -- exportPdf = "onType",
+--     -- exportPdf = "onSave",
+--     exportPdf = 'never',
+--   },
+-- }
 
 lspconfig.gopls.setup {
   on_attach = on_attach,
