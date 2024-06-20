@@ -175,10 +175,14 @@ vim.api.nvim_set_keymap('i', '<C-e>', '<cmd>lua _G.dynamic_node_external_update(
 vim.api.nvim_set_keymap('s', '<C-e>', '<cmd>lua _G.dynamic_node_external_update(2)<Cr>', { noremap = true })
 
 map('n', '<leader><leader>', '<cmd>e #<cr>', { desc = 'Switch to previous buffer' })
+map('n', '<leader>ee', ':silent %DB<CR>', { desc = 'exec sql' })
 
 --- Copy-paste
 map('n', '<leader>Y', 'gg"+yG', { desc = 'Copy whole file' })
 map('n', '<leader>d', '"_d', { desc = 'Delete without yank' })
+
+-- dadbod-ui
+map('n', '<leader>db', '<CMD>DBUIToggle<CR>', { desc = 'DBUIToggle' })
 
 map('n', '<Tab>', '<cmd>lua require("mini.files").open()<CR>', { silent = true })
 

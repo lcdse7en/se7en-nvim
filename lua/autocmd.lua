@@ -155,7 +155,11 @@ vim.api.nvim_create_autocmd('FileType', {
     'man',
     'notify',
     'aerial',
+    'oil',
     'qf',
+    'dbout', -- vim-dadbod-ui output
+    'query', -- :InspectTree
+    'dap-float',
     'NvimTree',
     'dap-float',
     'null-ls-info',
@@ -812,5 +816,12 @@ vim.cmd [[
     au!
     au InsertEnter * lua vim.b.miniindentscope_disable = true
     au InsertLeave * lua vim.b.miniindentscope_disable = false
+  augroup END
+]]
+
+vim.cmd [[
+  augroup exesql
+    au!
+    au BufWritePost *.sql exe ':silent %DB'
   augroup END
 ]]

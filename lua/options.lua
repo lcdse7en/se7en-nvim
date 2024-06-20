@@ -88,7 +88,13 @@ local options = {
   -- Fold  listchars
   -- ============================================================
   list = true,                           --- enable or disable listchars
-  listchars = { tab = "· ", trail = " ", eol = " ", extends = "→", precedes = "←" },
+  -- listchars = { tab = "· ", trail = " ", eol = " ", extends = "→", precedes = "←" },
+  listchars = {
+    tab = '▏ ',
+    trail = '·',
+  },
+  fillchars = 'vert:│',
+  breakindent = true,
   foldcolumn = '0',                      --- '0' is not bad
   foldlevel = 99,                        --- Using ufo provider need a large value, feel free to decrease the value
   foldlevelstart = 99,
@@ -148,6 +154,9 @@ vim.filetype.add({
     ['%.env%.[%w_.-]+'] = 'dotenv',
   },
 })
+
+-- if tt "vim-dadbod-ui" then globals["db_ui_auto_excute_table_helpers"] =1 end
+-- let g:db_ui_use_nerd_fonts
 
 -- Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])

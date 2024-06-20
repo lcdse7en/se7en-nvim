@@ -18,6 +18,7 @@ return {
     { 'nvim-telescope/telescope-frecency.nvim', dependencies = { 'kkharji/sqlite.lua' } },
     { 'jvgrootveld/telescope-zoxide' }, --  NOTE: sudo pacman -S zoxide | zoxide add path
     { 'nvim-telescope/telescope-live-grep-args.nvim' },
+    { 'smartpde/telescope-recent-files' },
   },
   config = function()
     local telescope = require 'telescope'
@@ -128,6 +129,9 @@ return {
       local builtin = require 'telescope.builtin'
       builtin.treesitter()
     end, { desc = 'Lists FunctionNames | variables from Treesitter' })
+    map('n', '<leader>fF', function()
+      return require('telescope').extensions.recent_files.pick()
+    end, { desc = 'recent_files' })
 
     -- ============================================================
     -- LSP
@@ -350,6 +354,8 @@ return {
     require('telescope').load_extension 'fzf'
     require('telescope').load_extension 'repo'
     require('telescope').load_extension 'zoxide'
+    require('telescope').load_extension 'recent_files'
+    require('telescope').load_extension 'notify'
     require('telescope').load_extension 'file_browser'
     -- require("telescope").load_extension "projects"
     require('telescope').load_extension 'git_worktree'

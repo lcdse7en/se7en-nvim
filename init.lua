@@ -2,7 +2,7 @@
 -- Author      : se7enlcd                    *
 -- E-mail      : 2353442022@qq.com           *
 -- Create_Time : 2023-12-08 13:06:39         *
--- Description :                             *
+-- Description :
 --********************************************
 
 require 'se7en_settings'
@@ -25,3 +25,4 @@ require 'utils.FloatWin'
 require 'utils.CodeRunning'
 require 'vm.vmlens'
 require 'lang.typst'
+-- require 'orgmode_cron'

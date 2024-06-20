@@ -44,7 +44,11 @@ return {
       ['scoop'] = 'http://scoop.sh',
 
       --  NOTE: icons png svg jpg gif
-      ['icons'] = 'https://icons8.com/icons/set/arch-linux',
+      ['svg'] = {
+        ['name'] = 'svg',
+        ['svg'] = 'https://www.svgrepo.com/',
+        ['icons'] = 'https://icons8.com/icons/set/arch-linux',
+      },
 
       --  NOTE: hyprland
       ['hypr'] = {

@@ -5,9 +5,40 @@ return {
   dependencies = {
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-cmdline',
+    {
+      'hrsh7th/cmp-cmdline',
+      config = function()
+        local cmp = require 'cmp'
+        cmp.setup.cmdline(':', {
+          mapping = cmp.mapping.preset.cmdline {
+            -- ['<CR>'] = {
+            --   c = cmp.mapping.confirm { select = false },
+            -- },
+          },
+          sources = cmp.config.sources({
+            { name = 'path' },
+          }, {
+            { name = 'cmdline' },
+          }),
+          matching = { disallow_symbol_nonprefix_matching = false },
+        })
+      end,
+    },
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-nvim-lua',
+    {
+      'kristijanhusak/vim-dadbod-completion',
+      init = function()
+        vim.api.nvim_create_autocmd('FileType', {
+          desc = 'dadbod completion',
+          group = vim.api.nvim_create_augroup('dadbod_cmp', { clear = true }),
+          pattern = { 'sql', 'mysql', 'plsql' },
+          callback = function()
+            require('cmp').setup.buffer { sources = { { name = 'vim-dadbod-completion' } } }
+          end,
+        })
+      end,
+    },
     'hrsh7th/cmp-nvim-lsp-document-symbol',
     'lukas-reineke/cmp-under-comparator',
     'lukas-reineke/cmp-rg',
