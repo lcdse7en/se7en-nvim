@@ -10,9 +10,10 @@ return {
     local browse = require 'browse'
 
     browse.setup {
-      -- provider = "brave",
+      -- sudo pacman -S brave
+      provider = 'brave',
       -- provider = 'bing',
-      provider = 'firefox',
+      -- provider = 'firefox',
     }
 
     local bookmarks = {
@@ -31,10 +32,11 @@ return {
         ['torrent'] = 'http://localhost:9091',
       },
 
-      --  NOTE: localhost
-      ['extension'] = {
+      --  NOTE: Chorme extensions
+      ['chrome-extension'] = {
         ['name'] = 'chrome extensions',
-        ['extension'] = 'https://chrome.zzzmh.cn/#/extension',
+        ['zzzmh'] = 'https://chrome.zzzmh.cn/#/extension',
+        ['pictureknow'] = 'https://chrome.pictureknow.com/',
       },
 
       --  NOTE: typst ebook
