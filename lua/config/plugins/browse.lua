@@ -68,7 +68,8 @@ return {
 
       --  NOTE: Typst
       ['typst'] = {
-        ['name'] = 'Typst-packages',
+        ['name'] = 'Typst Doc temp and Packages',
+        ['zh-doc'] = 'https://typst-doc-cn.github.io/docs/reference/layout/place/',
         ['typst-packages'] = 'https://typst-doc-cn.github.io/docs/packages/',
         ['typst-preview'] = 'https://githubfast.com/Enter-tainer/typst-preview/releases',
         ['tablex'] = 'https://githubfast.com/PgBiel/typst-tablex',

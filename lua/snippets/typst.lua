@@ -511,24 +511,6 @@ return {
   s(
     {
       trig = 'myali',
-      regTrig = false,
-      snippetType = 'autosnippet',
-      priority = 2000,
-    },
-    fmta(
-      [[
-      #align(center)[
-        <>
-      ]
-      ]],
-      {
-        i(1),
-      }
-    )
-  ),
-  s(
-    {
-      trig = 'myali',
       dscr = 'align',
       regTrig = false,
       snippetType = 'snippet',
@@ -538,6 +520,25 @@ return {
 
       ]],
       {}
+    )
+  ),
+  s(
+    {
+      trig = 'myali',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #align(<>)[
+        <>
+      ]
+      ]],
+      {
+        c(1, { t 'left', t 'end', t 'center' }),
+        i(2),
+      }
     )
   ),
   s(
@@ -1803,15 +1804,15 @@ return {
   ),
   s(
     {
-      trig = 'myali',
+      trig = 'mytal',
       regTrig = false,
       snippetType = 'autosnippet',
       priority = 2000,
     },
     fmta(
       [[
-      align: (x, _) <>
-        if x == 0 { center } else { left },
+      align: (column, row) <>
+        if column == 0 { center } else { left },
       <>
       ]],
       {
@@ -2048,7 +2049,7 @@ return {
     fmta(
       [[
       #matrix-fmt(
-        caption: "<>",
+        caption: [#text(font: "Helvetica")][<>],
         alignment: center + horizon,
         <>
       )
@@ -2777,6 +2778,70 @@ return {
       ]],
       {
         c(1, { t 'Helvetica', t 'FZShuSong-Z01S', t 'Iropke Batang' }),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'mygra',
+      dscr = 'dscr',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
+  s(
+    {
+      trig = 'mygra',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #mygra(body: "<>")
+      ]],
+      {
+        i(1),
+      }
+    )
+  ),
+  s(
+    {
+      trig = 'myrsi',
+      dscr = 'dscr',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
+  s(
+    {
+      trig = 'myrsi',
+      regTrig = false,
+      snippetType = 'autosnippet',
+      priority = 2000,
+    },
+    fmta(
+      [[
+      #resume-skill-item(
+        [<>],
+        ("<>",),
+      )
+      ]],
+      {
+        i(1),
+        i(2),
       }
     )
   ),
