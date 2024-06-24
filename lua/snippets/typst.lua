@@ -1805,6 +1805,20 @@ return {
   s(
     {
       trig = 'mytal',
+      dscr = 'dscr',
+      regTrig = false,
+      snippetType = 'snippet',
+    },
+    fmta(
+      [[
+
+      ]],
+      {}
+    )
+  ),
+  s(
+    {
+      trig = 'mytal',
       regTrig = false,
       snippetType = 'autosnippet',
       priority = 2000,
