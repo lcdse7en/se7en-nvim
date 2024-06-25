@@ -24,10 +24,16 @@ return {
         'Trouble',
         'trouble',
         'lazy',
+        'noice',
         'mason',
         'notify',
         'toggleterm',
         'lazyterm',
+        'better_term',
+        'checkhealth',
+        'csv',
+        'crunner',
+        'lspinfo',
       },
       callback = function()
         vim.b.miniindentscope_disable = true
