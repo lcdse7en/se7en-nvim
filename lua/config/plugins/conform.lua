@@ -25,13 +25,14 @@ return {
         typst = { 'typstyle' },
         -- typst = { 'prettypst' },
         -- typst = { 'typstfmt' },
-        python = function(bufnr)
-          if require('conform').get_formatter_info('yapf', bufnr).available then
-            return { 'yapf' } --  NOTE: pip instal yapf
-          else
-            return { 'isort', 'black' }
-          end
-        end,
+        -- python = function(bufnr)
+        --   if require('conform').get_formatter_info('yapf', bufnr).available then
+        --     return { 'yapf' } --  NOTE: pip instal yapf
+        --   else
+        --     return { 'isort', 'black' }
+        --   end
+        -- end,
+        python = { 'ruff_format', 'ruff_fix' },
         javascript = prettier,
         typescript = prettier,
         javascriptreact = prettier,
@@ -84,18 +85,18 @@ return {
         },
 
         -- NOTE: python
-        yapf = {
-          command = 'yapf',
-          args = {
-            '--quiet',
-            '--style',
-            '{based_on_style: google, force_multiline_dict: true, indent_width: 4, column_limit: 100, spaces_around_dict_delimiters: true, spaces_around_tuple_delimiters: true, coalesce_brackets: false, split_before_dict_set_generator: true, dedent_closing_brackets: true, spaces_before_comment: 2,}',
-            '--parallel',
-          },
-          range_args = function(ctx)
-            return { '--quiet', '--lines', string.format('%d-%d', ctx.range.start[1], ctx.range['end'][1]) }
-          end,
-        },
+        -- yapf = {
+        --   command = 'yapf',
+        --   args = {
+        --     '--quiet',
+        --     '--style',
+        --     '{based_on_style: google, force_multiline_dict: true, indent_width: 4, column_limit: 100, spaces_around_dict_delimiters: true, spaces_around_tuple_delimiters: true, coalesce_brackets: false, split_before_dict_set_generator: true, dedent_closing_brackets: true, spaces_before_comment: 2,}',
+        --     '--parallel',
+        --   },
+        --   range_args = function(ctx)
+        --     return { '--quiet', '--lines', string.format('%d-%d', ctx.range.start[1], ctx.range['end'][1]) }
+        --   end,
+        -- },
         -- NOTE: shell
         shfmt = {
           -- stdin = true,
