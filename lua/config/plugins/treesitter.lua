@@ -21,6 +21,7 @@ return {
 
       ensure_installed = {
         'lua',
+        'nix',
         'bash',
         'c',
         'cpp',
