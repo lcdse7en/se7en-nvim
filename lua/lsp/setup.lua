@@ -42,12 +42,12 @@ mason_lsp.setup {
     'prismals',
     'typst_lsp',
     -- 'marksman',
-    'clangd',
+    -- 'clangd',
     'tailwindcss',
     'svelte',
     -- "ltex",
     'texlab',
-    'gopls',
+    -- 'gopls',
     'efm',
     'rust_analyzer',
     'yamlls',
@@ -71,8 +71,7 @@ mason_tool_installer.setup {
     'prettier', -- prettier formatter
     'prettierd', -- prettierd formatter
     'clang-format', -- c | cpp formatter
-    'gopls',
-    'gofumpt',
+    -- 'gofumpt',
     -- "goimports",
     'jq',
     -- "latexindent",
@@ -212,50 +211,50 @@ lspconfig.pyright.setup {
 --   },
 -- }
 
-lspconfig.gopls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  handlers = handlers,
-  flags = { debounce_text_changes = 500 },
-  cmd = { 'gopls', '-remote=auto' },
-  filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
-  settings = {
-    gopls = {
-      usePlaceholders = true,
-      analyses = {
-        nilness = true,
-        shadow = true,
-        unusedparams = true,
-        unusewrites = true,
-      },
-    },
-  },
-
-  --   settings = {
-  --     gopls = {
-  --       hints = {
-  --         -- https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
-  --         assignVariableTypes = true,
-  --         compositeLiteralFields = true,
-  --         compositeLiteralTypes = true,
-  --         constantValues = true,
-  --         functionTypeParameters = true,
-  --         parameterNames = true,
-  --         rangeVariableTypes = true,
-  --       },
-  --       completeUnimported = true,
-  --       usePlaceholders = true,
-  --       gofumpt = true,
-  --       staticcheck = true,
-  --       analyses = {
-  --         unusedparams = true,
-  --       },
-  --     },
-  --   },
-  --   flags = {
-  --     debounce_text_changes = 120,
-  --   },
-}
+-- lspconfig.gopls.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+--   handlers = handlers,
+--   flags = { debounce_text_changes = 500 },
+--   cmd = { 'gopls', '-remote=auto' },
+--   filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+--   settings = {
+--     gopls = {
+--       usePlaceholders = true,
+--       analyses = {
+--         nilness = true,
+--         shadow = true,
+--         unusedparams = true,
+--         unusewrites = true,
+--       },
+--     },
+--   },
+--
+--   --   settings = {
+--   --     gopls = {
+--   --       hints = {
+--   --         -- https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
+--   --         assignVariableTypes = true,
+--   --         compositeLiteralFields = true,
+--   --         compositeLiteralTypes = true,
+--   --         constantValues = true,
+--   --         functionTypeParameters = true,
+--   --         parameterNames = true,
+--   --         rangeVariableTypes = true,
+--   --       },
+--   --       completeUnimported = true,
+--   --       usePlaceholders = true,
+--   --       gofumpt = true,
+--   --       staticcheck = true,
+--   --       analyses = {
+--   --         unusedparams = true,
+--   --       },
+--   --     },
+--   --   },
+--   --   flags = {
+--   --     debounce_text_changes = 120,
+--   --   },
+-- }
 
 lspconfig.rust_analyzer.setup {
   on_attach = on_attach,
@@ -333,58 +332,58 @@ local function get_binary_path_list(binaries)
   end
   return table.concat(path_list, ',')
 end
-lspconfig.clangd.setup {
-  on_attach = on_attach,
-  -- capabilities = capabilities,
-  capabilities = vim.tbl_deep_extend('keep', { offsetEncoding = { 'utf-16', 'utf-8' } }, capabilities),
-  single_file_support = true,
-  filetypes = { 'cpp', 'c', 'h', 'hpp', 'cuda' },
-  cmd = {
-    'clangd',
-    '--offset-encoding=utf-16',
-    '-j=12',
-    '--enable-config',
-    '--background-index',
-    '--pch-storage=memory',
-    -- You MUST set this arg ↓ to your c/cpp compiler location (if not included)!
-    '--query-driver=' .. get_binary_path_list { 'clang++', 'clang', 'gcc', 'g++' },
-    '--clang-tidy',
-    '--all-scopes-completion',
-    '--completion-style=detailed',
-    '--header-insertion-decorators',
-    '--header-insertion=iwyu',
-    '--limit-references=3000',
-    '--limit-results=350',
-  },
-  commands = {
-    ClangdSwitchSourceHeader = {
-      function()
-        switch_source_header_splitcmd(0, 'edit')
-      end,
-      description = 'Open source/header in current buffer',
-    },
-    ClangdSwitchSourceHeaderVSplit = {
-      function()
-        switch_source_header_splitcmd(0, 'vsplit')
-      end,
-      description = 'Open source/header in a new vsplit',
-    },
-    ClangdSwitchSourceHeaderSplit = {
-      function()
-        switch_source_header_splitcmd(0, 'split')
-      end,
-      description = 'Open source/header in a new split',
-    },
-  },
-  -- on_init = require'clangd_nvim'.on_init,
-  -- callbacks = lsp_status.extensions.clangd.setup(),
-  init_options = {
-    clangdFileStatus = true,
-    usePlaceholders = true,
-    completeUnimported = true,
-  },
-  -- settings = require("lsp.servers.clangd").settings,
-}
+-- lspconfig.clangd.setup {
+--   on_attach = on_attach,
+--   -- capabilities = capabilities,
+--   capabilities = vim.tbl_deep_extend('keep', { offsetEncoding = { 'utf-16', 'utf-8' } }, capabilities),
+--   single_file_support = true,
+--   filetypes = { 'cpp', 'c', 'h', 'hpp', 'cuda' },
+--   cmd = {
+--     'clangd',
+--     '--offset-encoding=utf-16',
+--     '-j=12',
+--     '--enable-config',
+--     '--background-index',
+--     '--pch-storage=memory',
+--     -- You MUST set this arg ↓ to your c/cpp compiler location (if not included)!
+--     '--query-driver=' .. get_binary_path_list { 'clang++', 'clang', 'gcc', 'g++' },
+--     '--clang-tidy',
+--     '--all-scopes-completion',
+--     '--completion-style=detailed',
+--     '--header-insertion-decorators',
+--     '--header-insertion=iwyu',
+--     '--limit-references=3000',
+--     '--limit-results=350',
+--   },
+--   commands = {
+--     ClangdSwitchSourceHeader = {
+--       function()
+--         switch_source_header_splitcmd(0, 'edit')
+--       end,
+--       description = 'Open source/header in current buffer',
+--     },
+--     ClangdSwitchSourceHeaderVSplit = {
+--       function()
+--         switch_source_header_splitcmd(0, 'vsplit')
+--       end,
+--       description = 'Open source/header in a new vsplit',
+--     },
+--     ClangdSwitchSourceHeaderSplit = {
+--       function()
+--         switch_source_header_splitcmd(0, 'split')
+--       end,
+--       description = 'Open source/header in a new split',
+--     },
+--   },
+--   -- on_init = require'clangd_nvim'.on_init,
+--   -- callbacks = lsp_status.extensions.clangd.setup(),
+--   init_options = {
+--     clangdFileStatus = true,
+--     usePlaceholders = true,
+--     completeUnimported = true,
+--   },
+--   -- settings = require("lsp.servers.clangd").settings,
+-- }
 
 for _, server in ipairs {
   'lua_ls',
@@ -392,7 +391,7 @@ for _, server in ipairs {
   'cssls',
   'yamlls',
   'jsonls',
-  'gopls',
+  -- 'gopls',
   'cssls',
   -- 'marksman',
   'emmet_ls',

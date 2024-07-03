@@ -273,12 +273,12 @@ return {
       },
       extensions = {
         bookmarks = { selected_browser = 'firefox' }, -- edge firefox safari brave
-        fzf = {
-          fuzzy = true,
-          override_generic_sorter = true,
-          override_file_sorter = true,
-          case_mode = 'smart_case',
-        },
+        -- fzf = {
+        --   fuzzy = true,
+        --   override_generic_sorter = true,
+        --   override_file_sorter = true,
+        --   case_mode = 'smart_case',
+        -- },
         file_browser = {
           theme = 'dropdown',
           hijack_netrw = true,
@@ -351,7 +351,7 @@ return {
     }
 
     --  NOTE: Load Extensions
-    require('telescope').load_extension 'fzf'
+    -- require('telescope').load_extension 'fzf'
     require('telescope').load_extension 'repo'
     require('telescope').load_extension 'zoxide'
     require('telescope').load_extension 'recent_files'

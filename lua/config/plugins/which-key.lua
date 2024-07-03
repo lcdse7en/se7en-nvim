@@ -124,6 +124,13 @@ return {
           t = { '<cmd>e ~/.config/nvim/lua/config/plugins/telescope.lua<CR>', 'Edit telescope.lua' },
           T = { '<cmd>e ~/.config/nvim/lua/config/plugins/treesitter.lua<CR>', 'Edit treesitter.lua' },
           w = { '<cmd>e ~/.config/nvim/lua/config/plugins/which-key.lua<CR>', 'Edit which-key.lua' },
+          --  NOTE: edit nixos config
+          n = {
+            name = 'Edit NixOS config file',
+            c = { '<cmd>e ~/nixos-config/nixos/configuration.nix<CR>', 'Edit configuration.nix' },
+            h = { '<cmd>e ~/nixos-config/home-manager/home.nix<CR>', 'Edit home.nix' },
+            f = { '<cmd>e ~/nixos-config/flake.nix<CR>', 'Edit flake.nix' },
+          },
           --  NOTE: Snippets
           s = {
             name = 'Edit Lua Snippet File',

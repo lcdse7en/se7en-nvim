@@ -1,5 +1,6 @@
 return {
   "gbprod/yanky.nvim",
+  enabled = false,
   event = "VeryLazy",
   cmd = { "YankyRingHistory" },
   dependencies = {
