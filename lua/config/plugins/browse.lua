@@ -35,8 +35,8 @@ return {
       --  NOTE: Chorme extensions
       ['chrome-extension'] = {
         ['name'] = 'chrome extensions',
-        ['zzzmh'] = 'https://chrome.zzzmh.cn/#/extension',
         ['pictureknow'] = 'https://chrome.pictureknow.com/',
+        ['zzzmh'] = 'https://chrome.zzzmh.cn/#/extension',
       },
 
       --  NOTE: typst ebook
