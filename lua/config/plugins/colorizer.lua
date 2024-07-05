@@ -2,6 +2,7 @@ return {
   'NvChad/nvim-colorizer.lua',
   enabled = true,
   ft = {
+    'nix',
     'vue',
     'javascript',
     'typescript',
