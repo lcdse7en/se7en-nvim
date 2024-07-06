@@ -15,7 +15,7 @@ return {
 
     local opts = {
       formatters_by_ft = {
-        nix = { 'nixpkgs_fmt' },
+        nix = { 'nixfmt' },
         lua = { 'stylua' },
         c = { 'clang_format' },
         cpp = { 'clang_format' },
