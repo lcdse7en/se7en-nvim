@@ -27,10 +27,10 @@ mason_lsp.setup {
   -- A list of servers to automatically install if they're not already installed
   ensure_installed = {
     'bashls',
-    'jsonls',
-    'cssls',
+    -- 'jsonls',
+    -- 'cssls',
     'html',
-    'tsserver',
+    -- 'tsserver',
     'jdtls',
     'vimls',
     'pyright',
@@ -77,7 +77,7 @@ mason_tool_installer.setup {
     -- "latexindent",
     'bibtex-tidy',
     -- "luacheck",
-    'stylua', -- lua formatter
+    -- 'stylua', -- lua formatter
     --  NOTE: Lint
     'pylint', -- python linter
     'eslint_d', -- eslint linter
@@ -116,12 +116,12 @@ capabilities.experimental = { localDocs = true }
 
 -- Order matters
 
-lspconfig.tsserver.setup {
-  capabilities = require('lsp.servers.tsserver').capabilities,
-  handlers = require('lsp.servers.tsserver').handlers,
-  on_attach = require('lsp.servers.tsserver').on_attach,
-  settings = require('lsp.servers.tsserver').settings,
-}
+-- lspconfig.tsserver.setup {
+--   capabilities = require('lsp.servers.tsserver').capabilities,
+--   handlers = require('lsp.servers.tsserver').handlers,
+--   on_attach = require('lsp.servers.tsserver').on_attach,
+--   settings = require('lsp.servers.tsserver').settings,
+-- }
 
 -- lspconfig.tailwindcss.setup {
 --   capabilities = require("lsp.servers.tailwindcss").capabilities,
@@ -132,26 +132,26 @@ lspconfig.tsserver.setup {
 --   settings = require("lsp.servers.tailwindcss").settings,
 -- }
 
-lspconfig.cssls.setup {
-  capabilities = capabilities,
-  handlers = handlers,
-  on_attach = require('lsp.servers.cssls').on_attach,
-  settings = require('lsp.servers.cssls').settings,
-}
+-- lspconfig.cssls.setup {
+--   capabilities = capabilities,
+--   handlers = handlers,
+--   on_attach = require('lsp.servers.cssls').on_attach,
+--   settings = require('lsp.servers.cssls').settings,
+-- }
 
-lspconfig.eslint.setup {
-  capabilities = capabilities,
-  handlers = handlers,
-  on_attach = require('lsp.servers.eslint').on_attach,
-  settings = require('lsp.servers.eslint').settings,
-}
+-- lspconfig.eslint.setup {
+--   capabilities = capabilities,
+--   handlers = handlers,
+--   on_attach = require('lsp.servers.eslint').on_attach,
+--   settings = require('lsp.servers.eslint').settings,
+-- }
 
-lspconfig.jsonls.setup {
-  capabilities = capabilities,
-  handlers = handlers,
-  on_attach = on_attach,
-  settings = require('lsp.servers.jsonls').settings,
-}
+-- lspconfig.jsonls.setup {
+--   capabilities = capabilities,
+--   handlers = handlers,
+--   on_attach = on_attach,
+--   settings = require('lsp.servers.jsonls').settings,
+-- }
 
 lspconfig.lua_ls.setup {
   capabilities = capabilities,
@@ -388,11 +388,10 @@ end
 for _, server in ipairs {
   'lua_ls',
   'bashls',
-  'cssls',
+  -- 'cssls',
   'yamlls',
-  'jsonls',
+  -- 'jsonls',
   -- 'gopls',
-  'cssls',
   -- 'marksman',
   'emmet_ls',
   'graphql',
