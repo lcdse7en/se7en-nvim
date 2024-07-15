@@ -10,9 +10,7 @@ return {
     local browse = require 'browse'
 
     browse.setup {
-      -- sudo pacman -S brave
       -- provider = 'brave',
-      -- provider = 'bing',
       provider = 'firefox',
     }
 
