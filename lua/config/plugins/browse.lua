@@ -11,9 +11,9 @@ return {
 
     browse.setup {
       -- sudo pacman -S brave
-      provider = 'brave',
+      -- provider = 'brave',
       -- provider = 'bing',
-      -- provider = 'firefox',
+      provider = 'firefox',
     }
 
     local bookmarks = {

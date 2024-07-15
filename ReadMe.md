@@ -1,4 +1,4 @@
-#### 1. Download lazy.nvim
+### 1. Download lazy.nvim
 
 ```shell
 cd ~/.local/share/nvim/lazy
