@@ -819,9 +819,20 @@ vim.cmd [[
   augroup END
 ]]
 
-vim.cmd [[
-  augroup exesql
-    au!
-    au BufWritePost *.sql exe ':silent %DB'
-  augroup END
-]]
+-- vim.cmd [[
+--   augroup exesql
+--     au!
+--     au BufWritePost *.sql exe ':silent %DB'
+--   augroup END
+-- ]]
+local function execute_sql()
+  if vim.bo.filetype == 'sql' then
+    vim.cmd 'DBUIExecuteQuery'
+  end
+end
+vim.api.nvim_create_augroup('DadbodExecuteOnSave', { clear = true })
+vim.api.nvim_create_autocmd('BufWritePost', {
+  pattern = '*.sql',
+  group = 'DadbodExecuteOnSave',
+  callback = execute_sql,
+})
